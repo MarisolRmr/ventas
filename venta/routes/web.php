@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
-});
+//Dashboard
+Route::get('/', [HomeController::class, 'home'])->name('home');
+
+// Iniciar Sesión
+Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::post('/login', [UserController::class, 'store'])->name('login.store');
+
+// Registrarse
+Route::get('/register', [UserController::class, 'register'])->name('register');
+Route::post('/register', [UserController::class, 'store_register'])->name('register.store');
+
+// Cerrar sesión
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+// Dasboard administrador
+Route::get('/{user:username}', [DashboardController::class, 'index'])->name('posts.index');
