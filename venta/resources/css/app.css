@@ -2,4 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '~select2/dist/css/select2.css';
+@import './nucleo-icons.css';
+@import './nucleo-svg.css';
+@import './argon-dashboard-tailwind.css';
