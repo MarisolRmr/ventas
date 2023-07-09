@@ -394,15 +394,16 @@
   </div>
   <!-- Argon Scripts -->
   <<!-- Argon Scripts -->
-      @vite('resources/vendor/jquery/dist/jquery.min.js')
-  @vite('resources/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')
-  @vite('resources/vendor/js-cookie/js.cookie.js')
-  @vite('resources/vendor/jquery.scrollbar/jquery.scrollbar.min.js')
-  @vite('resources/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')
+<!-- Core -->
+<script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js-cookie/js.cookie.js') }}"></script>
+<script src="{{ asset('jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
+<script src="{{ asset('jquery-scroll-lock/dist/jquery-scrollLock.min.js') }}"></script>
 
-  <!-- Optional JS -->
-  @vite('resources/vendor/chart.js/dist/Chart.min.js')
-  @vite('resources/vendor/chart.js/dist/Chart.extension.js')
+<!-- Optional JS -->
+<script src="{{ asset('chart.js/dist/Chart.min.js') }}"></script>
+<script src="{{ asset('chart.js/dist/Chart.extension.js') }}"></script>
 
   <!-- Argon JS -->
   @vite('resources/js/argon.js')
