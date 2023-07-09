@@ -394,28 +394,18 @@
   </div>
   <!-- Argon Scripts -->
   <<!-- Argon Scripts -->
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      @vite('resources/vendor/jquery/dist/jquery.min.js')
+  @vite('resources/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')
+  @vite('resources/vendor/js-cookie/js.cookie.js')
+  @vite('resources/vendor/jquery.scrollbar/jquery.scrollbar.min.js')
+  @vite('resources/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')
 
-<!-- Bootstrap -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional JS -->
+  @vite('resources/vendor/chart.js/dist/Chart.min.js')
+  @vite('resources/vendor/chart.js/dist/Chart.extension.js')
 
-<!-- JS Cookie -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
-
-<!-- jQuery Scrollbar -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.scrollbar/2.14.0/jquery.scrollbar.min.js"></script>
-
-<!-- jQuery Scroll Lock -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scroll-lock/3.7.0/jquery-scrollLock.min.js"></script>
-
-<!-- Chart.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.extension.js"></script>
-
-<!-- Argon JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/argon-design-system/2.16.0/dist/js/argon.min.js"></script>
-
+  <!-- Argon JS -->
+  @vite('resources/js/argon.js')
 
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
