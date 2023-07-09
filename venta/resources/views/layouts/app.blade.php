@@ -393,19 +393,21 @@
     
   </div>
   <!-- Argon Scripts -->
-  <!-- Core -->
-  @vite('resources/vendor/jquery/dist/jquery.min.js')
-  @vite('resources/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')
-  @vite('resources/vendor/js-cookie/js.cookie.js')
-  @vite('resources/vendor/jquery.scrollbar/jquery.scrollbar.min.js')
-  @vite('resources/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')
+  <<!-- Argon Scripts -->
+<!-- Core -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/src/js.cookie.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.scrollbar@0.2.11/jquery.scrollbar.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-scroll-lock@0.1.4/dist/jquery-scrollLock.min.js"></script>
 
-  <!-- Optional JS -->
-  @vite('resources/vendor/chart.js/dist/Chart.min.js')
-  @vite('resources/vendor/chart.js/dist/Chart.extension.js')
+<!-- Optional JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.extension.js"></script>
 
-  <!-- Argon JS -->
-  @vite('resources/js/argon.js')
+<!-- Argon JS -->
+<script src="/ruta/al/argon.js"></script>
+
 
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
