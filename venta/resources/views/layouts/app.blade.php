@@ -394,19 +394,27 @@
   </div>
   <!-- Argon Scripts -->
   <<!-- Argon Scripts -->
-<!-- Core -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/src/js.cookie.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.scrollbar@0.2.11/jquery.scrollbar.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-scroll-lock@0.1.4/dist/jquery-scrollLock.min.js"></script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<!-- Optional JS -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.extension.js"></script>
+<!-- Bootstrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+<!-- JS Cookie -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.scrollbar/2.14.0/jquery.scrollbar.min.js"></script>
+
+<!-- jQuery Scroll Lock -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scroll-lock/3.7.0/jquery-scrollLock.min.js"></script>
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.extension.js"></script>
 
 <!-- Argon JS -->
-<script src="/ruta/al/argon.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/argon-design-system/2.16.0/dist/js/argon.min.js"></script>
 
 
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
