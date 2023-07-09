@@ -17,13 +17,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   
   <!-- Icons -->
-  @vite('resources/vendor/nucleo/css/nucleo.css')
-  @vite('resources/vendor/@fortawesome/fontawesome-free/css/all.min.css')
-  
+   @vite ('resources/css/app.css')
+  @vite ('resources/js/app.js')
   <!-- Page plugins -->
   <!-- Argon CSS -->
-  @vite('resources/css/argon.css')
-
 </head>
 
 @auth  
@@ -393,19 +390,7 @@
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
-  @vite('resources/vendor/jquery/dist/jquery.min.js')
-  @vite('resources/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')
-  @vite('resources/vendor/js-cookie/js.cookie.js')
-  @vite('resources/vendor/jquery.scrollbar/jquery.scrollbar.min.js')
-  @vite('resources/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')
-
-  <!-- Optional JS -->
-  @vite('resources/vendor/chart.js/dist/Chart.min.js')
-  @vite('resources/vendor/chart.js/dist/Chart.extension.js')
-
-  <!-- Argon JS -->
-  @vite('resources/js/argon.js')
-
+ 
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 

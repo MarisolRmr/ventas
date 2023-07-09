@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+<<<<<<< HEAD
 @import './nucleo-icons.css';
 @import './nucleo-svg.css';
 @import './argon-dashboard-tailwind.css';
+=======
+
+@import './nucleo-icons.css';
+@import './nucleo-svg.css';
+@import './argon-dashboard-tailwind.css';
+
+>>>>>>> 77bcb33 (cambios server)
