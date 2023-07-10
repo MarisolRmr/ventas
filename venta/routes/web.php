@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\MarcasController;
+use App\Http\Controllers\SubcategoriaController;
 use App\Http\Controllers\VentasController;
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use App\Http\Controllers\VentasController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
 // lista de productos
 Route::get('/productos', [ProductosController::class, 'index'])->name('productos.index');
 
@@ -54,6 +57,37 @@ Route::get('/categorias/{categoria}/edit',[ CategoriasController::class, 'edit']
 
 // actualizar cambios categorias
 Route::put('/categorias/{id}/edit', [CategoriasController::class, 'update'])->name('categorias.update');
+
+// lista de subcategorias
+Route::get('/subcategorias', [SubcategoriaController::class, 'index'])->name('subcategorias.index');
+
+// formulario subcategorias
+Route::get('/subcategorias/Nueva', [SubcategoriaController::class, 'create'])->name('subcategorias.create');
+
+// guardar subcategorias
+Route::post('/subcategorias', [SubcategoriaController::class, 'store'])->name('subcategorias.store');
+
+//ruta para enviar datos al servidor de imagen
+Route::post('/subcategorias_imagen', [SubcategoriaController::class,'store_imagen'])->name('subcategorias.imagen');
+
+// editar categorias
+Route::get('/subcategorias/{subcategoria}/edit',[ SubcategoriaController::class, 'edit'])->name('subcategorias.edit');
+
+// actualizar cambios subcategorias
+Route::put('/subcategorias/{id}/edit', [SubcategoriaController::class, 'update'])->name('subcategorias.update');
+
+// eliminar subcategorias
+Route::delete('/subcategorias/{id}', [SubcategoriaController::class, 'delete'])->name('subcategorias.delete');
+
+
+
+
+
+
+
+
+
+
 
 // lista de marcas
 Route::get('/marcas', [MarcasController::class, 'index'])->name('marcas.index');

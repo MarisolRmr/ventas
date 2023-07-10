@@ -74,7 +74,7 @@
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{route('subcategorias.index')}}">
                 <i class="ni ni-ui-04 text-yellow"></i>
                 <span class="nav-link-text">Subcategorías</span>
               </a>
