@@ -13,10 +13,13 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   @yield('estilos')
-
+  <!--styles-->
+  @stack('styles')
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   
+  @vite('resources/js/app.js')
+
   <!-- Icons -->
   @vite('resources/vendor/nucleo/css/nucleo.css')
   @vite('resources/vendor/@fortawesome/fontawesome-free/css/all.min.css')
@@ -77,7 +80,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="tables.html">
+              <a class="nav-link" href="{{route('marcas.index')}}">
                 <i class="ni ni-tag text-default"></i>
                 <span class="nav-link-text">Marcas</span>
               </a>

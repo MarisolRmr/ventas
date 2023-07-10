@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\MarcasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +54,26 @@ Route::get('/categorias/{categoria}/edit',[ CategoriasController::class, 'edit']
 // actualizar cambios categorias
 Route::put('/categorias/{id}/edit', [CategoriasController::class, 'update'])->name('categorias.update');
 
+// lista de marcas
+Route::get('/marcas', [MarcasController::class, 'index'])->name('marcas.index');
+
+// formulario marcas
+Route::get('/marcas/Nueva', [MarcasController::class, 'create'])->name('marcas.create');
+
+// guardar marcas
+Route::post('/marcas', [MarcasController::class, 'store'])->name('marcas.store');
+
+// eliminar marcas
+Route::delete('/marcas/{id}', [MarcasController::class, 'delete'])->name('marcas.delete');
+
+// editar marcas
+Route::get('/marcas/{categoria}/edit',[ MarcasController::class, 'edit'])->name('marcas.edit');
+
+// actualizar cambios marcas
+Route::put('/marcas/{id}/edit', [MarcasController::class, 'update'])->name('marcas.update');
+
+//ruta para enviar datos al servidor de imagen
+Route::post('/imagenes', [MarcasController::class,'store_imagen'])->name('imagenes.store');
 
 //Dashboard
 Route::get('/', [HomeController::class, 'home'])->name('home');
