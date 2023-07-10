@@ -13,5 +13,11 @@ class Categoria extends Model
         'nombre',
         'codigo',
         'descripcion',
+        'user_id',
     ];
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

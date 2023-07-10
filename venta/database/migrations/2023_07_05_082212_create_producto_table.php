@@ -18,8 +18,11 @@ return new class extends Migration
             $table->double('precio_venta');
             $table->double('precio_compra');
             $table->integer('unidades');
-            //agregamos la relacion a categorias
+            //agregamos la relacion a categorias, subcategoria, usuario y marca
             $table->foreignId('categoria_id')->constrained('categoria');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('marca_id')->constrained('marca')->onDelete('cascade');
+            $table->foreignId('subcategoria_id')->constrained('subcategoria');
         });
     }
 

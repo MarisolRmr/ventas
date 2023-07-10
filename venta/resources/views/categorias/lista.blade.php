@@ -157,6 +157,7 @@ input[type="search"]::-webkit-search-cancel-button {
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Nombre</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Código</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Descripción</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Creado por</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7"></th>
                     </tr>
                   </thead>
@@ -167,7 +168,7 @@ input[type="search"]::-webkit-search-cancel-button {
                         </tr>
                     @else
                         @foreach($categorias as $categoria)
-                            <tr>
+                            <tr class="text-center">
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">{{ $categoria->id }}</p>
                                 </td>
@@ -180,7 +181,9 @@ input[type="search"]::-webkit-search-cancel-button {
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">{{ $categoria->descripcion }}</p>
                                 </td>
-                            
+                                <td>
+                                    <a href="#" ><p class="text-xs font-weight-bold mb-0">{{ $categoria->usuario->username }}</p></a>
+                                </td>
                                 <td class=" px-3 py-2 exclude-column">
                                     <form action="{{route('categorias.delete', $categoria->id)}}" method="POST">
                                     <div style="display: flex; justify-content:center">

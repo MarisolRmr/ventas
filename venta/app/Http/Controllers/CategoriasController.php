@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriasController extends Controller
 {
@@ -16,7 +17,7 @@ class CategoriasController extends Controller
     // Mostrar vista de listado de categorías
     public function index()
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::with('usuario')->get();
         return view('categorias.lista')->with(['categorias' => $categorias]);
     }
 
@@ -48,11 +49,16 @@ class CategoriasController extends Controller
             'descripcion' => 'required'
         ]);
 
-        // Invocar el modelo Categoria para crear el registro
+        // Obtener el ID del usuario autenticado
+        $userId = Auth::id();
+        //dd($userId);
+
+        // Invocar el modelo Categoria para crear el registro con el user_id
         Categoria::create([
             'nombre' => $request->nombre,
             'codigo' => $request->codigo,
             'descripcion' => $request->descripcion,
+            'user_id' => $userId,
         ]);
 
         // Redireccionar a la vista de listado de categorías
