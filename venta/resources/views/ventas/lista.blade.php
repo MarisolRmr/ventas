@@ -129,7 +129,7 @@ input[type="search"]::-webkit-search-cancel-button {
                     <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-2 h-2">
                         <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
                     </svg>
-                    Agregar Producto
+                    Agregar Venta
                 </a>
             </div>
             </div>
@@ -154,46 +154,49 @@ input[type="search"]::-webkit-search-cancel-button {
                   <thead>
                     <tr>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">ID</th>
-                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Nombre</th>
-                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Precio de Compra</th>
-                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Precio de Venta</th>
-                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Unidades</th>
-                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Categoria</th>
-                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Marca</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Referencia</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Fecha</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Estatus</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Pago</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Total</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Pagado</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Adeudo</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Creado por</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7"></th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($productos as $producto)
                         <tr class="text-center">
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $producto->id }}</p>
+                                <p class="text-xs font-weight-bold mb-0">1</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $producto->nombre }}</p>
+                                <p class="text-xs font-weight-bold mb-0">123_ioioi</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">${{ $producto->precio_compra }}</p>
+                                <p class="text-xs font-weight-bold mb-0">2023-06-12</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">${{ $producto->precio_venta }}</p>
+                                <p class="text-xs font-weight-bold mb-0">Pagado</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $producto->unidades }}</p>
+                                <p class="text-xs font-weight-bold mb-0">Completo</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{  $categorias[$producto->categoria_id] }}</p>
+                                <p class="text-xs font-weight-bold mb-0">$500.00</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{  $marcas[$producto->marca_id] }}</p>
+                                <p class="text-xs font-weight-bold mb-0">$500.00</p>
                             </td>
                             <td>
-                            <a href="#" ><p class="text-xs font-weight-bold mb-0">{{ $producto->usuario->username }}</p></a>
+                                <p class="text-xs font-weight-bold mb-0">$0.00</p>
+                            </td>
+                            <td>
+                                <a href="#" ><p class="text-xs font-weight-bold mb-0">lore</p></a>
                             </td>
 
                             <td class=" px-3 py-2 exclude-column">
-                                <form action="{{route('productos.delete', $producto->id)}}" method="POST">
+                                <form action="#" method="POST">
                                 <div style="display: flex; justify-content:center">
                                 @method('delete')
                                 @csrf
@@ -203,16 +206,32 @@ input[type="search"]::-webkit-search-cancel-button {
                                     </svg>
                                 </button>
                                 </form>
-                                <a href="{{ route('productos.edit', $producto->id) }}" style="border-radius: 50px !important; border:none !important" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                                <a href="#" style="border-radius: 50px !important; border:none !important" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                 <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
                                 </svg>
-
                                 </a>
-                            </div>
+                                <li class="nav-item dropdown">
+                                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style=" border:none !important" class="inline-block px-2 py-2 rounded-lg font-bold transition-colors">
+                                    <svg   xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                    </svg>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-sm  dropdown-menu-right  py-0 overflow-hidden">
+                                        <!-- Dropdown header -->
+                                        <div class="px-2 py-2">
+                                            <a href="#" style=" border:none !important" class="inline-block px-2 py-2  rounded-lg">
+                                                Ver recibo
+                                            </a>
+                                            <br>
+                                            <a href="{{route('ventas.detalles')}}" style=" border:none !important" class="inline-block px-2 py-2 rounded-lg">
+                                                Detalles
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
                             </td>
                         </tr>
-                    @endforeach
                     
                   </tbody>
                 </table>
@@ -234,7 +253,7 @@ input[type="search"]::-webkit-search-cancel-button {
         order: [[3, 'desc']],
         "lengthMenu":[[5,10,50,-1],[5,10,50,"All"]],
         language: {
-            emptyTable: "Aún no hay productos que mostrar."
+            emptyTable: "Aún no hay ventas que mostrar."
         }
     });
 

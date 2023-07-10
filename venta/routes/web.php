@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\MarcasController;
+use App\Http\Controllers\VentasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,6 +75,28 @@ Route::put('/marcas/{id}/edit', [MarcasController::class, 'update'])->name('marc
 
 //ruta para enviar datos al servidor de imagen
 Route::post('/imagenes', [MarcasController::class,'store_imagen'])->name('imagenes.store');
+
+// lista de ventas
+Route::get('/ventas', [VentasController::class, 'index'])->name('ventas.index');
+
+// formulario ventas
+Route::get('/ventas/Nueva', [VentasController::class, 'create'])->name('ventas.create');
+
+// guardar ventas
+Route::post('/ventas', [VentasController::class, 'store'])->name('ventas.store');
+
+// eliminar ventas
+Route::delete('/ventas/{id}', [VentasController::class, 'delete'])->name('ventas.delete');
+
+// editar ventas
+Route::get('/ventas/{marca}/edit',[ VentasController::class, 'edit'])->name('ventas.edit');
+
+// actualizar cambios ventas
+Route::put('/ventas/{id}/edit', [VentasController::class, 'update'])->name('ventas.update');
+
+// lista de ventas
+Route::get('/ventas/detalle', [VentasController::class, 'detalles_index'])->name('ventas.detalles');
+
 
 //Dashboard
 Route::get('/', [HomeController::class, 'home'])->name('home');
