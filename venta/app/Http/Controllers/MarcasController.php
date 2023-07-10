@@ -74,11 +74,11 @@ class MarcasController extends Controller
             'descripcion' => 'required',
         ]);
 
-        $categoria = Categoria::findOrFail($id);
-        $categoria->nombre = $request->nombre;
-        $categoria->imagen = $request->imagen;
-        $categoria->descripcion = $request->descripcion;
-        $categoria->save();
+        $marca = Marca::findOrFail($id);
+        $marca->nombre = $request->nombre;
+        $marca->imagen = $request->imagen;
+        $marca->descripcion = $request->descripcion;
+        $marca->save();
 
         return redirect()->route('marcas.index')->with('actualizada', 'Marca actualizada correctamente.');
     }

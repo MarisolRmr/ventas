@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('categoria_id')->constrained('categoria');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('marca_id')->constrained('marca')->onDelete('cascade');
-            $table->foreignId('subcategoria_id')->constrained('subcategoria');
+            $table->foreignId('subcategoria_id')->nullable()->constrained('subcategoria');
         });
     }
 

@@ -74,7 +74,7 @@
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="profile.html">
+              <a class="nav-link" href="#">
                 <i class="ni ni-ui-04 text-yellow"></i>
                 <span class="nav-link-text">Subcategorías</span>
               </a>
@@ -85,13 +85,13 @@
                 <span class="nav-link-text">Marcas</span>
               </a>
             </li>
-            <!--<li class="nav-item">
-              <a class="nav-link" href="login.html">
-                <i class="ni ni-key-25 text-info"></i>
-                <span class="nav-link-text">Login</span>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="ni ni-money-coins text-info"></i>
+                <span class="nav-link-text">Ventas</span>
               </a>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <a class="nav-link" href="register.html">
                 <i class="ni ni-circle-08 text-pink"></i>
                 <span class="nav-link-text">Register</span>

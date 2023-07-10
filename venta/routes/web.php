@@ -67,7 +67,7 @@ Route::post('/marcas', [MarcasController::class, 'store'])->name('marcas.store')
 Route::delete('/marcas/{id}', [MarcasController::class, 'delete'])->name('marcas.delete');
 
 // editar marcas
-Route::get('/marcas/{categoria}/edit',[ MarcasController::class, 'edit'])->name('marcas.edit');
+Route::get('/marcas/{marca}/edit',[ MarcasController::class, 'edit'])->name('marcas.edit');
 
 // actualizar cambios marcas
 Route::put('/marcas/{id}/edit', [MarcasController::class, 'update'])->name('marcas.update');

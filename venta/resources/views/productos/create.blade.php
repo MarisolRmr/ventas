@@ -134,6 +134,28 @@
                 @enderror
             </div>
 
+            <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
+                <label for="marca_id" class="mb-2 block uppercase text-gray-500 font-bold">
+                    Marca
+                </label>
+                <select 
+                    style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
+                    id="marca_id"
+                    name="marca_id"
+                    class="border p-3 w-full rounded-lg @error ('marca_id') border-red-500 @enderror"
+                >
+                    <option value="">Seleccione una marca</option>
+                    @foreach($marcas as $marca)
+                        <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+                    @endforeach
+                </select>
+                @error('marca_id')
+                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>    
+                @enderror
+            </div>
+
             <div class="text-center">
               <button type="submit"class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white">Guardar</button>
             </div>

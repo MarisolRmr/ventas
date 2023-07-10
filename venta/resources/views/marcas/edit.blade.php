@@ -16,6 +16,9 @@
         margin-bottom: 0.5rem;
         
     }
+    .dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * {
+        width: 400px !important;
+    }
     
 </style>
 @endsection
@@ -29,14 +32,13 @@
           <h4>Editar marca</h4>
         </div>
         <div class="card-body px-4 pt-4 pb-2 flex items-center justify-center text-center">
-            <div class="md:w-1/3 px-10 p-10 ">
-                <form action="{{route('imagenes.store')}}" method="post" enctype="multipart/form-data" id="dropzone" class="dropzone border-dashed border-2 w-full h-96 rounded shadow-xl flex flex-col justify-center items-center  bg-white">
-                    @csrf
-                </form> 
-            </div> 
-            <form action="{{route('marcas.update', $marca->id)}}" method="post" novalidate>
+            <!--<form action="{{route('imagenes.store')}}" method="post" enctype="multipart/form-data" id="dropzone" class="dropzone " style="width: 100%; border:none;padding:0px; align-items:center">
+                @csrf
+            </form> -->  
+            <form action="{{ route('marcas.update', $marca->id) }}" method="post" novalidate>
             @method('put')
             @csrf
+  
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
                 <label for="nombre" class="mb-2 block uppercase text-gray-500 font-bold">
                     Nombre
@@ -56,8 +58,6 @@
                     </p>    
                 @enderror
             </div>
-
-            
 
             <div class="mb-4 items-start" style="display: flex; align-items: top; justify-content:center">
                 <label for="descripcion" class="mb-2 block uppercase text-gray-500 font-bold">
@@ -79,7 +79,7 @@
             </div>
             <!--Agregar campo oculto para guardar el valor de la imagen-->
             <div class="mb-5">
-                <input type="hidden" name="imagen"  value="{{old('imagen', $marca->imagen)}}"">
+                <input type="hidden" name="imagen"  value="{{old('imagen', $marca->imagen)}}">
                 @error('imagen')
                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                         {{$message}}
