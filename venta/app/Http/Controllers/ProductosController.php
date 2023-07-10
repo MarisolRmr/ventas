@@ -103,7 +103,6 @@ class ProductosController extends Controller
             'precio_venta' => 'required|numeric|min:0',
             'precio_compra' => 'required|numeric|min:0',
             'categoria_id' => 'required',
-            'subcategoria_id' => 'required',
             'marca_id' => 'required',
         ]);
 
