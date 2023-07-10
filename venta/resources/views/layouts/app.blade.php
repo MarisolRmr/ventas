@@ -91,6 +91,12 @@
                 <span class="nav-link-text">Ventas</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('devoluciones.index')}}">
+                <i class="ni ni-money-coins text-info"></i>
+                <span class="nav-link-text">Devoluciones</span>
+              </a>
+            </li>
             <!--<li class="nav-item">
               <a class="nav-link" href="register.html">
                 <i class="ni ni-circle-08 text-pink"></i>

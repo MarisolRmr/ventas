@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\MarcasController;
 use App\Http\Controllers\SubcategoriaController;
 use App\Http\Controllers\VentasController;
+use App\Http\Controllers\DevolucionesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,16 +80,6 @@ Route::put('/subcategorias/{id}/edit', [SubcategoriaController::class, 'update']
 // eliminar subcategorias
 Route::delete('/subcategorias/{id}', [SubcategoriaController::class, 'delete'])->name('subcategorias.delete');
 
-
-
-
-
-
-
-
-
-
-
 // lista de marcas
 Route::get('/marcas', [MarcasController::class, 'index'])->name('marcas.index');
 
@@ -130,6 +121,10 @@ Route::put('/ventas/{id}/edit', [VentasController::class, 'update'])->name('vent
 
 // lista de ventas
 Route::get('/ventas/detalle', [VentasController::class, 'detalles_index'])->name('ventas.detalles');
+
+// lista de devoluciones
+Route::get('/devoluciones', [DevolucionesController::class, 'index'])->name('devoluciones.index');
+
 
 
 //Dashboard
