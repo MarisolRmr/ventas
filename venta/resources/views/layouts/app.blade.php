@@ -93,7 +93,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route('devoluciones.index')}}">
-                <i class="ni ni-money-coins text-info"></i>
+                <i class="ni ni-curved-next text-pink"></i>
                 <span class="nav-link-text">Devoluciones</span>
               </a>
             </li>

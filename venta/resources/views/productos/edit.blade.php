@@ -138,6 +138,30 @@
             </div>
 
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
+                <label for="subcategoria_id" class="mb-2 block uppercase text-gray-500 font-bold">
+                    Subcategoría
+                </label>
+                <select 
+                    style="border-radius: 20px !important; height: 55px; width: 400px; margin-left: 20px; "
+                    id="subcategoria_id"
+                    name="subcategoria_id"
+                    class="border p-3 w-full rounded-lg @error('subcategoria_id') border-red-500 @enderror"
+                >
+                    <option value="">Selecciona una subcategoría</option>
+                    @foreach($subcategorias as $subcategoria)
+                        <option value="{{ $categoria->id }}" {{ $subcategoria->id == old('subcategoria_id', $producto->subcategoria_id) ? 'selected' : '' }}>
+                            {{ $subcategoria->nombre }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('subcategoria_id')
+                    <p style="background-color: #f56565; color: #fff; margin-top: 0.5rem; border-radius: 0.5rem; font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{ $message }}
+                    </p>    
+                @enderror
+            </div>
+
+            <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
                 <label for="marca_id" class="mb-2 block uppercase text-gray-500 font-bold">
                     Marca
                 </label>

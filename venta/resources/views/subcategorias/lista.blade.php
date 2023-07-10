@@ -176,7 +176,7 @@ input[type="search"]::-webkit-search-cancel-button {
                                 <p class="text-xs font-weight-bold mb-0">{{ $subcategoria->nombre }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $subcategoria->categoria_id }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{  $categorias[$subcategoria->categoria_id] }}</p>
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $subcategoria->codigo }}</p>

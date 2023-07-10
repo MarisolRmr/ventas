@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Subcategoria;
+use App\Models\Categoria;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
@@ -20,20 +21,25 @@ class SubcategoriaController extends Controller{
     // Mostrar vista de listado de subcategorías
     public function index(){
         $subcategorias = Subcategoria::with('usuario')->get();
-        return view('subcategorias.lista')->with(['subcategorias' => $subcategorias]);
+        // Obtener los nombres de categoría correspondientes a cada producto
+        $categorias = Categoria::whereIn('id', $subcategorias->pluck('categoria_id'))->pluck('nombre', 'id');
+
+        
+        return view('subcategorias.lista')->with(['subcategorias' => $subcategorias, 'categorias' => $categorias]);
     }
 
     // Mostrar vista de formulario
     public function create(){
-        return view('subcategorias.create');
+        $categorias = Categoria::all();
+        return view('subcategorias.create', compact('categorias'));
     }
 
     //editar
     public function edit(Subcategoria $subcategoria){
-        return view('subcategorias.edit', compact('subcategoria'));
+        $categorias = Categoria::all();
+        return view('subcategorias.edit', compact('subcategoria','categorias'));
     }
 
-    // Validar y guardar datos del formulario
     // Validar y guardar datos del formulario
     public function store(Request $request)
     {
@@ -41,7 +47,8 @@ class SubcategoriaController extends Controller{
         $this->validate($request, [
             'nombre' => 'required',
             'codigo' => 'required|min:5',
-            'descripcion' => 'required'
+            'descripcion' => 'required',
+            'categoria_id' => 'required',
         ]);
 
         // Obtener el ID del usuario autenticado
@@ -52,7 +59,7 @@ class SubcategoriaController extends Controller{
         Subcategoria::create([
             'nombre' => $request->nombre,
             'codigo' => $request->codigo,
-            'categoria_id' => $request->categoria,
+            'categoria_id' => $request->categoria_id,
             'descripcion' => $request->descripcion,
             'imagen' => $request->imagen,
             'user_id' => $userId,
@@ -103,7 +110,7 @@ class SubcategoriaController extends Controller{
         $subcategoria->nombre = $request->nombre;
         $subcategoria->descripcion = $request->descripcion;
         $subcategoria->codigo = $request->codigo;
-        $subcategoria->categoria = $request->categoria;
+        $subcategoria->categoria_id = $request->categoria_id;
         $subcategoria->save();
 
         return redirect()->route('subcategorias.index')->with('actualizada', 'Subcategoría actualizada correctamente.');

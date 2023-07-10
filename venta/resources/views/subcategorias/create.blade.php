@@ -65,19 +65,21 @@
             </div>
 
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
-                <label for="nombre" class="mb-2 block uppercase text-gray-500 font-bold">
+                <label for="categoria_id" class="mb-2 block uppercase text-gray-500 font-bold">
                     Categoría
                 </label>
-                <input 
-                    style="border-radius: 20px !important; height: 45px; width: 400px; margin-left: 20px; "
-                    id="categoria"
-                    name="categoria"
-                    type="text"
-                    placeholder="Nombre de la categoría"
-                    class="border p-3 w-full rounded-lg @error ('categoria') border-red-500 @enderror"
-                    value="{{old('categoria')}}"
+                <select 
+                    style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
+                    id="categoria_id"
+                    name="categoria_id"
+                    class="border p-3 w-full rounded-lg @error ('categoria_id') border-red-500 @enderror"
                 >
-                @error('categoria')
+                    <option value="">Seleccione una categoría</option>
+                    @foreach($categorias as $categoria)
+                        <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                    @endforeach
+                </select>
+                @error('categoria_id')
                     <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                         {{$message}}
                     </p>    
@@ -93,7 +95,7 @@
                     id="codigo"
                     name="codigo"
                     type="text"
-                    placeholder="Nombre de la categoría"
+                    placeholder="Código de la categoría"
                     class="border p-3 w-full rounded-lg @error ('codigo') border-red-500 @enderror"
                     value="{{old('codigo')}}"
                 >

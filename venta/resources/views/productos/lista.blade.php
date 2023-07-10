@@ -159,6 +159,7 @@ input[type="search"]::-webkit-search-cancel-button {
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Precio de Venta</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Unidades</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Categoria</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Subcategoria</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Marca</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Creado por</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7"></th>
@@ -186,10 +187,18 @@ input[type="search"]::-webkit-search-cancel-button {
                                 <p class="text-xs font-weight-bold mb-0">{{  $categorias[$producto->categoria_id] }}</p>
                             </td>
                             <td>
+                            @if(!$subcategorias->isEmpty() && isset($subcategorias[$producto->subcategoria_id]))
+                                <p class="text-xs font-weight-bold mb-0">{{ $subcategorias[$producto->subcategoria_id] }}</p>
+                            @else
+                                <p class="text-xs font-weight-bold mb-0">Sin subcategoría</p>
+                            @endif
+                            </td>
+
+                            <td>
                                 <p class="text-xs font-weight-bold mb-0">{{  $marcas[$producto->marca_id] }}</p>
                             </td>
                             <td>
-                            <a href="#" ><p class="text-xs font-weight-bold mb-0">{{ $producto->usuario->username }}</p></a>
+                                <a href="#" ><p class="text-xs font-weight-bold mb-0">{{ $producto->usuario->username }}</p></a>
                             </td>
 
                             <td class=" px-3 py-2 exclude-column">
