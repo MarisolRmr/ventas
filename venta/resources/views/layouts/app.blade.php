@@ -97,19 +97,13 @@
                 <span class="nav-link-text">Devoluciones</span>
               </a>
             </li>
-            <!--<li class="nav-item">
-              <a class="nav-link" href="register.html">
-                <i class="ni ni-circle-08 text-pink"></i>
-                <span class="nav-link-text">Register</span>
-              </a>
-            </li>
             <li class="nav-item">
-              <a class="nav-link" href="upgrade.html">
-                <i class="ni ni-send text-dark"></i>
-                <span class="nav-link-text">Upgrade</span>
+              <a class="nav-link" href="{{route('clientes.index')}}">
+                <i class="ni ni-single-02 text-dark"></i>
+                <span class="nav-link-text">Clientes</span>
               </a>
             </li>
-          </ul>-->
+          </ul>
           <!-- Divider -->
           <hr class="my-3">
           <!-- Heading -->

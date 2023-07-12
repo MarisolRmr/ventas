@@ -10,6 +10,7 @@ use App\Http\Controllers\MarcasController;
 use App\Http\Controllers\SubcategoriaController;
 use App\Http\Controllers\VentasController;
 use App\Http\Controllers\DevolucionesController;
+use App\Http\Controllers\ClientesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -100,6 +101,26 @@ Route::put('/marcas/{id}/edit', [MarcasController::class, 'update'])->name('marc
 
 //ruta para enviar datos al servidor de imagen
 Route::post('/imagenes', [MarcasController::class,'store_imagen'])->name('imagenes.store');
+
+// lista de clientes
+Route::get('/clientes', [ClientesController::class, 'index'])->name('clientes.index');
+
+// formulario clientes
+Route::get('/clientes/Nueva', [ClientesController::class, 'create'])->name('clientes.create');
+
+// guardar clientes
+Route::post('/clientes', [ClientesController::class, 'store'])->name('clientes.store');
+
+// eliminar clientes
+Route::delete('/clientes/{id}', [ClientesController::class, 'delete'])->name('clientes.delete');
+
+// editar clientes
+Route::get('/clientes/{marca}/edit',[ ClientesController::class, 'edit'])->name('clientes.edit');
+
+// actualizar cambios clientes
+Route::put('/clientes/{id}/edit', [ClientesController::class, 'update'])->name('clientes.update');
+
+
 
 // lista de ventas
 Route::get('/ventas', [VentasController::class, 'index'])->name('ventas.index');
