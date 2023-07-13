@@ -79,7 +79,7 @@ class ClientesController extends Controller
         $cliente->empresa = $request->empresa;
         $cliente->save();
 
-        return redirect()->route('clientes.index')->with('actualizada', 'cliente actualizado correctamente.');
+        return redirect()->route('clientes.index')->with('actualizada', 'Cliente actualizado correctamente.');
     }
 
     

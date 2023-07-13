@@ -115,7 +115,7 @@ Route::post('/clientes', [ClientesController::class, 'store'])->name('clientes.s
 Route::delete('/clientes/{id}', [ClientesController::class, 'delete'])->name('clientes.delete');
 
 // editar clientes
-Route::get('/clientes/{marca}/edit',[ ClientesController::class, 'edit'])->name('clientes.edit');
+Route::get('/clientes/{cliente}/edit',[ ClientesController::class, 'edit'])->name('clientes.edit');
 
 // actualizar cambios clientes
 Route::put('/clientes/{id}/edit', [ClientesController::class, 'update'])->name('clientes.update');
