@@ -38,6 +38,9 @@ Route::delete('/productos/{id}', [ProductosController::class, 'delete'])->name('
 // editar productos
 Route::get('/productos/{producto}/edit',[ ProductosController::class, 'edit'])->name('productos.edit');
 
+//ruta para enviar datos al servidor de imagen
+Route::post('/productos_imagen', [ProductosController::class,'store_imagen'])->name('productos.imagen');
+
 // actualizar cambios productos
 Route::put('/productos/{id}/edit', [ProductosController::class, 'update'])->name('productos.update');
 

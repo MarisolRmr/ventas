@@ -154,6 +154,7 @@ input[type="search"]::-webkit-search-cancel-button {
                   <thead>
                     <tr>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">ID</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Imagen</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Nombre</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Precio de Compra</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Precio de Venta</th>
@@ -170,6 +171,9 @@ input[type="search"]::-webkit-search-cancel-button {
                         <tr class="text-center">
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $producto->id }}</p>
+                            </td>
+                            <td>
+                                <img src="{{ asset('uploads/' . $producto->imagen) }}" alt="Imagen del producto" style="height: 80px; border-radius:17px">
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $producto->nombre }}</p>

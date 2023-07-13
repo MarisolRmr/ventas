@@ -71,6 +71,7 @@ class ProductosController extends Controller
         $this->validate($request, [
             'nombre' => 'required',
             'unidades' => 'required|numeric|min:0',
+            'imagen'=>'required',
             'precio_venta' => 'required|numeric|min:0',
             'precio_compra' => 'required|numeric|min:0',
             'categoria_id' => 'required',
@@ -88,6 +89,7 @@ class ProductosController extends Controller
             'categoria_id' => $request->categoria_id,
             'subcategoria_id' => $request->subcategoria_id,
             'marca_id' => $request->marca_id,
+            'imagen' => $request->imagen,
             'user_id' => $userId,
         ]);
 
@@ -117,6 +119,32 @@ class ProductosController extends Controller
         $producto->save();
 
         return redirect()->route('productos.index')->with('actualizado', 'Producto actualizado correctamente.');
+    }
+    //para guardar la imagen del producto
+    public function store_imagen(Request $request){
+        //identificar el archivo que se sube en dropzone
+        $imagen=$request->file('file');
+
+        //convertimos el arreglo input a formato json
+        //return response()->json(['imagen'=>$imagen->extension()]);
+        //genera un id unico para cada una de las imagenes que se cargan en el server
+        $nombreImagen = Str::uuid() . ".". $imagen->extension();
+
+        //implementar intervention Image 
+        $imagenServidor=Image::make($imagen);
+
+        //agregamos efectps de intervention image: indicamos la medida de cada imagen
+        $imagenServidor->fit(1000,1000);
+
+        //movemos la imagen a un lugar fisico del servidor
+        $imagenPath=public_path('uploads'). '/'. $nombreImagen;
+
+        //pasamos la imagen de memoria al server
+        $imagenServidor->save($imagenPath);
+
+        ///verificamos que el nombre del archivo se ponga como unico
+        return response()->json(['imagen'=>$nombreImagen]);
+
     }
 
 

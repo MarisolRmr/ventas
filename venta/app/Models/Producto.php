@@ -14,6 +14,7 @@ class Producto extends Model
         'precio_venta',
         'precio_compra',
         'unidades',
+        'imagen',
         'categoria_id',
         'subcategoria_id',
         'marca_id',
