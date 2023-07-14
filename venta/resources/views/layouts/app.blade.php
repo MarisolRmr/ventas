@@ -103,6 +103,12 @@
                 <span class="nav-link-text">Clientes</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('proveedores.index')}}">
+                <i class="ni ni-single-02 text-dark"></i>
+                <span class="nav-link-text">Proveedores</span>
+              </a>
+            </li>
           </ul>
           <!-- Divider -->
           <hr class="my-3">
