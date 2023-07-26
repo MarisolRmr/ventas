@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\Producto;
+use App\Models\Subcategoria;
 use Illuminate\Support\Facades\Auth;
 
 class CategoriasController extends Controller
@@ -23,8 +25,31 @@ class CategoriasController extends Controller
 
     public function delete($id)
     {
-        Categoria::find($id)->delete();
-        return redirect()->back()->with('success', 'Categoría eliminada correctamente');
+        // Buscar la categoría por su ID
+        $categoria = Categoria::find($id);
+
+        
+        // Obtener los productos asociados a la categoría
+        $productos = Producto::where('categoria_id', $categoria->id)->get();
+
+        // Eliminar los productos asociados
+        foreach ($productos as $producto) {
+            $producto->delete();
+        }
+
+        // Obtener los subcategorias asociados a la categoría
+        $subcategorias = Subcategoria::where('categoria_id', $categoria->id)->get();
+
+        // Eliminar los subcategorias asociados
+        foreach ($subcategorias as $subcategoria) {
+            $subcategoria->delete();
+        }
+
+        // Eliminar la categoría
+        $categoria->delete();
+
+        return redirect()->back()->with('success', 'La categoría, sus productos y subcategorias asociados han sido eliminados correctamente.');
+        
     }
 
     // Mostrar vista de formulario
@@ -46,7 +71,8 @@ class CategoriasController extends Controller
         $this->validate($request, [
             'nombre' => 'required',
             'codigo' => 'required|min:5',
-            'descripcion' => 'required'
+            'descripcion' => 'required',
+            'imagen' => 'required'
         ]);
 
         // Obtener el ID del usuario autenticado
@@ -58,6 +84,7 @@ class CategoriasController extends Controller
             'nombre' => $request->nombre,
             'codigo' => $request->codigo,
             'descripcion' => $request->descripcion,
+            'imagen' => $request->imagen,
             'user_id' => $userId,
         ]);
 
@@ -71,11 +98,13 @@ class CategoriasController extends Controller
             'nombre' => 'required',
             'codigo' => 'required|min:5',
             'descripcion' => 'required',
+            'imagen' => 'required',
         ]);
 
         $categoria = Categoria::findOrFail($id);
         $categoria->nombre = $request->nombre;
         $categoria->codigo = $request->codigo;
+        $categoria->imagen = $request->imagen;
         $categoria->descripcion = $request->descripcion;
         $categoria->save();
 

@@ -154,6 +154,7 @@ input[type="search"]::-webkit-search-cancel-button {
                   <thead>
                     <tr>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">ID</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Imagen</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Nombre</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Código</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Descripción</th>
@@ -168,6 +169,9 @@ input[type="search"]::-webkit-search-cancel-button {
                                 <p class="text-xs font-weight-bold mb-0">{{ $categoria->id }}</p>
                             </td>
                             <td>
+                                <img src="{{ asset('uploads/' . $categoria->imagen) }}" alt="Imagen de la subcategoria" style="height: 80px; border-radius:17px">
+                            </td>
+                            <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $categoria->nombre }}</p>
                             </td>
                             <td>
@@ -180,7 +184,7 @@ input[type="search"]::-webkit-search-cancel-button {
                                 <a href="#" ><p class="text-xs font-weight-bold mb-0">{{ $categoria->usuario->username }}</p></a>
                             </td>
                             <td class=" px-3 py-2 exclude-column">
-                                <form action="{{route('categorias.delete', $categoria->id)}}" method="POST">
+                                <form action="{{ route('categorias.delete', $categoria->id) }}" method="POST" onsubmit="return confirmDelete(event)">
                                 <div style="display: flex; justify-content:center">
                                 @method('delete')
                                 @csrf
@@ -225,5 +229,16 @@ input[type="search"]::-webkit-search-cancel-button {
         }
     });
 
+
+    function confirmDelete(event) {
+        event.preventDefault();
+        const shouldDelete = window.confirm('¿Estás seguro de que deseas eliminar esta categoría? ¡Todos los productos y subcategorias asociados también serán eliminados!');
+        if (shouldDelete) {
+            event.target.submit();
+        }
+        return false;
+    }
+
 </script>
+
 @endsection

@@ -21,6 +21,10 @@
     .dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * {
         width: 400px !important;
     }
+    .dz-image img{
+        height: 120px !important;
+        width: 120px !important;
+    }
 </style>
 @endsection
 <!--directiva para integrar los estilos de dropzone-->
@@ -38,7 +42,7 @@
           <h4>Agregar un nuevo producto</h4>
         </div>
         <div class="card-body px-4 pt-4 pb-2 flex items-center justify-center text-center">
-          <form action="{{route('subcategorias.imagen')}}" method="post" enctype="multipart/form-data" id="dropzone" class="dropzone " style="width: 100%; border:none;padding:0px; align-items:center">
+          <form action="{{route('productos.imagen')}}" method="post" enctype="multipart/form-data" id="dropzone" class="dropzone " style="width: 100%; border:none;padding:0px; align-items:center">
                 @csrf
           </form> 
           <form action="{{route('productos.store')}}" method="post" novalidate>

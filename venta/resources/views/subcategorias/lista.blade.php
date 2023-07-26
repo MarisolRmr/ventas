@@ -188,7 +188,7 @@ input[type="search"]::-webkit-search-cancel-button {
                                 <a href="#" ><p class="text-xs font-weight-bold mb-0">{{ $subcategoria->usuario->username }}</p></a>
                             </td> 
                             <td class=" px-3 py-2 exclude-column">
-                                <form action="{{route('subcategorias.delete', $subcategoria->id)}}" method="POST">
+                                <form action="{{route('subcategorias.delete', $subcategoria->id)}}" method="POST" onsubmit="return confirmDelete(event)">
                                 <div style="display: flex; justify-content:center">
                                 @method('delete')
                                 @csrf
@@ -232,6 +232,13 @@ input[type="search"]::-webkit-search-cancel-button {
             emptyTable: "Aún no hay subcategorías que mostrar."
         }
     });
-
+    function confirmDelete(event) {
+        event.preventDefault();
+        const shouldDelete = window.confirm('¿Estás seguro de que deseas eliminar esta subcategoría? ¡Todos los productos asociados se les quitará la subcategoria!');
+        if (shouldDelete) {
+            event.target.submit();
+        }
+        return false;
+    }
 </script>
 @endsection

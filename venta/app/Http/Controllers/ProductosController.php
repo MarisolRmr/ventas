@@ -9,6 +9,9 @@ use App\Models\Subcategoria;
 use App\Models\Marca;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
+
 
 class ProductosController extends Controller
 {
@@ -106,6 +109,7 @@ class ProductosController extends Controller
             'precio_compra' => 'required|numeric|min:0',
             'categoria_id' => 'required',
             'marca_id' => 'required',
+            'imagen' => 'required',
         ]);
 
         $producto = Producto::findOrFail($id);
@@ -113,6 +117,7 @@ class ProductosController extends Controller
         $producto->precio_venta = $request->precio_venta;
         $producto->precio_compra = $request->precio_compra;
         $producto->unidades = $request->unidades;
+        $producto->imagen = $request->imagen;
         $producto->subcategoria_id = $request->subcategoria_id;
         $producto->categoria_id = $request->categoria_id;
         $producto->marca_id = $request->marca_id;

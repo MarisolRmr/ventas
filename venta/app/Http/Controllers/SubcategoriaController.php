@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Subcategoria;
 use App\Models\Categoria;
+use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
@@ -23,8 +24,6 @@ class SubcategoriaController extends Controller{
         $subcategorias = Subcategoria::with('usuario')->get();
         // Obtener los nombres de categoría correspondientes a cada producto
         $categorias = Categoria::whereIn('id', $subcategorias->pluck('categoria_id'))->pluck('nombre', 'id');
-
-        
         return view('subcategorias.lista')->with(['subcategorias' => $subcategorias, 'categorias' => $categorias]);
     }
 
@@ -118,7 +117,21 @@ class SubcategoriaController extends Controller{
 
     public function delete($id)
     {
-        Subcategoria::find($id)->delete();
+        $subcategoria = Subcategoria::find($id);
+        // Obtener los productos asociados a la subcategoría
+        $productos = Producto::where('subcategoria_id', $subcategoria->id)->get();
+
+        // Quitar la subcategoría de los productos asociados
+        foreach ($productos as $producto) {
+            // Actualizar el ID de subcategoría a null en cada producto
+            $producto->subcategoria_id = null;
+            $producto->save();
+        }
+
+        // Eliminar la subcategoría
+        $subcategoria->delete();
+
+
         return redirect()->back()->with('success', 'Subcategoría eliminada correctamente');
     }
 }

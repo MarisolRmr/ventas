@@ -88,6 +88,10 @@ input[type="search"]::-webkit-search-cancel-button {
 .bg-blue-600 {
     background-color: #2563eb;
 }
+.bg-gray-600 {
+    background-color: #a3a3a3;
+}
+
 
 .hover\:bg-red-700:hover {
     background-color: #b91c1c;
@@ -216,9 +220,16 @@ input[type="search"]::-webkit-search-cancel-button {
                                     </svg>
                                 </button>
                                 </form>
-                                <a href="{{ route('productos.edit', $producto->id) }}" style="border-radius: 50px !important; border:none !important" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                                <a href="{{ route('productos.edit', $producto->id) }}" style="border-radius: 50px !important; border:none !important; margin-right: 10px;" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                 <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
+                                </svg>
+                                </a>
+
+                                <a href="{{ route('productos.edit', $producto->id) }}" style="border-radius: 50px !important; border:none !important" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-gray-600 hover:bg-gray-700 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
                                 </svg>
 
                                 </a>
