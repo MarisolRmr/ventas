@@ -11,6 +11,7 @@ use App\Http\Controllers\SubcategoriaController;
 use App\Http\Controllers\VentasController;
 use App\Http\Controllers\DevolucionesController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ProveedoresController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,7 +44,6 @@ Route::post('/productos_imagen', [ProductosController::class,'store_imagen'])->n
 
 // actualizar cambios productos
 Route::put('/productos/{id}/edit', [ProductosController::class, 'update'])->name('productos.update');
-
 
 // lista de categorias
 Route::get('/categorias', [CategoriasController::class, 'index'])->name('categorias.index');
@@ -123,8 +123,6 @@ Route::get('/clientes/{cliente}/edit',[ ClientesController::class, 'edit'])->nam
 // actualizar cambios clientes
 Route::put('/clientes/{id}/edit', [ClientesController::class, 'update'])->name('clientes.update');
 
-
-
 // lista de ventas
 Route::get('/ventas', [VentasController::class, 'index'])->name('ventas.index');
 
@@ -149,6 +147,26 @@ Route::get('/ventas/detalle', [VentasController::class, 'detalles_index'])->name
 // lista de devoluciones
 Route::get('/devoluciones', [DevolucionesController::class, 'index'])->name('devoluciones.index');
 
+
+
+
+// lista de proveedores
+Route::get('/proveedores', [ProveedoresController::class, 'index'])->name('proveedores.index');
+
+// formulario proveedores
+Route::get('/proveedores/Nueva', [ProveedoresController::class, 'create'])->name('proveedores.create');
+
+// guardar proveedores
+Route::post('/proveedores', [ProveedoresController::class, 'store'])->name('proveedores.store');
+
+// editar proveedores
+Route::get('/proveedores/{proveedor}/edit',[ ProveedoresController::class, 'edit'])->name('proveedores.edit');
+
+// actualizar cambios proveedores
+Route::put('/proveedores/{id}/edit', [ProveedoresController::class, 'update'])->name('proveedores.update');
+
+// eliminar proveedores
+Route::delete('/proveedores/{id}', [ProveedoresController::class, 'delete'])->name('proveedores.delete');
 
 
 //Dashboard
