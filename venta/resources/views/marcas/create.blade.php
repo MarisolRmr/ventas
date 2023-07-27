@@ -24,6 +24,10 @@
     .dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * {
         width: 400px !important;
     }
+    .dz-image img{
+        height: 120px !important;
+        width: 120px !important;
+    }
     
 </style>
 @endsection

@@ -105,7 +105,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route('proveedores.index')}}">
-                <i class="ni ni-single-02 text-dark"></i>
+                <i class="ni ni-building text-primary"></i>
                 <span class="nav-link-text">Proveedores</span>
               </a>
             </li>

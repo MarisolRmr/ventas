@@ -155,6 +155,7 @@ input[type="search"]::-webkit-search-cancel-button {
                     <tr>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">ID</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Nombre</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Imagen</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Código</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Teléfono</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Email</th>
@@ -171,10 +172,21 @@ input[type="search"]::-webkit-search-cancel-button {
                                 <p class="text-xs font-weight-bold mb-0">{{ $proveedor->nombre }}</p>
                             </td>
                             <td>
+                                @if($proveedor->imagen)
+                                <img src="{{ asset('uploads/' . $proveedor->imagen) }}" alt="Imagen de la marca" style="height: 80px; border-radius:17px">
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin Imagen</p>
+                                @endif
+                            </td>
+                            <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $proveedor->codigo }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $proveedor->telefono }}</p>
+                                @if($proveedor->telefono)
+                                    <p class="text-xs font-weight-bold mb-0">{{ $proveedor->telefono }}</p>
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin Teléfono</p>
+                                @endif
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $proveedor->email }}</p>

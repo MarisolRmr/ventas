@@ -24,6 +24,10 @@
     .dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * {
         width: 400px !important;
     }
+    .dz-image img{
+        height: 120px !important;
+        width: 120px !important;
+    }
     
 </style>
 @endsection
@@ -37,6 +41,9 @@
           <h4>Agregar un nuevo proveedor</h4>
         </div>
         <div class="card-body px-4 pt-4 pb-2 flex items-center justify-center text-center"> 
+            <form action="{{route('imagenes.store')}}" method="post" enctype="multipart/form-data" id="dropzone" class="dropzone " style="width: 100%; border:none;padding:0px; align-items:center">
+                @csrf
+            </form>  
             <form action="{{route('proveedores.store')}}" method="post" novalidate>
             @csrf
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
@@ -113,6 +120,16 @@
                     value="{{old('email')}}"
                 >
                 @error('email')
+                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>    
+                @enderror
+            </div>
+
+            <!--Agregar campo oculto para guardar el valor de la imagen-->
+            <div class="mb-5">
+                <input type="hidden" name="imagen"  value="{{old('imagen')}}">
+                @error('imagen')
                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                         {{$message}}
                     </p>    

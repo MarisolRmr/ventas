@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Models\Proveedores;
 
@@ -34,6 +35,7 @@ class ProveedoresController extends Controller{
             'codigo' => $request->codigo,
             'email' => $request->email,
             'telefono' => $request->telefono,
+            'imagen' => $request->imagen,
         ]);
 
         return redirect()->route('proveedores.index')->with('agregada', 'Proveedor agregado correctamente');
@@ -61,6 +63,7 @@ class ProveedoresController extends Controller{
         $cliente->codigo = $request->codigo;
         $cliente->email = $request->email;
         $cliente->telefono = $request->telefono;
+        $cliente->imagen = $request->imagen;
         $cliente->save();
 
         return redirect()->route('proveedores.index')->with('actualizada', 'Proveedor actualizado correctamente.');

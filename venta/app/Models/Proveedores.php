@@ -14,5 +14,6 @@ class Proveedores extends Model{
         'codigo',
         'telefono',
         'email',
+        'imagen'
     ];
 }

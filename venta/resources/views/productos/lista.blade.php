@@ -252,7 +252,6 @@ input[type="search"]::-webkit-search-cancel-button {
 @endsection
 
 @section('js')
-
 <script>
     new DataTable('#example', {
         order: [[3, 'desc']],

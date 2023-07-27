@@ -88,6 +88,7 @@ Crea una cuenta
         <div class="col-lg-6 col-md-8">
           <div class="card bg-secondary border-0">
             <div class="card-header bg-transparent pb-5">
+              <!--
               <div class="text-muted text-center mt-2 mb-4"><small>Regístrate con</small></div>
               <div class="text-center">
                 <a href="#" class="btn btn-neutral btn-icon mr-4">
@@ -103,9 +104,8 @@ Crea una cuenta
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
                 <small>O regístrate con credenciales</small>
-              </div>
-              
-              <form action="{{ route('register') }}" method="POST" novalidate>
+              </div>-->
+              <form action="{{ route('register') }}" method="POST" class="mt-4" novalidate>
                 @csrf
 
                 <div class="form-group">
@@ -163,7 +163,7 @@ Crea una cuenta
                     @enderror
                   </div>
                 </div>
-                <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
+                <!--<div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>-->
                 <div class="row my-4">
                   <div class="col-12">
                     <div class="custom-control custom-control-alternative custom-checkbox">

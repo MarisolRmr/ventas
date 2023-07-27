@@ -86,6 +86,7 @@
         <div class="col-lg-5 col-md-7">
           <div class="card bg-secondary border-0 mb-0">
             <div class="card-header bg-transparent pb-5">
+              <!--
               <div class="text-muted text-center mt-2 mb-3"><small>Puedes iniciar sesión con</small></div>
               <div class="btn-wrapper text-center">
                 <a href="#" class="btn btn-neutral btn-icon">
@@ -101,10 +102,9 @@
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
                 <small>O inicia sesión con credenciales</small>
-              </div>
+              </div>-->
 
-
-              <form method="post" action="{{route('login')}}" novalidate>
+              <form method="post" action="{{route('login')}}" class="mt-4" novalidate>
                 @csrf    
 
                 @if (session('mensaje'))

@@ -56,6 +56,7 @@ class ClientesController extends Controller
             'email' => $request->email,
             'telefono' => $request->telefono,
             'empresa' => $request->empresa,
+            'imagen' => $request->imagen,
         ]);
 
         // Redireccionar a la vista de listado de clientes
@@ -77,6 +78,7 @@ class ClientesController extends Controller
         $cliente->email = $request->email;
         $cliente->telefono = $request->telefono;
         $cliente->empresa = $request->empresa;
+        $cliente->imagen = $request->imagen;
         $cliente->save();
 
         return redirect()->route('clientes.index')->with('actualizada', 'Cliente actualizado correctamente.');

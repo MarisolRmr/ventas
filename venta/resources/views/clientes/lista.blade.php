@@ -155,6 +155,7 @@ input[type="search"]::-webkit-search-cancel-button {
                     <tr>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">ID</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Nombre</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Imagen</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Código</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Teléfono</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Email</th>
@@ -172,16 +173,31 @@ input[type="search"]::-webkit-search-cancel-button {
                                 <p class="text-xs font-weight-bold mb-0">{{ $cliente->nombre }}</p>
                             </td>
                             <td>
+                                @if($cliente->imagen)
+                                <img src="{{ asset('uploads/' . $cliente->imagen) }}" alt="Imagen de la marca" style="height: 80px; border-radius:17px">
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin Imagen</p>
+                                @endif
+                            </td>
+                            <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $cliente->codigo }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $cliente->telefono }}</p>
+                                @if($cliente->telefono)
+                                    <p class="text-xs font-weight-bold mb-0">{{ $cliente->telefono }}</p>
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin Teléfono</p>
+                                @endif
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $cliente->email }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $cliente->empresa }}</p>
+                                @if($cliente->empresa)
+                                    <p class="text-xs font-weight-bold mb-0">{{ $cliente->empresa }}</p>
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin Empresa</p>
+                                @endif
                             </td>
                             <td class=" px-3 py-2 exclude-column">
                                 <form action="{{route('clientes.delete', $cliente->id)}}" method="POST">
