@@ -403,7 +403,7 @@
     
   </div>
   <!-- Argon Scripts -->
-  <<!-- Argon Scripts -->
+  <!-- Argon Scripts -->
 <!-- Core -->
 <script src="{{ asset('jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

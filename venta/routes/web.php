@@ -126,8 +126,14 @@ Route::put('/clientes/{id}/edit', [ClientesController::class, 'update'])->name('
 // lista de ventas
 Route::get('/ventas', [VentasController::class, 'index'])->name('ventas.index');
 
-// formulario ventas
+// pos de ventas
 Route::get('/ventas/Nueva', [VentasController::class, 'create'])->name('ventas.create');
+
+// para obtener la subcategoria de una categoria
+Route::get('/ventas/subcategorias/{id}', [VentasController::class, 'subcategorias'])->name('ventas.subcategorias');
+//para filtrar los productos por categoria o subcategorias
+Route::get('/ventas/productosPorCategoria/{id}', [VentasController::class, 'productosPorCategoria'])->name('ventas.productosPorCategoria');
+Route::get('/ventas/productosPorSubcategoria/{id}', [VentasController::class, 'productosPorSubcategoria'])->name('ventas.productosPorSubcategoria');
 
 // guardar ventas
 Route::post('/ventas', [VentasController::class, 'store'])->name('ventas.store');
