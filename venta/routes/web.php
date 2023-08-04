@@ -23,7 +23,6 @@ use App\Http\Controllers\ProveedoresController;
 |
 */
 
-
 // lista de productos
 Route::get('/productos', [ProductosController::class, 'index'])->name('productos.index');
 
@@ -152,9 +151,6 @@ Route::get('/ventas/detalle', [VentasController::class, 'detalles_index'])->name
 
 // lista de devoluciones
 Route::get('/devoluciones', [DevolucionesController::class, 'index'])->name('devoluciones.index');
-
-
-
 
 // lista de proveedores
 Route::get('/proveedores', [ProveedoresController::class, 'index'])->name('proveedores.index');

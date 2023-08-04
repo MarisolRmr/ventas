@@ -32,6 +32,9 @@
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 @endpush
 
+@section('navegacion')
+Editar Producto
+@endsection
 
 @section('contenido')
 <div class="container-fluid py-4">

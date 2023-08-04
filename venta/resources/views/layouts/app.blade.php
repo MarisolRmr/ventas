@@ -48,6 +48,7 @@
           <img src="{{ asset ('img/ventas.png') }}" class="navbar-brand-img" alt="logo">
         </a>
       </div>
+
       <div class="navbar-inner">
         <!-- Collapse -->
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
@@ -55,7 +56,6 @@
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link active" href="{{route('posts.index',[auth()->user()])}}">
-       
               <i class="ni ni-chart-bar-32 text-primary"></i>
                 <span class="nav-link-text">Dashboard</span>
               </a>
@@ -110,48 +110,9 @@
               </a>
             </li>
           </ul>
-          <!-- Divider -->
-          <hr class="my-3">
-          <!-- Heading -->
-          <!--<h6 class="navbar-heading p-0 text-muted">
-            <span class="docs-normal">Documentation</span>
-          </h6>-->
-          <!-- Navigation -->
-          <!--
-          <ul class="navbar-nav mb-md-3">
-            <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html" target="_blank">
-                <i class="ni ni-spaceship"></i>
-                <span class="nav-link-text">Getting started</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html" target="_blank">
-                <i class="ni ni-palette"></i>
-                <span class="nav-link-text">Foundation</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html" target="_blank">
-                <i class="ni ni-ui-04"></i>
-                <span class="nav-link-text">Components</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/plugins/charts.html" target="_blank">
-                <i class="ni ni-chart-pie-35"></i>
-                <span class="nav-link-text">Plugins</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active active-pro" href="upgrade.html">
-                <i class="ni ni-send text-dark"></i>
-                <span class="nav-link-text">Upgrade to PRO</span>
-              </a>
-            </li>
-          </ul>-->
         </div>
       </div>
+
     </div>
   </nav>
   @endauth
@@ -397,7 +358,50 @@
     @endauth
     <!-- Header -->
 
-    @yield('contenido')
+    <!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Ventas</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="/" >Dashboards</a></li>
+              <li class="breadcrumb-item active" aria-current="page">@yield('navegacion')</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <a class="btn btn-sm btn-neutral">Nubia Cantú</a>
+          <a class="btn btn-sm btn-neutral">Lorena Romero</a>
+        </div>
+      </div>
+
+      
+      @yield('contenido')
+
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  
+  <!-- Footer -->
+  <footer class="footer pt-0">
+    <div class="row align-items-center justify-content-lg-between">
+      <div class="col-lg-6">
+        <div class="copyright text-center  text-white text-lg-left  text-muted">
+          &copy; 2023 
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
 
 
     

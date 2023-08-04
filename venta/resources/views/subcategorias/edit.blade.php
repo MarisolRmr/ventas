@@ -23,6 +23,10 @@
 </style>
 @endsection
 
+@section('navegacion')
+Editar Subcategoría
+@endsection
+
 @section('contenido')
 <div class="container-fluid py-4">
   <div class="row">

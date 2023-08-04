@@ -40,8 +40,7 @@ class SubcategoriaController extends Controller{
     }
 
     // Validar y guardar datos del formulario
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         // Reglas de validación
         $this->validate($request, [
             'nombre' => 'required',
