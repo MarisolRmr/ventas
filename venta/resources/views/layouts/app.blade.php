@@ -358,6 +358,8 @@
     @endauth
     <!-- Header -->
 
+
+    @auth  
     <!-- Header -->
 <div class="header bg-primary pb-6">
   <div class="container-fluid">
@@ -387,7 +389,9 @@
   </div>
 </div>
 
+@endauth
 
+@auth 
 <!-- Page content -->
 <div class="container-fluid mt--6">
   
@@ -402,6 +406,8 @@
     </div>
   </footer>
 </div>
+
+@endauth
 
 
     
