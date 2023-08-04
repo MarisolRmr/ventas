@@ -380,16 +380,18 @@
           <a class="btn btn-sm btn-neutral">Lorena Romero</a>
         </div>
       </div>
+      @endauth
 
       
       @yield('contenido')
 
-
+      @auth  
     </div>
   </div>
 </div>
-
 @endauth
+
+
 
 @auth 
 <!-- Page content -->
