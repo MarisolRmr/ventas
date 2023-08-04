@@ -31,6 +31,10 @@
 </style>
 @endsection
 
+@section('navegacion')
+Editar Clientes
+@endsection
+
 @section('contenido')
 <div class="container-fluid py-4">
   <div class="row">
