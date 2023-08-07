@@ -118,6 +118,10 @@ input[type="search"]::-webkit-search-cancel-button {
 </style>
 @endsection
 
+@section('navegacion')
+Devoluciones
+@endsection
+
 @section('contenido')
 <div class="container-fluid py-4">
       <div class="row">

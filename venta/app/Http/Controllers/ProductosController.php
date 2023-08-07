@@ -39,7 +39,7 @@ class ProductosController extends Controller
             'productos' => $productos,
             'categorias' => $categorias,
             'subcategorias' => $subcategorias,
-            'marcas' => $marcas,
+            'marcas' => $marcas
         ]);
     }
 
