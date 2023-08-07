@@ -159,6 +159,9 @@ input[type="search"]::-webkit-search-cancel-button {
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Código</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Teléfono</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Email</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Pais</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Ciudad</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Dirección</th> 
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7"></th>
                     </tr>
                   </thead>
@@ -190,6 +193,27 @@ input[type="search"]::-webkit-search-cancel-button {
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $proveedor->email }}</p>
+                            </td>
+                            <td>
+                                @if($proveedor->pais)
+                                    <p class="text-xs font-weight-bold mb-0">{{ $proveedor->pais }}</p>
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin País</p>
+                                @endif
+                            </td>
+                            <td>
+                                @if($proveedor->ciudad)
+                                    <p class="text-xs font-weight-bold mb-0">{{ $proveedor->ciudad }}</p>
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin Ciudad</p>
+                                @endif
+                            </td>
+                            <td>
+                                @if($proveedor->direccion)
+                                    <p class="text-xs font-weight-bold mb-0">{{ $proveedor->direccion }}</p>
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin Direccion</p>
+                                @endif
                             </td>
                             <td class=" px-3 py-2 exclude-column">
                                 <form action="{{route('proveedores.delete', $proveedor->id)}}" method="POST">

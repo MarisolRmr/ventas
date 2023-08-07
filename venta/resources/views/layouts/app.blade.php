@@ -11,6 +11,8 @@
   <link href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
   @yield('estilos')
   <!--styles-->
@@ -27,6 +29,10 @@
   <!-- Page plugins -->
   <!-- Argon CSS -->
   @vite('resources/css/argon.css')
+
+  <link rel="stylesheet" href="{{ asset('select2/dist/css/select2.min.css') }}">
+
+
 
 </head>
 
@@ -107,6 +113,12 @@
               <a class="nav-link" href="{{route('proveedores.index')}}">
                 <i class="ni ni-building text-primary"></i>
                 <span class="nav-link-text">Proveedores</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('usuarios.index')}}">
+                <i class="ni ni-single-02 text-orange"></i>
+                <span class="nav-link-text">Usuarios</span>
               </a>
             </li>
           </ul>
@@ -420,8 +432,9 @@
 
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-
+  <script src="{{ asset('select2/dist/js/select2.min.js') }}"></script>
   @yield('js')
+  
 
 
 </body>

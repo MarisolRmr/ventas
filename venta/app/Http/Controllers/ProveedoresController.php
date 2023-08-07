@@ -35,6 +35,9 @@ class ProveedoresController extends Controller{
             'codigo' => $request->codigo,
             'email' => $request->email,
             'telefono' => $request->telefono,
+            'pais' => $request->pais,
+            'ciudad' => $request->ciudad,
+            'direccion' => $request->direccion,
             'imagen' => $request->imagen,
         ]);
 
@@ -63,6 +66,9 @@ class ProveedoresController extends Controller{
         $cliente->codigo = $request->codigo;
         $cliente->email = $request->email;
         $cliente->telefono = $request->telefono;
+        $cliente->pais = $request->pais;
+        $cliente->ciudad = $request->ciudad;
+        $cliente->direccion = $request->direccion;
         $cliente->imagen = $request->imagen;
         $cliente->save();
 

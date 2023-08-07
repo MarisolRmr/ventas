@@ -134,6 +134,8 @@ Route::get('/ventas/subcategorias/{id}', [VentasController::class, 'subcategoria
 //para filtrar los productos por categoria o subcategorias
 Route::get('/ventas/productosPorCategoria/{id}', [VentasController::class, 'productosPorCategoria'])->name('ventas.productosPorCategoria');
 Route::get('/ventas/productosPorSubcategoria/{id}', [VentasController::class, 'productosPorSubcategoria'])->name('ventas.productosPorSubcategoria');
+// Ruta para obtener todos los productos
+Route::get('/ventas/productosTodos', [VentasController::class, 'productosTodos'])->name('ventas.productosTodos');
 
 // guardar ventas
 Route::post('/ventas', [VentasController::class, 'store'])->name('ventas.store');
@@ -174,6 +176,24 @@ Route::put('/proveedores/{id}/edit', [ProveedoresController::class, 'update'])->
 // eliminar proveedores
 Route::delete('/proveedores/{id}', [ProveedoresController::class, 'delete'])->name('proveedores.delete');
 
+
+// lista de proveedores
+Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index');
+
+// formulario usuarios
+Route::get('/usuarios/Nueva', [UserController::class, 'create'])->name('usuarios.create');
+
+// guardar usuarios
+Route::post('/usuarios', [UserController::class, 'store_user'])->name('usuarios.store');
+
+// editar usuarios
+Route::get('/usuarios/{usuario}/edit',[ UserController::class, 'edit'])->name('usuarios.edit');
+
+// actualizar cambios usuarios
+Route::put('/usuarios/{id}/edit', [UserController::class, 'update'])->name('usuarios.update');
+
+// eliminar usuarios
+Route::delete('/usuarios/{id}', [UserController::class, 'delete'])->name('usuarios.delete');
 
 //Dashboard
 Route::get('/', [HomeController::class, 'home'])->name('home');

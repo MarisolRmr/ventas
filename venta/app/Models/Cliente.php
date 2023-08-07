@@ -15,6 +15,9 @@ class Cliente extends Model
         'email',
         'telefono',
         'empresa',
+        'pais',
+        'ciudad',
+        'direccion',
         'imagen'
     ];
 }

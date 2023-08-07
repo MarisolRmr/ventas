@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\Subcategoria;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class VentasController extends Controller
@@ -20,8 +21,8 @@ class VentasController extends Controller
     //vista de ventas
     public function create(){
         $categorias = Categoria::all();
-        $productos = Producto::all();
-        return view('ventas.pos')->with(['categorias' => $categorias,'productos' => $productos]);
+        $clientes = Cliente::all();
+        return view('ventas.pos')->with(['categorias' => $categorias,'clientes' => $clientes]);
     }
     //vista de detalles de ventas
     public function detalles_index(){
@@ -32,6 +33,13 @@ class VentasController extends Controller
     {
         $subcategorias = Subcategoria::where('categoria_id', $id)->get();
         return response()->json($subcategorias);
+    }
+
+    // Función para obtener todos los productos con su relación 'marca'
+    public function productosTodos()
+    {
+        $productos = Producto::with('marca')->get();
+        return response()->json($productos);
     }
 
     public function productosPorCategoria($categoriaId)
