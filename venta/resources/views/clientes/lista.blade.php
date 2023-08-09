@@ -163,6 +163,9 @@ Clientes
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Código</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Teléfono</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Email</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Pais</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Ciudad</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Dirección</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Empresa</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7"></th>
                     </tr>
@@ -195,6 +198,27 @@ Clientes
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $cliente->email }}</p>
+                            </td>
+                            <td>
+                                @if($cliente->pais)
+                                    <p class="text-xs font-weight-bold mb-0">{{ $cliente->pais }}</p>
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin País</p>
+                                @endif
+                            </td>
+                            <td>
+                                @if($cliente->ciudad)
+                                    <p class="text-xs font-weight-bold mb-0">{{ $cliente->ciudad }}</p>
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin Ciudad</p>
+                                @endif
+                            </td>
+                            <td>
+                                @if($cliente->direccion)
+                                    <p class="text-xs font-weight-bold mb-0">{{ $cliente->direccion }}</p>
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin Direccion</p>
+                                @endif
                             </td>
                             <td>
                                 @if($cliente->empresa)

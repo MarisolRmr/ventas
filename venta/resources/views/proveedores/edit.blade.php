@@ -3,6 +3,9 @@
 @push('styles')
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 @endpush
 @section('estilos')
 <style>
@@ -27,7 +30,32 @@
         height: 120px !important;
         width: 120px !important;
     }
-    
+    .select2-selection{
+        border-radius: 20px !important; 
+        height: 50px !important; 
+        width: 400px !important; 
+        margin-left: 20px; 
+        border-bottom-right-radius: 20px !important;
+        border-bottom-left-radius: 20px !important;
+            
+    }
+    .select2-selection:focus{
+        outline-color: #5e72e4;
+        height: 50px !important; 
+        width: 400px !important; 
+        margin-left: 20px; 
+        border-bottom-right-radius: 20px !important;
+        border-bottom-left-radius: 20px !important;
+            
+    }
+    .select2-selection[aria-expanded='true'] {
+        border-bottom-right-radius: 20px !important;
+        border-bottom-left-radius: 20px  !important;
+    }
+    .select2.select2-container {
+        width: 400px !important;
+        
+    }
 </style>
 @endsection
 
@@ -99,7 +127,7 @@ Editar Proveedor
                     id="telefono"
                     name="telefono"
                     type="text"
-                    placeholder="Teléfono del cliente"
+                    placeholder="Teléfono del proveedor"
                     class="border p-3 w-full rounded-lg @error ('telefono') border-red-500 @enderror"
                     value="{{old('telefono', $proveedor->telefono)}}"
                 >
@@ -119,11 +147,66 @@ Editar Proveedor
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="Email del cliente"
+                    placeholder="Email del proveedor"
                     class="border p-3 w-full rounded-lg @error ('email') border-red-500 @enderror"
                     value="{{old('email', $proveedor->email)}}"
                 >
                 @error('email')
+                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>    
+                @enderror
+            </div>
+            <div class="mb-4 items-start" style="display: flex; align-items: top; justify-content:center">
+                <label for="Pais" class="mb-2 block uppercase text-gray-500 font-bold" style="padding-left: 25%">
+                    Pais
+                </label>
+                <select id="select-paises" 
+                style="border-radius: 20px !important; height: 50px; width: 400px !important; margin-left: 20px; "
+                name="pais"
+                class="border p-3 w-full rounded-lg @error ('catpaisegoria_id') border-red-500 @enderror">
+                <option value="">Seleccione un país</option>
+                </select>
+                @error('pais')
+                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>    
+                @enderror
+            </div>
+            <div class="mb-4 items-start" style="display: flex; align-items: top; justify-content:center">
+                <label for="ciudad" class="mb-2 block uppercase text-gray-500 font-bold">
+                    Ciudad
+                </label>
+                <input 
+                    style="border-radius: 20px !important; height: 45px; width: 400px; margin-left: 20px; "
+                    id="ciudad"
+                    name="ciudad"
+                    type="text"
+                    placeholder="Ciudad del proveedor"
+                    class="border p-3 w-full rounded-lg @error ('ciudad') border-red-500 @enderror"
+                    value="{{old('ciudad')}}"
+                >
+                @error('ciudad')
+                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>    
+                @enderror
+            </div>
+
+            <div class="mb-2 items-start" style="display: flex; align-items: top; justify-content:center">
+                <label for="direccion" class="mb-2 block uppercase text-gray-500 font-bold">
+                Dirección
+                </label>
+                <input 
+                    style="border-radius: 20px !important; height: 45px; width: 400px; margin-left: 20px; "
+                    id="direccion"
+                    name="direccion"
+                    type="text"
+                    placeholder="Dirección del proveedor"
+                    class="border p-3 w-full rounded-lg @error ('direccion') border-red-500 @enderror"
+                    value="{{old('direccion')}}"
+                >
+                @error('direccion')
                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                         {{$message}}
                     </p>    
@@ -150,4 +233,33 @@ Editar Proveedor
     </div>
   </div>
 </div>
+@endsection
+@section('js')
+<script>
+    // Obtener la lista de países desde Rest Countries API
+    $.ajax({
+        url: "https://restcountries.com/v3.1/all",
+        dataType: "json",
+        success: function (data) {
+            // Procesar los datos recibidos para obtener los nombres de los países
+            var countries = data.map(function (country) {
+                return country.name.common;
+            });
+
+            // Crear el select de países y agregar las opciones
+            var selectPaises = $("#select-paises");
+            countries.forEach(function (country) {
+                var option = new Option(country, country);
+                selectPaises.append(option);
+            });
+
+            // Opcional: Configurar el select2 para tener un buscador
+            selectPaises.select2();
+        },
+        error: function (error) {
+            console.log("Error al obtener la lista de países:", error);
+        }
+    });
+</script>
+
 @endsection
