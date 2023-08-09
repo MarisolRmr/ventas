@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('imagen')->nullable();
             $table->string('rol')->nullable();
             $table->string('status')->nullable();
+            $table->string('eliminado')->nullable();
+            $table->string('name')->nullable()->change();
+            $table->string('password')->nullable()->change();
+            $table->string('email')->nullable()->change();
         });
     }
 
@@ -31,6 +35,11 @@ return new class extends Migration
             $table->dropColumn('imagen');
             $table->dropColumn('rol');
             $table->dropColumn('status');
+            $table->dropColumn('eliminado');
+            $table->string('name')->change();
+            $table->string('password')->change();
+            $table->string('email')->change();
+
         });
     }
 };
