@@ -29,7 +29,7 @@
 @endsection
 
 @section('navegacion')
-    Agregar Devolución
+    Editar Devolución
 @endsection
 
 @section('contenido')
@@ -38,7 +38,7 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0 mb-2 text-center">
-          <h4>Agregar una nueva devolución</h4>
+          <h4>Editar devolución</h4>
         </div>
         <div class="card-body px-4 pt-4 pb-2 flex items-center justify-center text-center">
           
@@ -46,7 +46,7 @@
                 @csrf
             </form>   
             
-            <form action="{{route('devoluciones.store')}}" method="post" novalidate>
+            <form action="{{route('devoluciones.update', $devolucion->id)}}" method="post" novalidate>
             @csrf
             
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
@@ -55,10 +55,10 @@
                 </label>
                 <select 
                     style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
-                    id="nombreProducto"
-                    name="nombreProducto"
-                    class="border p-3 w-full rounded-lg @error ('nombreProducto') border-red-500 @enderror"
-                    value="{{old('nombreProducto')}}"
+                    id="producto"
+                    name="producto"
+                    class="border p-3 w-full rounded-lg @error ('producto') border-red-500 @enderror"
+                    value="{{old('producto', $devolucion->producto)}}"
                 >
                     <option value="">Seleccione el producto a devolver</option>
                     @foreach($productos as $producto)
@@ -83,7 +83,7 @@
                     type="date"
                     placeholder="Fecha"
                     class="border p-3 w-full rounded-lg @error ('fecha') border-red-500 @enderror"
-                    value="{{old('fecha')}}"
+                    value="{{old('fecha', $devolucion->fecha)}}"
                 >
                 @error('fecha')
                     <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
@@ -101,7 +101,7 @@
                     id="cliente"
                     name="cliente"
                     class="border p-3 w-full rounded-lg @error ('cliente') border-red-500 @enderror"
-                    value="{{old('cliente')}}"
+                    value="{{old('cliente', $devolucion->cliente)}}"
                 >
                     <option value="">Seleccione el cliente</option>
                     @foreach($clientes as $cliente)
@@ -124,7 +124,7 @@
                     id="status"
                     name="status"
                     class="border p-3 w-full rounded-lg @error ('status') border-red-500 @enderror"
-                    value="{{old('status')}}"
+                    value="{{old('status' , $devolucion->status)}}"
                 >
                     <option value="">Seleccione el status</option>
                     <option value="recibido">Recibido</option>
@@ -139,19 +139,19 @@
             </div>
 
             <div class="mb-4 items-start" style="display: flex; align-items: top; justify-content:center">
-                <label for="total" class="mb-2 block uppercase text-gray-500 font-bold">
+                <label for="apagar" class="mb-2 block uppercase text-gray-500 font-bold">
                     Total a pagar
                 </label>
                 <input 
                     style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
-                    id="total"
-                    name="total"
+                    id="apagar"
+                    name="apagar"
                     placeholder="Total a pagar"
-                    class="border p-3 w-full rounded-lg @error ('total') border-red-500 @enderror"
-                    value="{{old('total')}}"
+                    class="border p-3 w-full rounded-lg @error ('apagar') border-red-500 @enderror"
+                    value="{{old('apagar', $devolucion->apagar)}}"
                 >
 
-                @error('total')
+                @error('apagar')
                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                         {{$message}}
                     </p>    
@@ -168,7 +168,7 @@
                     name="pagado"
                     class="border p-3 w-full rounded-lg @error ('pagado') border-red-500 @enderror"
                     placeholder="Pagado"
-                    value="{{old('pagado')}}"
+                    value="{{old('pagado', $devolucion->pagado)}}"
                 >
             
                 @error('pagado')
@@ -188,7 +188,7 @@
                     name="deuda"
                     class="border p-3 w-full rounded-lg @error ('deuda') border-red-500 @enderror"
                     placeholder="Deuda"
-                    value="{{old('deuda')}}"
+                    value="{{old('deuda', $devolucion->deuda)}}"
                 >
             
                 @error('deuda')
@@ -199,22 +199,22 @@
             </div>
 
             <div class="mb-4 items-start" style="display: flex; align-items: top; justify-content:center">
-                <label for="statusPago" class="mb-2 block uppercase text-gray-500 font-bold">
+                <label for="status2" class="mb-2 block uppercase text-gray-500 font-bold">
                     Status
                 </label>
                 <select 
                     style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
-                    id="statusPago"
-                    name="statusPago"
-                    class="border p-3 w-full rounded-lg @error ('statusPago') border-red-500 @enderror"
-                    value="{{old('statusPago')}}"
+                    id="status2"
+                    name="status2"
+                    class="border p-3 w-full rounded-lg @error ('status2') border-red-500 @enderror"
+                    value="{{old('status2', $devolucion->status2)}}"
                 >
                     <option value="">Seleccione el status</option>
                     <option value="recibido">Pagado</option>
                     <option value="pendiente">No pagado</option>
                     
                 </select>
-                @error('statusPago')
+                @error('status2')
                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                         {{$message}}
                     </p>    
@@ -223,7 +223,7 @@
             
             <!--Agregar campo oculto para guardar el valor de la imagen-->
             <div class="mb-5">
-                <input type="hidden" name="imagen" id="imagen" value="{{old('imagen')}}">
+                <input type="hidden" name="imagen" id="imagen" value="{{old('imagen', $devolucion->imagen)}}">
                 @error('imagen')
                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                         {{$message}}

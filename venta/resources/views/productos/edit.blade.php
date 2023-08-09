@@ -167,7 +167,7 @@ Editar Producto
                 >
                     <option value="">Selecciona una subcategoría</option>
                     @foreach($subcategorias as $subcategoria)
-                        <option value="{{ $categoria->id }}" {{ $subcategoria->id == old('subcategoria_id', $producto->subcategoria_id) ? 'selected' : '' }}>
+                        <option value="{{ $subcategoria->id }}" {{ $subcategoria->id == old('subcategoria_id', $producto->subcategoria_id) ? 'selected' : '' }}>
                             {{ $subcategoria->nombre }}
                         </option>
                     @endforeach
@@ -222,4 +222,58 @@ Editar Producto
     </div>
   </div>
 </div>
+@endsection
+@section('js')
+
+<script>
+    // Variables para almacenar el valor de la subcategoría seleccionada
+    let subcategoriaSeleccionada = document.getElementById("subcategoria_id").value;
+
+    // Función para actualizar las subcategorías según la categoría seleccionada
+    function actualizarSubcategorias() {
+        // Obtener el elemento select de categorías y subcategorías
+        const categoriaSelect = document.getElementById("categoria_id");
+        const subcategoriaSelect = document.getElementById("subcategoria_id");
+
+        // Obtener el valor seleccionado de la categoría
+        const categoriaSeleccionada = categoriaSelect.value;
+        const subcategoriaSeleccionada = subcategoriaSelect.value;
+        
+        // Limpiar las opciones de subcategorías
+        subcategoriaSelect.innerHTML = '<option value="">Seleccione una subcategoría</option>';
+
+        // Si no se ha seleccionado ninguna categoría, deshabilitar el select de subcategorías y salir de la función
+        if (categoriaSeleccionada === "") {
+            subcategoriaSelect.disabled = true;
+            subcategoriaSeleccionada = ""; // Reiniciar la subcategoría seleccionada
+            return;
+        }
+        // Filtrar las subcategorías asociadas a la categoría seleccionada y agregarlas al select de subcategorías
+        const subcategoriasAsociadas = @json($subcategorias->groupBy('categoria_id')->toArray());
+        if (subcategoriasAsociadas.hasOwnProperty(categoriaSeleccionada)) {
+            const subcategorias = subcategoriasAsociadas[categoriaSeleccionada];
+            subcategorias.forEach((subcategoria) => {
+                const option = document.createElement("option");
+                option.value = subcategoria.id;
+                option.textContent = subcategoria.nombre;
+                // Agregar el atributo selected si la subcategoría coincide con la subcategoría previamente seleccionada
+                if (option.value === subcategoriaSeleccionada) {
+                    option.selected = true;
+                }
+                subcategoriaSelect.appendChild(option);
+            });
+
+        }
+
+        // Habilitar el select de subcategorías
+        subcategoriaSelect.disabled = false;
+    }
+
+    // Asociar la función actualizarSubcategorias al evento onChange del select de categorías
+    document.getElementById("categoria_id").addEventListener("change", actualizarSubcategorias);
+
+    // Llamar a la función inicialmente para que muestre las subcategorías correspondientes a la categoría seleccionada
+    actualizarSubcategorias();
+
+</script>
 @endsection

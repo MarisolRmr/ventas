@@ -139,7 +139,7 @@ Agregar Producto
                     style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
                     id="categoria_id"
                     name="categoria_id"
-                    class="border p-3 w-full rounded-lg @error ('categoria_id') border-red-500 @enderror"
+                    class="border p-2 w-full rounded-lg @error ('categoria_id') border-red-500 @enderror"
                 >
                     <option value="">Seleccione una categoría</option>
                     @foreach($categorias as $categoria)
@@ -162,7 +162,7 @@ Agregar Producto
                     style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
                     id="subcategoria_id"
                     name="subcategoria_id"
-                    class="border p-3 w-full rounded-lg @error ('subcategoria_id') border-red-500 @enderror"
+                    class="border p-2 w-full rounded-lg @error ('subcategoria_id') border-red-500 @enderror"
                 >
                     <option value="">Seleccione una subcategoría</option>
                     @foreach($subcategorias as $subcategoria)
@@ -184,7 +184,7 @@ Agregar Producto
                     style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
                     id="marca_id"
                     name="marca_id"
-                    class="border p-3 w-full rounded-lg @error ('marca_id') border-red-500 @enderror"
+                    class="border p-2 w-full rounded-lg @error ('marca_id') border-red-500 @enderror"
                 >
                     <option value="">Seleccione una marca</option>
                     @foreach($marcas as $marca)
@@ -217,4 +217,48 @@ Agregar Producto
     </div>
   </div>
 </div>
+@endsection
+@section('js')
+<script>
+    // Función para actualizar las subcategorías según la categoría seleccionada
+    function actualizarSubcategorias() {
+        // Obtener el elemento select de categorías y subcategorías
+        const categoriaSelect = document.getElementById("categoria_id");
+        const subcategoriaSelect = document.getElementById("subcategoria_id");
+
+        // Obtener el valor seleccionado de la categoría
+        const categoriaSeleccionada = categoriaSelect.value;
+
+        // Limpiar las opciones de subcategorías
+        subcategoriaSelect.innerHTML = '<option value="">Seleccione una subcategoría</option>';
+
+        // Si no se ha seleccionado ninguna categoría, deshabilitar el select de subcategorías y salir de la función
+        if (categoriaSeleccionada === "") {
+            subcategoriaSelect.disabled = true;
+            return;
+        }
+
+        // Filtrar las subcategorías asociadas a la categoría seleccionada y agregarlas al select de subcategorías
+        const subcategoriasAsociadas = @json($subcategorias->groupBy('categoria_id')->toArray());
+        if (subcategoriasAsociadas.hasOwnProperty(categoriaSeleccionada)) {
+            const subcategorias = subcategoriasAsociadas[categoriaSeleccionada];
+            subcategorias.forEach((subcategoria) => {
+                const option = document.createElement("option");
+                option.value = subcategoria.id;
+                option.textContent = subcategoria.nombre;
+                subcategoriaSelect.appendChild(option);
+            });
+        }
+
+        // Habilitar el select de subcategorías
+        subcategoriaSelect.disabled = false;
+    }
+
+    // Asociar la función actualizarSubcategorias al evento onChange del select de categorías
+    document.getElementById("categoria_id").addEventListener("change", actualizarSubcategorias);
+
+    // Llamar a la función inicialmente para que muestre las subcategorías correspondientes a la categoría seleccionada
+    actualizarSubcategorias();
+</script>
+
 @endsection

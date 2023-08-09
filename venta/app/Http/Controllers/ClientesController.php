@@ -56,6 +56,9 @@ class ClientesController extends Controller
             'email' => $request->email,
             'telefono' => $request->telefono,
             'empresa' => $request->empresa,
+            'pais' => $request->pais,
+            'ciudad' => $request->ciudad,
+            'direccion' => $request->direccion,
             'imagen' => $request->imagen,
         ]);
 
@@ -77,6 +80,9 @@ class ClientesController extends Controller
         $cliente->codigo = $request->codigo;
         $cliente->email = $request->email;
         $cliente->telefono = $request->telefono;
+        $cliente->pais = $request->pais;
+        $cliente->ciudad = $request->ciudad;
+        $cliente->direccion = $request->direccion;
         $cliente->empresa = $request->empresa;
         $cliente->imagen = $request->imagen;
         $cliente->save();
