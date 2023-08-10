@@ -47,6 +47,7 @@ class SubcategoriaController extends Controller{
             'codigo' => 'required|min:5',
             'descripcion' => 'required',
             'categoria_id' => 'required',
+            'imagen'=>'required',
         ]);
 
         // Obtener el ID del usuario autenticado

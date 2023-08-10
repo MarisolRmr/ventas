@@ -129,7 +129,7 @@ Devoluciones
           <div class="card mb-4">
             <div class="card-header pb-0 mb-2">
             <div class="text-right">
-                <a href="{{route('subcategorias.create')}}" class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white">
+                <a href="{{route('devoluciones.create')}}" class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white">
                     <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-2 h-2">
                         <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
                     </svg>
@@ -158,6 +158,7 @@ Devoluciones
                   <thead>
                     <tr>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">ID</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Imagen</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Producto</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Fecha</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Cliente</th>
@@ -170,37 +171,45 @@ Devoluciones
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($devoluciones as $devolucion)
                         <tr class="text-center">
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">1</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->id }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">Uvas</p>
+                                @if($devolucion->imagen)
+                                <img src="{{ asset('uploads/' . $devolucion->imagen) }}" alt="Imagen de la marca" style="height: 80px; border-radius:17px">
+                                @else
+                                    <p class="text-xs font-weight-bold mb-0">Sin Imagen</p>
+                                @endif
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">2023-06-12</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->nombreProducto }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">Liam Payne</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->fecha }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">Completo</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->cliente }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">$500.00</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->total }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">$500.00</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->pagado }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">$0.00</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->deuda }}</p>
                             </td>
                             <td>
-                                <a href="#" ><p class="text-xs font-weight-bold mb-0">lore</p></a>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->statusPago }}</p>
                             </td>
-
+                            <td>
+                               
+                                <a href="#" ><p class="text-xs font-weight-bold mb-0">{{ $devolucion->usuario->username }}</p></a>
+                            </td>
                             <td class=" px-3 py-2 exclude-column">
-                                <form action="#" method="POST">
+                                <form action="{{route('devoluciones.delete', $devolucion->id)}}" method="POST">
                                 <div style="display: flex; justify-content:center">
                                 @method('delete')
                                 @csrf
@@ -210,14 +219,17 @@ Devoluciones
                                     </svg>
                                 </button>
                                 </form>
-                                <a href="#" style="border-radius: 50px !important; border:none !important" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                                <a href="{{ route('devoluciones.edit', $devolucion->id) }}" style="border-radius: 50px !important; border:none !important" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                 <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
                                 </svg>
+
                                 </a>
+                            </div>
                             </td>
                         </tr>
-                    
+                    @endforeach
+                  
                   </tbody>
                 </table>
               </div>

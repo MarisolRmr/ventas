@@ -62,6 +62,8 @@ Route::get('/categorias/{categoria}/edit',[ CategoriasController::class, 'edit']
 // actualizar cambios categorias
 Route::put('/categorias/{id}/edit', [CategoriasController::class, 'update'])->name('categorias.update');
 
+
+
 // lista de subcategorias
 Route::get('/subcategorias', [SubcategoriaController::class, 'index'])->name('subcategorias.index');
 
@@ -82,6 +84,28 @@ Route::put('/subcategorias/{id}/edit', [SubcategoriaController::class, 'update']
 
 // eliminar subcategorias
 Route::delete('/subcategorias/{id}', [SubcategoriaController::class, 'delete'])->name('subcategorias.delete');
+
+
+// lista de devoluciones
+Route::get('/devoluciones', [DevolucionesController::class, 'index'])->name('devoluciones.index');
+
+// formulario de devoluciones
+Route::get('/devoluciones/Nueva', [DevolucionesController::class, 'create'])->name('devoluciones.create');
+
+// guardar devoluciones
+Route::post('/devoluciones', [DevolucionesController::class, 'store'])->name('devoluciones.store');
+
+//ruta para enviar datos al servidor de imagen
+Route::post('/devoluciones_imagen', [DevolucionesController::class,'store_imagen'])->name('devoluciones.imagen');
+
+// editar devoluciones
+Route::get('/devoluciones/{devolucion}/edit',[ DevolucionesController::class, 'edit'])->name('devoluciones.edit');
+
+// actualizar cambios subcategorias
+Route::put('/devoluciones/{id}/edit', [DevolucionesController::class, 'update'])->name('devoluciones.update');
+
+// eliminar subcategorias
+Route::delete('/devoluciones/{id}', [DevolucionesController::class, 'delete'])->name('devoluciones.delete');
 
 // lista de marcas
 Route::get('/marcas', [MarcasController::class, 'index'])->name('marcas.index');
@@ -143,8 +167,6 @@ Route::get('/ventas/productosTodos', [VentasController::class, 'productosTodos']
 // lista de ventas
 Route::get('/ventas/{id}/detalle', [VentasController::class, 'detalles_index'])->name('ventas.detalles');
 
-// lista de devoluciones
-Route::get('/devoluciones', [DevolucionesController::class, 'index'])->name('devoluciones.index');
 
 // lista de proveedores
 Route::get('/proveedores', [ProveedoresController::class, 'index'])->name('proveedores.index');
