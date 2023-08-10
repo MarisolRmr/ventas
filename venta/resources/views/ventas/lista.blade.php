@@ -160,83 +160,50 @@ Ventas
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">ID</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7 ">Referencia</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Fecha</th>
-                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Estatus</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Pago</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Total</th>
-                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Pagado</th>
-                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Adeudo</th>
+                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Cliente</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Creado por</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7"></th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($ventas as $venta)
                         <tr class="text-center">
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">1</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $venta->id }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">123_ioioi</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $venta->referencia }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">2023-06-12</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $venta->fecha }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">Pagado</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $venta->pagocon }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">Completo</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $venta->total }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">$500.00</p>
-                            </td>
+                                <a href="#" ><p class="text-xs font-weight-bold mb-0">{{ $venta->usuario->username }}</p></a>
+                            </td> 
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">$500.00</p>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">$0.00</p>
-                            </td>
-                            <td>
-                                <a href="#" ><p class="text-xs font-weight-bold mb-0">lore</p></a>
-                            </td>
+                                <a href="#" ><p class="text-xs font-weight-bold mb-0">{{ $venta->cliente->nombre }}</p></a>
+                            </td> 
+                            
 
                             <td class=" px-3 py-2 exclude-column">
-                                <form action="#" method="POST">
-                                <div style="display: flex; justify-content:center">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" style="border-radius: 50px !important; border:none !important ; margin-right: 10px;" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-red-600 hover:bg-red-700 transition-colors">
+                            
+                                <a href="{{ route('ventas.detalles', $venta->id) }}" style="background-color: #a3a3a3; color: white;border-radius: 50px !important; border:none !important" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-gray-600 hover:bg-gray-700 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                    <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
+                                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                    <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
                                     </svg>
-                                </button>
-                                </form>
-                                <a href="#" style="border-radius: 50px !important; border:none !important" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                <path d="M2.695 14.763l-1.262 3.154a.5.5 0 00.65.65l3.155-1.262a4 4 0 001.343-.885L17.5 5.5a2.121 2.121 0 00-3-3L3.58 13.42a4 4 0 00-.885 1.343z" />
-                                </svg>
                                 </a>
-                                <li class="nav-item dropdown">
-                                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" style=" border:none !important" class="inline-block px-2 py-2 rounded-lg font-bold transition-colors">
-                                    <svg   xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                                    </svg>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-sm  dropdown-menu-right  py-0 overflow-hidden">
-                                        <!-- Dropdown header -->
-                                        <div class="px-2 py-2">
-                                            <a href="#" style=" border:none !important" class="inline-block px-2 py-2  rounded-lg">
-                                                Ver recibo
-                                            </a>
-                                            <br>
-                                            <a href="{{route('ventas.detalles')}}" style=" border:none !important" class="inline-block px-2 py-2 rounded-lg">
-                                                Detalles
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
                             </td>
                         </tr>
-                    
+                    @endforeach
                   </tbody>
                 </table>
               </div>

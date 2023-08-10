@@ -63,47 +63,116 @@
     </div>
   </div>
   
-
   <div class="col-3 bg-white rounded mt-2 p-0 m-0" style="box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15);">
-    <div class="p-3">
-        <select class="form-control mi-selector" id="cliente_select">
-            <option value="" >Seleccione un cliente</option>
-            @foreach ($clientes as $cliente)
-            @php
-                // Combina el nombre y el código en una sola cadena separada por un carácter especial (por ejemplo, '|').
-                $optionValue = $cliente->nombre . ' ' . $cliente->codigo;
-            @endphp
-                <option value="{{ $cliente->id }}"  data-imagen="{{ asset('uploads/' . $cliente->imagen) }}">{{ $optionValue }} </option>
-            @endforeach
-        </select>
+    <form style="height:100%;width:100%" action="{{route('ventas.store')}}" method="post" novalidate>
+    @csrf 
+        <div class="overflow" style="max-height: 16%;height: 100%; overflow-y:auto">
+            <div class="p-3">
+            <select class="form-control mi-selector" id="cliente_select" name="cliente_id">
+                <option value="">Seleccione un cliente</option>
+                @foreach ($clientes as $cliente)
+                    @php
+                        // Combina el nombre y el código en una sola cadena separada por un carácter especial (por ejemplo, '|').
+                        $optionValue = $cliente->nombre . ' ' . $cliente->codigo;
+                    @endphp
+                    <option value="{{ $cliente->id }}" data-imagen="{{ asset('uploads/' . $cliente->imagen) }}"
+                        @if (old('cliente_id') == $cliente->id)
+                            selected
+                        @endif
+                    >{{ $optionValue }}</option>
+                @endforeach
+            </select>
 
-    </div>
-    <a href="#" onclick="limpiarCarrito()"><p class="mr-3 pt-3 mb-2" style="text-align:end">Eliminar artículos</p></a> 
-    <h2 class="mt-2 ml-3">Lista de compra</h2>
-    <p class="mt-2 ml-3 mb-0">Total de artículos: <span class="ml-2" id="total">0</span></p> 
-    <div class="p-3 overflow text-center" style="max-height: 300px;height: 300px; overflow-y:auto" id="carritoContainer">
-        Aún no ha agregado productos
-    </div>
-    <div>
-    <div class="p-3 " style="height: 150px; overflow-y:auto; text-align: right; box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15);" id="totalcarrito">
-        <p class="mb-2">Subtotal: $0.00</p>
-        <p class="mb-2">IVA 16%: $0.00</p>
-        <p>Total: $0.00</p>
-    </div>
-    <div class="d-flex align-items-center mt-0 pb-0 pl-4 mb-2 pt-2" >
-        <label for="cambio" class="mr-2">Pago con:</label>
-        <input style="outline:none; width: 70px; border:1px solid #b0b1b9; border-radius: 10px; color:black; padding:5px; padding-left: 10px" type="number" id="pagocon" name="pagocon" min="0" step="any">
-        
-    </div>
-    <div class="d-flex align-items-center mt-0 pb-0 pl-4  " >
-        Cambio: <span class="ml-2" id="cambio"></span>
-    </div>
-    <p id="no-cambio" class="ml-4 text-danger" style="display: none;">Necesita más dinero para completar el pago.</p>
-    </div>  
+                @error('cliente_id')
+                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>    
+                @enderror
+            </div>
+            <a href="#" onclick="limpiarCarrito()"><p class="mr-3 mb-2" style="text-align:end">Eliminar artículos</p></a> 
+            <h2 class="mt-2 ml-3">Lista de compra</h2>
+            <p class="mt-2 ml-3 mb-0">Total de artículos: <span class="ml-2" id="total">0</span></p> 
+            <div class="d-flex align-items-center mt-0 pb-0 pl-3 mb-2 pt-2 pr-2" >
+                <label for="referencia" class="mr-2">Referencia:</label>
+                <input value="{{old('referencia')}}" style="outline:none; font-size: 15px; width: 100%; border:1px solid #b0b1b9; border-radius: 10px; color:black; padding:5px; padding-left: 10px"  type="text" id="referencia" name="referencia">
+               
+            </div>
+             @error('referencia')
+                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                    {{$message}}
+                </p>    
+            @enderror
+            <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
+            @error('user_id')
+                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                    {{$message}}
+                </p>    
+            @enderror
+        </div>
+        <div class="p-3 overflow text-center" style="max-height: 55%;height: 100%; overflow-y:auto" id="carritoContainer">
+            Aún no ha agregado productos
+            @error('carrito')
+                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                    {{$message}}
+                </p>    
+            @enderror
+        </div>
+        <input type="hidden" name="carrito" id="carrito_input" value="{{old('carrito')}}">
 
+        <div class="overflow" style="max-height: 24%;height: 100%; overflow-y:auto">
+            <div class="p-3 " style="height: 150px; overflow-y:auto; text-align: right; box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15);" id="totalcarrito">
+                <p class="mb-2">Subtotal: $0.00</p>
+                @error('subtotal')
+                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>    
+                @enderror
+                <p class="mb-2">IVA 16%: $0.00</p>
+                @error('impuestos')
+                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>    
+                @enderror
+                <p>Total: $0.00</p>
+                @error('total')
+                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>    
+                @enderror
+            </div>
+            <input type="hidden" id="subtotal_hidden" name="subtotal" value="{{old('subtotal')}}">
+            <input type="hidden" id="impuestos_hidden" name="impuestos" value="{{old('impuestos')}}">
+            <input type="hidden" id="total_hidden" name="total" value="{{old('total')}}">
+
+            <div class="d-flex align-items-center mt-0 pb-0 pl-4 mb-2 pt-2" >
+                <label for="cambio" class="mr-2">Pago con:</label>
+                <input style="outline:none; width: 70px; border:1px solid #b0b1b9; border-radius: 10px; color:black; padding:5px; padding-left: 10px" type="number" id="pagocon" name="pagocon" min="0" step="any" value="{{old('pagocon')}}">
+                
+            </div>
+            @error('pagocon')
+                <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                    {{$message}}
+                </p>    
+            @enderror
+            <div class="d-flex align-items-center mt-0 pb-0 pl-4  " >
+                Cambio: <span class="ml-2" id="cambio"></span>
+                <input type="hidden" id="cambio_hidden" name="cambio" value="{{old('cambio')}}">
+                @error('cambio')
+                    <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                        {{$message}}
+                    </p>    
+                @enderror
+            </div>
+            <p id="no-cambio" class="ml-4 text-danger" style="display: none;">Necesita más dinero para completar el pago.</p>
+        </div>  
+        <div class="overflow text-center" style="max-height: 5%;height: 100%;overflow-y:auto">
+            <button type="submit" class=" flex  btn btn-primary p-2 text-white hover:text-white">Terminar Venta</button>
+        </div>
+    </form>
   </div>
+  
 
-  <a href="#" onclick="cargarTodosLosProductos()" class="p-3 m-0 col-12" style="text-align: center; cursor: pointer">Ver todos los productos</a>
+  <a href="#" onclick="cargarTodosLosProductos()" class="text-white p-3 m-0 col-12" style="text-align: center; cursor: pointer">Ver todos los productos</a>
 
 </div>
 @endsection
@@ -132,8 +201,15 @@
     }
 
     //CARRITO
+    const pagoInput = document.getElementById('pagocon');
+    const cambioSpan = document.getElementById('cambio');
+
     // Variable para almacenar los productos del carrito
     let carrito = [];
+    @if(old('carrito'))
+        carrito = {!! json_encode(json_decode(urldecode(old('carrito')))) !!};
+        actualizarCarrito();
+    @endif
 
     // Llamamos a la función para cargar y mostrar todos los productos
     cargarTodosLosProductos();
@@ -155,7 +231,14 @@
                         'marca':producto.marca.nombre, 
                         'imagen':producto.imagen
                     }
-                         
+                    const botonOAgotado = producto.unidades >= 1 ?
+                    `<button type="button" class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white" onclick="agregarProductoAlCarrito('${encodeURIComponent(JSON.stringify(productoParaHTML))}')">
+                        <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                        </svg>
+                        Agregar al carrito
+                    </button>` :
+                    `<p style="color:red; font-weight: 600;">AGOTADO</p>`;
                     productosHtml += `
                     <div class="col p-0">
                         <div class="card m-1" >
@@ -170,12 +253,7 @@
                                 <small class="card-text">Unidades disponibles: ${producto.unidades}</small>
                             </div>
                             <div style="max-height: 100px; padding: 1.5rem; display: flex; justify-content: center; align-items: center;">
-                                <button type="button" class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white" onclick="agregarProductoAlCarrito('${encodeURIComponent(JSON.stringify(productoParaHTML))}')">
-                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                    </svg>
-                                    Agregar al carrito
-                                </button>
+                                 ${botonOAgotado}
                             </div>
                         </div>
                     </div>
@@ -307,15 +385,26 @@
             `;
             carritoContainer.innerHTML += productoHtml;
         });
+        // mandar valor de productos en el carrito a un input hidden
+        document.getElementById('carrito_input').value = JSON.stringify(carrito);
+
 
         // Mostrar el total del carrito
         const totalContainer = document.getElementById('totalcarrito');
         totalContainer.innerHTML = '';
         const totalCarrito = calcularTotalCarrito();
-        let iva=totalCarrito*0.16;
+        let iva = totalCarrito * 0.16;
+        const totalConIva = totalCarrito + iva;
+
+        // Actualizar los input hidden con los valores
+        document.getElementById('subtotal_hidden').value = totalCarrito.toFixed(2);
+        document.getElementById('impuestos_hidden').value = iva.toFixed(2);
+        document.getElementById('total_hidden').value = totalConIva.toFixed(2);
+
         totalContainer.innerHTML += `<p class="mb-2">Subtotal: $${totalCarrito.toFixed(2)}</p>
         <p class="mb-2">IVA 16%: $${iva.toFixed(2)}</p>
-        <p>Total: $${(totalCarrito+iva).toFixed(2)}</p>`;
+        <p>Total: $${totalConIva.toFixed(2)}</p>`;
+
         actualizarCambio();
     }
 
@@ -372,9 +461,7 @@
         return carrito.reduce((total, producto) => total + producto.precio_venta * producto.cantidad, 0);
     }
     
-    const pagoInput = document.getElementById('pagocon');
-    const cambioSpan = document.getElementById('cambio');
-
+   
     function actualizarCambio() {
         const totalCarrito = calcularTotalCarrito();
         const pago = parseFloat(pagoInput.value);
@@ -393,11 +480,14 @@
                 // Si el cambio es negativo, mostrar el mensaje y ocultar el cambio
                 mensaje.style.display = 'block';
                 cambioSpan.textContent = '';
+                document.getElementById('cambio_hidden').value = ''; // Vaciar el input hidden
             } else {
                 // Si el cambio es positivo o cero, mostrar el cambio y ocultar el mensaje
                 cambioSpan.textContent = `$${cambio.toFixed(2)}`;
                 mensaje.style.display = 'none';
+                document.getElementById('cambio_hidden').value = cambio.toFixed(2); // Establecer el valor en el input hidden
             }
+
         }
     }
 
@@ -501,7 +591,15 @@
                         'marca':producto.marca.nombre, 
                         'imagen':producto.imagen
                     }
-                    productosHtml  += `
+                    const botonOAgotado = producto.unidades >= 1 ?
+                    `<button type="button" class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white" onclick="agregarProductoAlCarrito('${encodeURIComponent(JSON.stringify(productoParaHTML))}')">
+                        <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                        </svg>
+                        Agregar al carrito
+                    </button>` :
+                    `<p style="color:red; font-weight: 600;">AGOTADO</p>`;
+                    productosHtml += `
                     <div class="col p-0">
                         <div class="card m-1" >
                             <img src="{{ asset('uploads/${producto.imagen}') }}" alt="Imagen de producto" class="card-img-top" >
@@ -515,15 +613,12 @@
                                 <small class="card-text">Unidades disponibles: ${producto.unidades}</small>
                             </div>
                             <div style="max-height: 100px; padding: 1.5rem; display: flex; justify-content: center; align-items: center;">
-                                <button type="button" class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white" onclick="agregarProductoAlCarrito('${encodeURIComponent(JSON.stringify(productoParaHTML))}')">
-                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                    </svg>
-                                    Agregar al carrito
-                                </button>
+                                 ${botonOAgotado}
                             </div>
                         </div>
-                    </div>`;
+                    </div>
+                    `;
+                    
                 });
                 if (productos.length > 0) {
                         // Si hay productos, agregamos el contenido de productosHtml al contenedor productosContainer
@@ -589,29 +684,33 @@
                             'marca':producto.marca.nombre, 
                             'imagen':producto.imagen
                         }
+                        const botonOAgotado = producto.unidades >= 1 ?
+                        `<button type="button" class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white" onclick="agregarProductoAlCarrito('${encodeURIComponent(JSON.stringify(productoParaHTML))}')">
+                            <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                            </svg>
+                            Agregar al carrito
+                        </button>` :
+                        `<p style="color:red; font-weight: 600;">AGOTADO</p>`;
                         productosHtml += `
                         <div class="col p-0">
-                        <div class="card m-1" >
-                        <img src="{{ asset('uploads/${producto.imagen}') }}" alt="Imagen de producto" class="card-img-top" >
-                            <div class="card-body m-h-200">
-                                <div class="d-flex justify-content-between">
-                                <h2 class="card-title mb-2 text-bold " >${producto.nombre}</h2>
-                                <h2 class="card-title mb-2 text-orange">$${parseFloat(producto.precio_venta).toFixed(2)}</h2>
+                            <div class="card m-1" >
+                                <img src="{{ asset('uploads/${producto.imagen}') }}" alt="Imagen de producto" class="card-img-top" >
+                                <div class="card-body m-h-200">
+                                    <div class="d-flex justify-content-between">
+                                    <h2 class="card-title mb-2 text-bold " >${producto.nombre}</h2>
+                                    <h2 class="card-title mb-2 text-orange">$${parseFloat(producto.precio_venta).toFixed(2)}</h2>
+                                    </div>
+                                    <p class="card-text mb-2">${producto.marca.nombre}</p>
+                                    
+                                    <small class="card-text">Unidades disponibles: ${producto.unidades}</small>
                                 </div>
-                                <p class="card-text mb-2">${producto.marca.nombre}</p>
-                                
-                                <small class="card-text">Unidades disponibles: ${producto.unidades}</small>
-                            </div>
-                            <div style="max-height: 100px; padding: 1.5rem; display: flex; justify-content: center; align-items: center;">
-                                <button type="button" class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white" onclick="agregarProductoAlCarrito('${encodeURIComponent(JSON.stringify(productoParaHTML))}')">
-                                    <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                    </svg>
-                                    Agregar al carrito
-                                </button>
+                                <div style="max-height: 100px; padding: 1.5rem; display: flex; justify-content: center; align-items: center;">
+                                    ${botonOAgotado}
+                                </div>
                             </div>
                         </div>
-                    </div>`;
+                        `;
                     });
                     if (productos.length > 0) {
                         // Si hay productos, agregamos el contenido de productosHtml al contenedor productosContainer

@@ -128,6 +128,10 @@ Route::get('/ventas', [VentasController::class, 'index'])->name('ventas.index');
 // pos de ventas
 Route::get('/ventas/Nueva', [VentasController::class, 'create'])->name('ventas.create');
 
+
+// guardar ventas
+Route::post('/ventas/create', [VentasController::class, 'store'])->name('ventas.store');
+
 // para obtener la subcategoria de una categoria
 Route::get('/ventas/subcategorias/{id}', [VentasController::class, 'subcategorias'])->name('ventas.subcategorias');
 //para filtrar los productos por categoria o subcategorias
@@ -136,20 +140,8 @@ Route::get('/ventas/productosPorSubcategoria/{id}', [VentasController::class, 'p
 // Ruta para obtener todos los productos
 Route::get('/ventas/productosTodos', [VentasController::class, 'productosTodos'])->name('ventas.productosTodos');
 
-// guardar ventas
-Route::post('/ventas', [VentasController::class, 'store'])->name('ventas.store');
-
-// eliminar ventas
-Route::delete('/ventas/{id}', [VentasController::class, 'delete'])->name('ventas.delete');
-
-// editar ventas
-Route::get('/ventas/{marca}/edit',[ VentasController::class, 'edit'])->name('ventas.edit');
-
-// actualizar cambios ventas
-Route::put('/ventas/{id}/edit', [VentasController::class, 'update'])->name('ventas.update');
-
 // lista de ventas
-Route::get('/ventas/detalle', [VentasController::class, 'detalles_index'])->name('ventas.detalles');
+Route::get('/ventas/{id}/detalle', [VentasController::class, 'detalles_index'])->name('ventas.detalles');
 
 // lista de devoluciones
 Route::get('/devoluciones', [DevolucionesController::class, 'index'])->name('devoluciones.index');

@@ -45,10 +45,8 @@
             <form action="{{route('imagenes.store')}}" method="post" enctype="multipart/form-data" id="dropzone" class="dropzone " style="width: 100%; border:none;padding:0px; align-items:center">
                 @csrf
             </form>   
-            <form action="{{route('usuarios.store')}}" method="post" novalidate>
+            <form action="{{ route('usuarios.update', $usuario->id) }}" method="post" novalidate>
             @csrf
-            
-
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
                 <label for="nombre" class="mb-2 block uppercase text-gray-500 font-bold">
                     Nombre

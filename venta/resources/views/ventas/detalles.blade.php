@@ -132,10 +132,10 @@ Detalles de Venta
             <div class="card-header pb-0 mb-4 ">
                 <div class="row">
                     <div class="text-left mb-2 col-md-6">
-                        Detalle de Venta: 123_ioioi
+                        Detalle de Venta: {{$venta->referencia}}
                     </div>
                     <div class="text-right mb-2 col-md-6">
-                        Fecha: 2023-06-12
+                        Fecha: {{$venta->fecha}}
                     </div>
                 </div>
             </div>
@@ -144,20 +144,27 @@ Detalles de Venta
                 <div class="row">
                     <div class="col-md-4">
                         <h3 class="text-primary">Datos del cliente</h3>
-                        Nombre: Juan Perez<br>
-                        Dirección: Colonia Tamaulipas, Victoria, Tamaulipas, Mexíco.<br>
-                        Email: juanito@gmail.com<br>
+                        Nombre: {{$venta->cliente->nombre}}<br>
+                        Empresa: {{$venta->cliente->empresa}}<br>
+                        @if($venta->cliente->telefono)
+                        Telefono: {{$venta->cliente->telefono}}<br>
+                        @endif
+                        Email: {{$venta->cliente->email}}<br>
+                        Dirección: @if($venta->cliente->direccion) {{$venta->cliente->direccion}}@endif,  @if($venta->cliente->ciudad) {{$venta->cliente->ciudad}}@endif,  @if($venta->cliente->pais) {{$venta->cliente->pais}}@endif.<br>
                     </div>
                     <div class="col-md-4">
                         <h3 class="text-primary">Datos del Vendedor</h3>
-                        Nombre: Juan Perez<br>
-                        Dirección: Colonia Tamaulipas, Victoria, Tamaulipas, Mexíco.<br>
-                        Email: juanito@gmail.com<br>
+                        Nombre: {{$venta->usuario->nombre}}<br>
+                        Empresa: {{$venta->usuario->empresa}}<br>
+                        @if($venta->usuario->telefono)
+                        Telefono: {{$venta->usuario->telefono}}<br>
+                        @endif
+                        Email: {{$venta->usuario->email}}<br>
                     </div>
                     <div class="col-md-4">
                         <h3 class="text-primary">Datos del Recibo</h3>
-                        Fecha: 2023-06-12<br>
-                        Estatus: Pagado
+                        Pago con: ${{$venta->pagocon}}<br>
+                        Cambio: ${{$venta->cambio}}<br>
                     </div>
                 </div>
                 </div>
