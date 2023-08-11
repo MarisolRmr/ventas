@@ -25,13 +25,19 @@ class UserController extends Controller
          'email'=>'required|email',
          'password'=>'required'
         ]); 
-        
+        $user = User::where('email', $request->email)->first();
+
+
+        // Verificar si el usuario existe y si su status es 'Activado'
+        if (!$user || $user->status !== 'Activado') {
+            return back()->with('mensaje', 'Credenciales incorrectas o Usuario desactivado');
+        }
         if(!auth()->attempt($request->only('email', 'password'), $request->remember)){
             return back()->with('mensaje', 'Credenciales incorrectas');
         }
 
         return redirect()->route('posts.index', auth()->user()->username);
-     }
+    }
 
     public function register(){
         return view('auth.register');
@@ -63,9 +69,10 @@ class UserController extends Controller
         
     }
     public function index(){
-        $usuarios = User::all();
+        $usuarios = User::where('eliminado', 'no')->get();
         return view('usuarios.lista')->with(['usuarios' => $usuarios]);
     }
+    
     //vista de usuarios
     public function create(){
         return view('usuarios.create');
@@ -90,6 +97,7 @@ class UserController extends Controller
         Usuario::create([
             'name' => $request->name,
             'username' => $request->username,
+            'eliminado' => 'no',
             'email' => $request->email,
             'password' => Hash::make( $request->password ),
             'apellido' => $request->apellido,
@@ -107,29 +115,56 @@ class UserController extends Controller
     //guardar cambios editados
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|max:30',
-            'apellido' => 'required|max:30',
-            'username' => "required|min:3|max:20",
-            'email' => 'required|email|max:60',
-            'password' => 'required|min:6',
-            'imagen' => 'required',
-            'telefono' => 'required|integer',
-            'status' => 'required',
-            'rol' => 'required',
-        ]);
-
-        $usuario = Usuario::findOrFail($id);
-        $usuario->nombre = $request->nombre;
-        $usuario->apellido = $request->apellido;
-        $usuario->username = $request->username;
-        $usuario->email = $request->email;
-        $usuario->imagen = $request->imagen;
-        $usuario->telefono = $request->telefono;
-        $usuario->status = $request->status;
-        $usuario->rol = $request->rol;
-        $usuario->password = Hash::make( $request->password );
-        $usuario->save();
+        if($request->password){
+            $request->validate([
+                'name' => 'required|max:30',
+                'apellido' => 'required|max:30',
+                'username' => "required|min:3|max:20",
+                'email' => 'required|email|max:60',
+                'password' => 'required|min:6',
+                'imagen' => 'required',
+                'telefono' => 'required|integer',
+                'status' => 'required',
+                'rol' => 'required',
+            ]);
+    
+            $usuario = Usuario::findOrFail($id);
+            $usuario->name = $request->name;
+            $usuario->eliminado = 'no';
+            $usuario->apellido = $request->apellido;
+            $usuario->username = $request->username;
+            $usuario->email = $request->email;
+            $usuario->imagen = $request->imagen;
+            $usuario->telefono = $request->telefono;
+            $usuario->status = $request->status;
+            $usuario->rol = $request->rol;
+            $usuario->password = Hash::make( $request->password );
+            $usuario->save();
+        }else{
+            $request->validate([
+                'name' => 'required|max:30',
+                'apellido' => 'required|max:30',
+                'username' => "required|min:3|max:20",
+                'email' => 'required|email|max:60',
+                'imagen' => 'required',
+                'telefono' => 'required|integer',
+                'status' => 'required',
+                'rol' => 'required',
+            ]);
+    
+            $usuario = Usuario::findOrFail($id);
+            $usuario->name = $request->name;
+            $usuario->eliminado = 'no';
+            $usuario->apellido = $request->apellido;
+            $usuario->username = $request->username;
+            $usuario->email = $request->email;
+            $usuario->imagen = $request->imagen;
+            $usuario->telefono = $request->telefono;
+            $usuario->status = $request->status;
+            $usuario->rol = $request->rol;
+            $usuario->save();
+        }
+        
 
         return redirect()->route('usuarios.index')->with('actualizada', 'Usuario actualizado correctamente.');
     }
@@ -141,7 +176,22 @@ class UserController extends Controller
     
     public function delete($id)
     {
-        Usuario::find($id)->delete();
-        return redirect()->back()->with('success', 'Usuario eliminado correctamente');
+        $usuario = Usuario::find($id);
+        if ($usuario) {
+            $usuario->update([
+                'eliminado' => 'si',
+                'status' => 'Desactivado',
+                'name' => null,
+                'apellido' => null,
+                'email' => null,
+                'password' => null,
+                'imagen' => null,
+                'telefono' => null,
+                'rol' => null,
+            ]);
+            return redirect()->back()->with('success', 'Usuario eliminado correctamente');
+        } else {
+            return redirect()->back()->with('error', 'Usuario no encontrado');
+        }
     }
 }

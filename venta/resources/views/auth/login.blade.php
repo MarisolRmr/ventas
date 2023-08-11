@@ -108,7 +108,7 @@
                 @csrf    
 
                 @if (session('mensaje'))
-                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                    <p class="bg-red-500  my-2 rounded-lg text-sm p-2 text-center">
                         {{session('mensaje')}}
                     </p>
                 @endif
@@ -119,7 +119,13 @@
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
                     <input id="email" name="email" class="form-control @error('email') border-red-500 @enderror" value="{{old('email')}}" placeholder="Email" type="email">
+                    
                   </div>
+                  @error ('email')
+                      <p class="bg-red-500  my-2 rounded-lg text-sm p-2">
+                          {{$message}}
+                      </p>
+                    @enderror
                 </div>
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
@@ -127,7 +133,13 @@
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
                     <input id="password" name="password" class="form-control @error('password') border-red-500 @enderror" value="{{old('password')}}" placeholder="Password" type="password">
+                    
                   </div>
+                  @error ('password')
+                      <p class="bg-red-500  my-2 rounded-lg text-sm p-2">
+                          {{$message}}
+                      </p>
+                    @enderror
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id=" customCheckLogin" type="checkbox">

@@ -26,6 +26,7 @@ class Usuario extends Model
         'imagen',
         'rol',
         'status',
+        'eliminado',
     ];
 
     /**

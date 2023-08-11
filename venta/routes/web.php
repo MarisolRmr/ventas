@@ -200,10 +200,10 @@ Route::post('/usuarios', [UserController::class, 'store_user'])->name('usuarios.
 Route::get('/usuarios/{usuario}/edit',[ UserController::class, 'edit'])->name('usuarios.edit');
 
 // actualizar cambios usuarios
-Route::put('/usuarios/{id}/edit', [UserController::class, 'update'])->name('usuarios.update');
+Route::put('/usuarios/{id}/update', [UserController::class, 'update'])->name('usuarios.update');
 
 // eliminar usuarios
-Route::delete('/usuarios/{id}', [UserController::class, 'delete'])->name('usuarios.delete');
+Route::post('/usuarios/{id}', [UserController::class, 'delete'])->name('usuarios.delete');
 
 //Dashboard
 Route::get('/', [HomeController::class, 'home'])->name('home');

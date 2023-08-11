@@ -28,6 +28,17 @@
         height: 120px !important;
         width: 120px !important;
     }
+    .select2.select2-container {
+        width: 400px !important;
+        height: 50px !important;
+    }
+    .select2-container .select2-selection--single {
+        height: 45px !important;
+    }
+    .select2-container--default .select2-selection--single {
+
+        border-radius: 20px !important;
+    }
     
 </style>
 @endsection
@@ -47,6 +58,7 @@
             </form>   
             <form action="{{ route('usuarios.update', $usuario->id) }}" method="post" novalidate>
             @csrf
+            @method('put')
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
                 <label for="nombre" class="mb-2 block uppercase text-gray-500 font-bold">
                     Nombre
@@ -168,39 +180,37 @@
             </div>
 
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
-                <label for="status" class="mb-2 block uppercase text-gray-500 font-bold">
+                <label style="margin-right: 20px" for="status" class="mb-2 block uppercase text-gray-500 font-bold">
                     Status
                 </label>
-                <select 
-                    style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
+                <select style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
                     id="status"
                     name="status"
-                    class="border p-3 w-full rounded-lg @error ('status') border-red-500 @enderror"
-                >
+                    class="form-control mi-selector border p-3 w-full rounded-lg @error ('status') border-red-500 @enderror">
                     <option value="">Seleccione el status</option>
                     <option value="Activado" {{ $usuario->status === 'Activado' ? 'selected' : '' }}>Activado</option>
                     <option value="Desactivado" {{ $usuario->status === 'Desactivado' ? 'selected' : '' }}>Desactivado</option>
                 </select>
+
                 @error('status')
                     <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                         {{$message}}
                     </p>    
                 @enderror
+                
             </div>
 
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
-                <label for="rol" class="mb-2 block uppercase text-gray-500 font-bold">
+                <label style="margin-right: 20px" for="rol" class="mb-2 block uppercase text-gray-500 font-bold">
                     Rol
                 </label>
-                <select 
-                    style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
+                <select style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
                     id="rol"
                     name="rol"
-                    class="border p-3 w-full rounded-lg @error ('rol') border-red-500 @enderror"
-                >
-                    <option value="">Seleccione el Rol</option>
-                    <option value="Administrador" {{ $usuario->rol === 'Administrador' ? 'selected' : '' }}>Administrador</option>
+                    class="form-control mi-selector border p-3 w-full rounded-lg @error ('rol') border-red-500 @enderror">
+                    <option value="">Seleccione el rol</option>
                     <option value="Vendedor" {{ $usuario->rol === 'Vendedor' ? 'selected' : '' }}>Vendedor</option>
+                    <option value="Administrador" {{ $usuario->rol === 'Administrador' ? 'selected' : '' }}>Administrador</option>
                 </select>
                 @error('rol')
                     <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
@@ -230,4 +240,12 @@
   </div>
 </div>
 
+@endsection
+@section('js')
+<script>
+     $(document).ready(function () {
+        // Inicializar el selector Select2
+        $('.mi-selector').select2();
+    });
+</script>
 @endsection
