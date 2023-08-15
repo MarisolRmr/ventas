@@ -39,14 +39,7 @@ class DevolucionesController extends Controller{
     public function store(Request $request){
         // Reglas de validación
         $this->validate($request, [
-            'venta' => 'required',
-            'fecha' => 'required',
-            'status' => 'required',
-            'total' => 'required|integer',
-            'pagado' => 'required|integer',
-            'deuda' => 'required|integer',
-            'statusPago' => 'required',
-            'imagen'=>'required'
+            'referenciaVenta' => 'required'
         ]);
 
         // Obtener el ID del usuario autenticado
