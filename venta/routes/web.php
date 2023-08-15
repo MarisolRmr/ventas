@@ -87,7 +87,7 @@ Route::delete('/subcategorias/{id}', [SubcategoriaController::class, 'delete'])-
 
 
 
-// DEVOLUCIONESSS MODIFICACIÓN
+// crear devoluciones
 Route::get('/get-products/{ventaId}', [DevolucionesController::class, 'buscarVenta'])->name('devoluciones.buscar');
 
 // lista de devoluciones
@@ -99,11 +99,7 @@ Route::get('/devoluciones/Nueva', [DevolucionesController::class, 'create'])->na
 // guardar devoluciones
 Route::post('/devoluciones', [DevolucionesController::class, 'store'])->name('devoluciones.store');
 
-//ruta para enviar datos al servidor de imagen
-Route::post('/devoluciones_imagen', [DevolucionesController::class,'store_imagen'])->name('devoluciones.imagen');
 
-// editar devoluciones
-Route::get('/devoluciones/{devolucion}/edit',[ DevolucionesController::class, 'edit'])->name('devoluciones.edit');
 
 // actualizar cambios subcategorias
 Route::put('/devoluciones/{id}/edit', [DevolucionesController::class, 'update'])->name('devoluciones.update');

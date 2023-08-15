@@ -8,9 +8,7 @@ use App\Models\Devoluciones;
 use App\Models\Producto;
 use App\Models\Cliente;
 use App\Models\Venta;
-use App\Models\Venta_Producto;
 use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
 
 class DevolucionesController extends Controller{
 
@@ -36,10 +34,10 @@ class DevolucionesController extends Controller{
     }
 
     // Validar y guardar datos del formulario
-    public function store(Request $request){
+    /*public function store(Request $request){
         // Reglas de validación
         $this->validate($request, [
-            'referenciaVenta' => 'required'
+            'referencia' => 'required'
         ]);
 
         // Obtener el ID del usuario autenticado
@@ -48,7 +46,7 @@ class DevolucionesController extends Controller{
 
         // Invocar el modelo Categoria para crear el registro con el user_id
         Devoluciones::create([
-            'nombreProducto' => $request->nombreProducto,
+            'referencia' => $request->referencia,
             'fecha' => $request->fecha,
             'cliente' => $request->cliente,
             'status' => $request->status,
@@ -63,76 +61,26 @@ class DevolucionesController extends Controller{
 
         // Redireccionar a la vista de listado de categorías
         return redirect()->route('devoluciones.index')->with('agregada', 'Devolución agregada correctamente');
+    }*/
+
+    public function store(Request $request){
+        $ventaId = $request->input('referencia');
+        $productos = $request->input('productos'); // Esto debe coincidir con el nombre de los inputs en el formulario
+        $userId = Auth::id();
+
+        foreach ($productos as $productoId => $cantidadDevuelta) {
+            Devoluciones::create([
+                'user_id' => $userId,
+                'venta_id' => $ventaId,
+                'referencia' => $request->input('referencia'),
+                'producto_id' => $productoId,
+                'cantidad_devuelta' => $cantidadDevuelta,
+            ]);
+        }
+
+        return redirect()->route('devoluciones.index')->with('success', 'Devolución registrada correctamente.');
     }
 
-    //para guardar la imagen de la devolucion
-    public function store_imagen(Request $request){
-        //identificar el archivo que se sube en dropzone
-        $imagen=$request->file('file');
-
-        //convertimos el arreglo input a formato json
-        //return response()->json(['imagen'=>$imagen->extension()]);
-        //genera un id unico para cada una de las imagenes que se cargan en el server
-        $nombreImagen = Str::uuid() . ".". $imagen->extension();
-
-        //implementar intervention Image 
-        $imagenServidor=Image::make($imagen);
-
-        //agregamos efectps de intervention image: indicamos la medida de cada imagen
-        $imagenServidor->fit(1000,1000);
-
-        //movemos la imagen a un lugar fisico del servidor
-        $imagenPath=public_path('uploads'). '/'. $nombreImagen;
-
-        //pasamos la imagen de memoria al server
-        $imagenServidor->save($imagenPath);
-
-        ///verificamos que el nombre del archivo se ponga como unico
-        return response()->json(['imagen'=>$nombreImagen]);
-
-    }
-
-    //editar
-    public function edit(Devoluciones $devolucion){
-        
-        $productos = Producto::all();
-        $clientes = Cliente::all();
-        
-        return view('devoluciones.edit')->with(['productos' => $productos,'clientes' => $clientes, 'devolucion' => $devolucion]);
-        
-    }
-
-    //guardar cambios editados
-    public function update(Request $request, $id){
-        
-        $request->validate([
-            'nombreProducto' => 'required',
-            'fecha' => 'required',
-            'status' => 'required',
-            'total' => 'required|integer',
-            'pagado' => 'required|integer',
-            'deuda' => 'required|integer',
-            'statusPago' => 'required',
-            'imagen'=>'required'
-        ]);
-
-        $devolucion = Devoluciones::findOrFail($id);
-        $devolucion->nombreProducto = $request->nombreProducto;
-        $devolucion->fecha = $request->fecha;
-        $devolucion->status = $request->status;
-        $devolucion->total = $request->total;
-        $devolucion->pagado = $request->pagado;
-        $devolucion->deuda = $request->deuda;
-        $devolucion->statusPago = $request->statusPago;
-        $devolucion->save();
-
-        return redirect()->route('devoluciones.index')->with('actualizada', 'Devolución actualizada correctamente');
-    }
-
-    public function delete($id){
-        Devoluciones::find($id)->delete();
-        return redirect()->back()->with('success', 'Devolución ha sido eliminado correctamente');
-    }
 
     public function buscarVenta($ventaId){
 
