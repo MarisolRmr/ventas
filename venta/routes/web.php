@@ -86,6 +86,18 @@ Route::put('/subcategorias/{id}/edit', [SubcategoriaController::class, 'update']
 Route::delete('/subcategorias/{id}', [SubcategoriaController::class, 'delete'])->name('subcategorias.delete');
 
 
+
+// DEVOLUCIONESSS MODIFICACIÓN
+Route::get('/get-products/{ventaId}', [DevolucionesController::class, 'buscarVenta'])->name('devoluciones.buscar');
+
+
+
+
+
+
+
+
+
 // lista de devoluciones
 Route::get('/devoluciones', [DevolucionesController::class, 'index'])->name('devoluciones.index');
 

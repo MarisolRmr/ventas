@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Devoluciones;
 use App\Models\Producto;
 use App\Models\Cliente;
+use App\Models\Venta;
+use App\Models\Venta_Producto;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
@@ -26,17 +28,18 @@ class DevolucionesController extends Controller{
     
     // Mostrar vista de formulario
     public function create(){
+        $ventas = Venta::all();
         $productos = Producto::all();
         $clientes = Cliente::all();
         
-        return view('devoluciones.create')->with(['productos' => $productos,'clientes' => $clientes]);
+        return view('devoluciones.create')->with(['ventas' => $ventas,'productos' => $productos,'clientes' => $clientes]);
     }
 
     // Validar y guardar datos del formulario
     public function store(Request $request){
         // Reglas de validación
         $this->validate($request, [
-            'nombreProducto' => 'required',
+            'venta' => 'required',
             'fecha' => 'required',
             'status' => 'required',
             'total' => 'required|integer',
@@ -137,6 +140,28 @@ class DevolucionesController extends Controller{
         Devoluciones::find($id)->delete();
         return redirect()->back()->with('success', 'Devolución ha sido eliminado correctamente');
     }
+
+    public function buscarVenta($ventaId){
+
+        $venta = Venta::find($ventaId);
+
+        if (!$venta) {
+            return response()->json(['error' => 'Venta no encontrada'], 404);
+        }
+
+        $productosComprados = $venta->ventaProductos()
+        ->with(['producto' => function ($query) {
+            $query->select('id', 'imagen', 'nombre', 'precio_venta');
+        }])
+        ->select('producto_id', 'cantidad')
+        ->get();
+
+
+        return response()->json(['productos' => $productosComprados]);
+    }
+
+
+    
 
     
 

@@ -28,5 +28,10 @@ class Venta extends Model
     {
         return $this->belongsTo(Cliente::class, 'cliente_id');
     }
+
+    public function ventaProductos() {
+        return $this->hasMany(Venta_Producto::class, 'venta_id');
+    }
+
     
 }
