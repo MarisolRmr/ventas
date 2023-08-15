@@ -133,22 +133,55 @@ input[type="search"]::-webkit-search-cancel-button {
                 </a>
             </div>
             </div>
+            <div class="my-4 flex justify-end space-x-2" style="display: flex;justify-content: end;margin-right: 30px;">
+                <button onclick="exportToPDF('usuarios')" style="background-color: #e34444" class="btn mr-2 inline-block px-2 py-1 rounded-lg font-bold text-sm text-white bg-red-600 hover:bg-red-700 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V304H176c-35.3 0-64 28.7-64 64V512H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM176 352h32c30.9 0 56 25.1 56 56s-25.1 56-56 56H192v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V448 368c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24H192v48h16zm96-80h32c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48H304c-8.8 0-16-7.2-16-16V368c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H320v96h16zm80-112c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16s-7.2 16-16 16H448v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H448v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V432 368z"/></svg>    
+                </button>
+
+                <button onclick="exportToExcel('usuarios')" style="background-color: #3d8d3d" class="btn inline-block px-2 py-1 rounded-lg font-bold text-sm text-white bg-green-600 hover:bg-green-700 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM155.7 250.2L192 302.1l36.3-51.9c7.6-10.9 22.6-13.5 33.4-5.9s13.5 22.6 5.9 33.4L221.3 344l46.4 66.2c7.6 10.9 5 25.8-5.9 33.4s-25.8 5-33.4-5.9L192 385.8l-36.3 51.9c-7.6 10.9-22.6 13.5-33.4 5.9s-13.5-22.6-5.9-33.4L162.7 344l-46.4-66.2c-7.6-10.9-5-25.8 5.9-33.4s25.8-5 33.4 5.9z"/></svg>    
+                </button>
+            </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
-                @if(session('agregada'))
-                    <div class="bg-green-200 p-2 rounded-lg mb-6 text-black text-center ">
-                        {{ session('agregada') }}
-                    </div>
+              @if(session('success'))
+                    <script>
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: '{{ session('success') }}',
+                            icon: 'success',
+                            timer: 4000, 
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            
+                        });
+                    </script>
                 @endif
-                @if(session('success'))
-                    <div class="bg-green-200 p-2 rounded-lg mb-6 text-black text-center ">
-                        {{ session('success') }}
-                    </div>
+                @if(session('agregada'))
+                    <script>
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: '{{ session('agregada') }}',
+                            icon: 'success',
+                            timer: 4000, 
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            
+                        });
+                    </script>
                 @endif
                 @if(session('actualizada'))
-                    <div class="bg-green-200 p-2 rounded-lg mb-6 text-black text-center ">
-                        {{ session('actualizada') }}
-                    </div>
+                    <script>
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: '{{ session('actualizada') }}',
+                            icon: 'success',
+                            timer: 4000, 
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            
+                        });
+                    </script>
                 @endif
                 <table id="example" class="table align-items-center mb-0 hover">
                   <thead>
@@ -222,7 +255,6 @@ input[type="search"]::-webkit-search-cancel-button {
                             <td class=" px-3 py-2 exclude-column">
                                 <form action="{{route('usuarios.delete', $usuario->id)}}" method="POST">
                                 <div style="display: flex; justify-content:center">
-                                @method('delete')
                                 @csrf
                                 <button type="submit" style="border-radius: 50px !important; border:none !important ; margin-right: 10px;" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-red-600 hover:bg-red-700 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
@@ -266,4 +298,8 @@ input[type="search"]::-webkit-search-cancel-button {
     });
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js" integrity="sha512-sk0cNQsixYVuaLJRG0a/KRJo9KBkwTDqr+/V94YrifZ6qi8+OO3iJEoHi0LvcTVv1HaBbbIvpx+MCjOuLVnwKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="{{ asset('exportarPdfExcel.js') }}"></script>
 @endsection

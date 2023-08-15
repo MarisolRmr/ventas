@@ -28845,10 +28845,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     display: none;
 }
 
-.select2.select2-container
-{
-    width: 100% !important;
-}
+
 
 .select2-container .select2-selection--single,
 .select2-container--default.select2-container--focus .select2-selection--multiple,

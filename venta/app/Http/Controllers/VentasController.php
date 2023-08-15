@@ -31,8 +31,8 @@ class VentasController extends Controller
     public function detalles_index($id){
         // Busca la venta por ID y carga las relaciones con 'usuario' y 'cliente'
         $venta = Venta::with('usuario', 'cliente')->find($id);
-
-        return view('ventas.detalles')->with(['venta' => $venta]);
+        $detalles = Venta_Producto::with('producto')->where('venta_id', $id)->get();
+        return view('ventas.detalles')->with(['venta' => $venta,'detalles' => $detalles ]);
     }
     // Validar y guardar datos del formulario
     public function store(Request $request){
