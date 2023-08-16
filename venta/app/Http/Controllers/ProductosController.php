@@ -45,10 +45,16 @@ class ProductosController extends Controller
         ]);
     }
 
-    public function delete($id)
+    public function activo($id)
     {
-        Producto::find($id)->delete();
-        return redirect()->back()->with('success', 'Producto eliminado correctamente');
+        $producto = Producto::find($id);
+    
+        if ($producto) {
+            $producto->update(['activo' => false]);
+            return redirect()->back()->with('success', 'Producto eliminado correctamente');
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar el producto');
+        }
     }
     
     // Mostrar vista de formulario
@@ -95,6 +101,7 @@ class ProductosController extends Controller
             'subcategoria_id' => $request->subcategoria_id,
             'marca_id' => $request->marca_id,
             'imagen' => $request->imagen,
+            'activo' => 1,
             'user_id' => $userId,
         ]);
 
@@ -230,6 +237,7 @@ class ProductosController extends Controller
                     'subcategoria_id' => $fila[5],
                     'marca_id' => $fila[6],
                     'imagen' => $fila[7],
+                    'activo' => 1,
                     'user_id' => $userId,
                 ]);
             }

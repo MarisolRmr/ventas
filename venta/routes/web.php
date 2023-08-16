@@ -37,7 +37,7 @@ Route::get('/productos/Nueva', [ProductosController::class, 'create'])->name('pr
 Route::post('/productos', [ProductosController::class, 'store'])->name('productos.store');
 
 // eliminar productos
-Route::delete('/productos/{id}', [ProductosController::class, 'delete'])->name('productos.delete');
+Route::put('/productos/{id}', [ProductosController::class, 'activo'])->name('productos.activo');
 
 // editar productos
 Route::get('/productos/{producto}/edit',[ ProductosController::class, 'edit'])->name('productos.edit');
