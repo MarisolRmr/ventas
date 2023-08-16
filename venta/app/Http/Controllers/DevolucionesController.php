@@ -64,18 +64,26 @@ class DevolucionesController extends Controller{
     }*/
 
     public function store(Request $request){
-        $ventaId = $request->input('referencia');
-        $productos = $request->input('productos'); // Esto debe coincidir con el nombre de los inputs en el formulario
-        $userId = Auth::id();
 
-        foreach ($productos as $productoId => $cantidadDevuelta) {
-            Devoluciones::create([
-                'user_id' => $userId,
-                'venta_id' => $ventaId,
-                'referencia' => $request->input('referencia'),
-                'producto_id' => $productoId,
-                'cantidad_devuelta' => $cantidadDevuelta,
-            ]);
+        dd($request->all());
+
+        $ventaId = $request->input('referencia');
+        $cantidadesDevueltas = $request->input('cantidades_devueltas');
+
+        
+        $productos = $request->input('productos');
+        $cantidadesDevueltas = $request->input('cantidades_devueltas');
+
+        foreach ($productos as $productoId => $producto) {
+            $cantidadDevuelta = $cantidadesDevueltas[$productoId];
+
+            if ($cantidadDevuelta > 0) {
+                Devoluciones::create([
+                    'venta_id' => $ventaId,
+                    'producto_id' => $productoId,
+                    'cantidad_devuelta' => $cantidadDevuelta,
+                ]);
+            }
         }
 
         return redirect()->route('devoluciones.index')->with('success', 'Devolución registrada correctamente.');

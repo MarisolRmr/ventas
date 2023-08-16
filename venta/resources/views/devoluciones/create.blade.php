@@ -79,9 +79,7 @@
                 @enderror
             </div>
 
-            @foreach($productos as $producto)
-                <input type="hidden" name="productos[{{$producto->id}}]" value="0">
-            @endforeach
+            
 
             <br>
             
@@ -128,6 +126,7 @@
                         <div class="col-md-8 p-0">
                             <div class="card-body p-2">
                                 <h5 class="card-title mb-1" style="font-size:16px">${producto.nombre}</h5>
+                                <input type="hidden" name="productos[${producto.id}]" value="${producto.nombre}">
                                 <div class="d-flex align-items-center mt-1">
                                 <p class="card-text mb-0 mr-3" style="font-size: 15px">Pre. Unit. <br>$${parseFloat(producto.precio_venta).toFixed(2)}</p>
                                 <p class="card-text mb-0 mr-3" style="font-size: 15px">Cantidad Comprada <br>${productoVenta.cantidad}</p>
@@ -138,7 +137,8 @@
                                 </div>
                                 <div class="d-flex align-items-center" style="display:flex; justify-content:center">
                                     <button class="btn btn-sm btn-primary mr-2" onclick="disminuirCantidad(${producto.id})" type="button">-</button>
-                                    <input id="cantidadInput${producto.id}" type="number" min="0" style="outline:none; width: 40px; border: 1px solid gray; border-radius: 8px; color: gray" class="text-center mr-2" value="0" readonly onkeydown="return false"  />
+                                    <input name="cantidades_devueltas[${producto.id}]" id="cantidad_devuelta${producto.id}" type="number" min="0" style="outline:none; width: 40px; border: 1px solid gray; border-radius: 8px; color: gray" class="text-center mr-2" value="0" readonly onkeydown="return false"  />
+                                    
                                     <button class="btn btn-sm btn-primary" onclick="agregarCantidad(${producto.id}, ${productoVenta.cantidad})" type="button">+</button>
 
                                 </div>                         
@@ -168,19 +168,20 @@
 
     
     function disminuirCantidad(productoId) {
-        const cantidadInput = document.getElementById(`cantidadInput${productoId}`);
+        const cantidadInput = document.getElementById(`cantidad_devuelta${productoId}`);
         if (cantidadInput.value > 0) {
             cantidadInput.value = parseInt(cantidadInput.value) - 1;
         }
     }
 
-    function agregarCantidad(productoId, cantidadComprada) {
-        const cantidadInput = document.getElementById(`cantidadInput${productoId}`);
 
-        if (cantidadInput.value < cantidadComprada) {
-            cantidadInput.value = parseInt(cantidadInput.value) + 1;
-        }
+    function agregarCantidad(productoId, cantidadComprada) {
+    const cantidadInput = document.getElementById(`cantidad_devuelta${productoId}`);
+
+    if (cantidadInput.value < cantidadComprada) {
+        cantidadInput.value = parseInt(cantidadInput.value) + 1;
     }
+}
 
 
     
