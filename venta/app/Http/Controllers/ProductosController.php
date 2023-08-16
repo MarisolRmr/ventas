@@ -195,6 +195,22 @@ class ProductosController extends Controller
             'archivo_csv' => 'required|mimes:csv,txt',
         ]);
 
+        // Obtener la primera línea del archivo
+        $primerLinea = null;
+        if (($handle = fopen($request->archivo_csv, "r")) !== false) {
+            $primerLinea = fgetcsv($handle);
+            fclose($handle);
+        }
+
+        // Estructura esperada en la primera línea
+        $estructuraEsperada = ['nombre', 'precio_venta', 'precio_compra', 'unidades', 'categoria_id', 'subcategoria_id', 'marca_id', 'imagen'];
+
+        // Validar la estructura del archivo
+        if ($primerLinea === null || count($primerLinea) !== count($estructuraEsperada) || $primerLinea !== $estructuraEsperada) {
+            return redirect()->back()->with('error', 'El archivo CSV no cumple con la estructura esperada.');
+        }
+
+
         if ($validator->fails()) {
             return redirect()->back()->with('error', 'Error al cargar el archivo CSV');
         }

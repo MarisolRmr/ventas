@@ -99,7 +99,8 @@ Agregar Producto
                 });
             </script>
             @endif
-          
+
+      
             <form action="{{ route('productos.importar') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" class="h-2 flex gap-2 btn btn-secondary my-4 p-2 text-black hover:text-white" name="archivo_csv">
@@ -110,6 +111,45 @@ Agregar Producto
                     <button type="button"class="h-2 flex gap-2 btn btn-secondary my-4 p-2 text-black hover:text-white"><a href="{{route('productos.index')}}">Ver Productos</a></button>
                   </div>
             </form>
+
+            <div class="h-2 flex gap-2 btn btn-secondary my-4 p-2 text-black hover:text-white" style="text-align: justify;">
+                <h2>Instrucciones para la Importación de Productos</h2>
+                <p>Asegúrate de seguir estas instrucciones antes de subir el archivo CSV:</p>
+                
+                <ol>
+                    <li>El archivo CSV debe tener la siguiente estructura de columnas en el mismo orden:</li>
+                </ol>
+                
+                <div class="csv-structure">
+                    <code>nombre, precio_venta, precio_compra, unidades, categoria_id, subcategoria_id, marca_id, imagen</code>
+                </div>
+                
+                <p>Cada columna debe contener los siguientes tipos de datos:</p>
+                
+                <ul>
+                    <li><code>nombre</code>: Nombre del producto (texto).</li>
+                    <li><code>precio_venta</code>: Precio de venta del producto (decimal, por ejemplo, 100.00).</li>
+                    <li><code>precio_compra</code>: Precio de compra del producto (decimal, por ejemplo, 80.00).</li>
+                    <li><code>unidades</code>: Cantidad de unidades disponibles del producto (entero, por ejemplo, 50).</li>
+                    <li><code>categoria_id</code>: ID de la categoría del producto (entero, por ejemplo, 1).</li>
+                    <li><code>subcategoria_id</code>: ID de la subcategoría del producto (entero, por ejemplo, 2).</li>
+                    <li><code>marca_id</code>: ID de la marca del producto (entero, por ejemplo, 3).</li>
+                    <li><code>imagen</code>: Nombre del archivo de imagen del producto (texto, por ejemplo, imagen1.jpg).</li>
+                </ul>
+                
+                <p>Recuerda que:</p>
+                
+                <ul>
+                    <li>Los valores numéricos deben estar en el formato correcto y sin separadores de miles.</li>
+                    <li>Los campos de texto pueden contener letras, números y símbolos, excepto comas (`,`).</li>
+                </ul>
+                
+                <p>Si el archivo CSV no cumple con esta estructura, la importación no se realizará correctamente.</p>
+            </div>
+            
+
+
+            
 
         </div>
       </div>
