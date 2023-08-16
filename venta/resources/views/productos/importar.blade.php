@@ -25,6 +25,32 @@
         height: 120px !important;
         width: 120px !important;
     }
+
+    /* Estilos para el campo de entrada de archivo personalizado */
+    .custom-file-input {
+        opacity: 0;
+        width: 0.1px;
+        height: 0.1px;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .custom-file-label {
+        display: inline-block;
+        padding: 0.5em 1em;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #fff;
+        background-color: #333;
+        border-radius: 0.25rem;
+        cursor: pointer;
+    }
+
+    /* Cambiar el estilo cuando el mouse pasa por encima */
+    .custom-file-label:hover {
+        background-color: #555;
+    }
+
 </style>
 @endsection
 <!--directiva para integrar los estilos de dropzone-->
@@ -56,7 +82,7 @@ Agregar Producto
           
             <form action="{{ route('productos.importar') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <input type="file" name="archivo_csv">
+                <input type="file" class="h-2 flex gap-2 btn btn-secondary my-4 p-2 text-black hover:text-white" name="archivo_csv">
                 
                 <div class="text-center">
                     <button type="submit"class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white">Importar</button>
