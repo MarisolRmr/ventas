@@ -239,6 +239,7 @@
             
             <div class="text-center">
               <button type="submit"class="h-2 flex gap-2 btn btn-primary my-4 p-2 text-white hover:text-white">Guardar</button>
+              <button type="button"class="h-2 flex gap-2 btn btn-secondary my-4 p-2 text-black hover:text-white"><a href="{{route('usuarios.index')}}">Cancelar</a></button>
             </div>
           </form>
         </div>

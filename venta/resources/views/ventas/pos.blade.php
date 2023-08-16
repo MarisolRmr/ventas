@@ -34,6 +34,10 @@
 </style>
 @endsection
 
+@section('navegacion')
+Crear Venta
+@endsection
+
 @section('contenido')
 <div class="card overflow-auto overflow" style="background-color: #fafaf9; overflow-x: auto;">
     <h2 class="ml-4 mt-1">Categorías</h2>
