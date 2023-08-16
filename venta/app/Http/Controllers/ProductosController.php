@@ -152,5 +152,34 @@ class ProductosController extends Controller
 
     }
 
+    public function detalles($id){
+
+       
+        $producto = Producto::find($id);
+
+        $categorias = Categoria::whereIn('id', $producto->pluck('categoria_id'))->pluck('nombre', 'id');
+
+        // Obtener los nombres de marcas correspondientes a cada producto
+        $marcas = Marca::whereIn('id', $producto->pluck('marca_id'))->pluck('nombre', 'id');
+
+        // Obtener los nombres de subcategorias correspondientes a cada producto
+        $subcategorias = Subcategoria::whereIn('id', $producto->pluck('subcategoria_id'))->pluck('nombre', 'id');
+    
+        // Verificar si se encontró el producto
+        if ($producto) {
+            // pasar los datos del producto a la vista
+            
+            return view('productos.detalle')->with([
+                'productos' => $producto,
+                'categorias' => $categorias,
+                'subcategorias' => $subcategorias,
+                'marcas' => $marcas
+            ]);
+        } else {
+            // Manejar la situación si el producto no se encontró
+            return redirect()->back()->with('error', 'Producto no encontrado');
+        }
+    }
+
 
 }

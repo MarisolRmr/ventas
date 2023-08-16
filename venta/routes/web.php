@@ -38,6 +38,9 @@ Route::delete('/productos/{id}', [ProductosController::class, 'delete'])->name('
 // editar productos
 Route::get('/productos/{producto}/edit',[ ProductosController::class, 'edit'])->name('productos.edit');
 
+// editar productos
+Route::get('/productos/{producto}/detalles',[ ProductosController::class, 'detalles'])->name('productos.detalles');
+
 //ruta para enviar datos al servidor de imagen
 Route::post('/productos_imagen', [ProductosController::class,'store_imagen'])->name('productos.imagen');
 
