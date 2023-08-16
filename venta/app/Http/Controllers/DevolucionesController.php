@@ -63,6 +63,12 @@ class DevolucionesController extends Controller{
 
 
     public function store(Request $request){
+        // Reglas de validación
+        $this->validate($request, [
+            'referencia' => 'required',
+            'productos' => 'required',
+            'cantidades_devueltas' => 'required',
+        ]);
         $userId = Auth::id();
        
         $ventaId = $request->input('referencia');

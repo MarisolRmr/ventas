@@ -148,20 +148,44 @@ Devoluciones
             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
-                @if(session('agregada'))
-                    <div class="bg-green-200 p-2 rounded-lg mb-6 text-black text-center ">
-                        {{ session('agregada') }}
-                    </div>
+              @if(session('success'))
+                    <script>
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: '{{ session('success') }}',
+                            icon: 'success',
+                            timer: 4000, 
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            
+                        });
+                    </script>
                 @endif
-                @if(session('success'))
-                    <div class="bg-green-200 p-2 rounded-lg mb-6 text-black text-center ">
-                        {{ session('success') }}
-                    </div>
+                @if(session('agregada'))
+                    <script>
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: '{{ session('agregada') }}',
+                            icon: 'success',
+                            timer: 4000, 
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            
+                        });
+                    </script>
                 @endif
                 @if(session('actualizada'))
-                    <div class="bg-green-200 p-2 rounded-lg mb-6 text-black text-center ">
-                        {{ session('actualizada') }}
-                    </div>
+                    <script>
+                        Swal.fire({
+                            title: 'Éxito',
+                            text: '{{ session('actualizada') }}',
+                            icon: 'success',
+                            timer: 4000, 
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            
+                        });
+                    </script>
                 @endif
                 <table id="example" class="table align-items-center mb-0 hover">
                   <thead>
