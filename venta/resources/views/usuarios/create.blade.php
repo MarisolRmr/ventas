@@ -34,11 +34,17 @@
     }
     .select2-container .select2-selection--single {
         height: 45px !important;
+        width:400px !important;
     }
     .select2-container--default .select2-selection--single {
-
+        width:400px !important;
         border-radius: 20px !important;
     }
+    
+    .select2-container--default .select2-container--focus span{
+        width:400px !important;
+    }
+    
     
 </style>
 @endsection
@@ -246,7 +252,7 @@
 <script>
      $(document).ready(function () {
         // Inicializar el selector Select2
-        $('.mi-selector').select2();
+        $('.mi-selector').select2({width: 'resolve'});
     });
 </script>
 @endsection

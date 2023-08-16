@@ -58,6 +58,7 @@
         width: 400px !important;
         
     }
+    
 </style>
 @endsection
 

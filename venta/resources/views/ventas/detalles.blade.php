@@ -207,6 +207,8 @@ Detalles de Venta
                         <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Precio Unitario</th>
                         <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Cantidad</th>
                         <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Subtotal</th>
+                        <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Impuestos</th>
+                        <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -230,6 +232,12 @@ Detalles de Venta
                                 </td>
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">{{$detalle->cantidad}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">${{ number_format(($detalle->producto->precio_venta * $detalle->cantidad)-($detalle->producto->precio_venta * $detalle->cantidad)*0.16, 2) }}</p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0">${{ number_format(($detalle->producto->precio_venta * $detalle->cantidad)*0.16, 2) }}</p>
                                 </td>
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">${{ number_format($detalle->producto->precio_venta * $detalle->cantidad, 2) }}</p>

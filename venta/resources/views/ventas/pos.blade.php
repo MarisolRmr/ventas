@@ -364,8 +364,14 @@
                             <h5 class="card-title mb-1" style="font-size:16px">${producto.nombre}</h5>
                             <div class="d-flex align-items-center mt-1">
                             <p class="card-text mb-0 mr-3" style="font-size: 15px">Pre. Unit. <br>$${parseFloat(producto.precio_venta).toFixed(2)}</p>
+                            <div>
+                            <p class="card-text mb-0" style="font-size: 15px">Subtotal <br>$${((parseFloat(producto.precio_venta * producto.cantidad))-(parseFloat(producto.precio_venta * producto.cantidad)*0.16)).toFixed(2) }</p>
+                            <p class="card-text mb-0" style="font-size: 15px">IVA <br>$${((parseFloat(producto.precio_venta * producto.cantidad)*0.16)).toFixed(2) }</p>
                             <p class="card-text mb-0" style="font-size: 15px">Total <br>$${(parseFloat(producto.precio_venta * producto.cantidad)).toFixed(2) }</p>
                             </div>
+                            </div>
+                            
+
                             <div class="d-flex align-items-center mt-3">
                                 <button class="btn btn-sm btn-primary mr-2" onclick="disminuirCantidad(${producto.id})">-</button>
                                 <input type="number" style="outline:none; width: 27px;border:1px solid gray; border-radius: 8px; color:gray" class="text-center mr-2" value="${producto.cantidad}" class="mr-2" oninput="validarCantidadInput(${producto.id}, this)"/>
@@ -394,16 +400,16 @@
         totalContainer.innerHTML = '';
         const totalCarrito = calcularTotalCarrito();
         let iva = totalCarrito * 0.16;
-        const totalConIva = totalCarrito + iva;
+        const totalsinIva = totalCarrito - iva;
 
         // Actualizar los input hidden con los valores
-        document.getElementById('subtotal_hidden').value = totalCarrito.toFixed(2);
+        document.getElementById('subtotal_hidden').value = totalsinIva.toFixed(2);
         document.getElementById('impuestos_hidden').value = iva.toFixed(2);
-        document.getElementById('total_hidden').value = totalConIva.toFixed(2);
+        document.getElementById('total_hidden').value = totalCarrito.toFixed(2);
 
-        totalContainer.innerHTML += `<p class="mb-2">Subtotal: $${totalCarrito.toFixed(2)}</p>
+        totalContainer.innerHTML += `<p class="mb-2">Subtotal: $${totalsinIva.toFixed(2)}</p>
         <p class="mb-2">IVA 16%: $${iva.toFixed(2)}</p>
-        <p>Total: $${totalConIva.toFixed(2)}</p>`;
+        <p>Total: $${totalCarrito.toFixed(2)}</p>`;
 
         actualizarCambio();
     }

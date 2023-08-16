@@ -122,6 +122,12 @@
                 <span class="nav-link-text">Usuarios</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('compras.index')}}">
+                <i class="ni ni-cart text-primary"></i>
+                <span class="nav-link-text">Compras</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>

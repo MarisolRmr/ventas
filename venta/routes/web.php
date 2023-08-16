@@ -12,6 +12,7 @@ use App\Http\Controllers\VentasController;
 use App\Http\Controllers\DevolucionesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProveedoresController;
+use App\Http\Controllers\ComprasController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -185,6 +186,30 @@ Route::put('/proveedores/{id}/edit', [ProveedoresController::class, 'update'])->
 
 // eliminar proveedores
 Route::delete('/proveedores/{id}', [ProveedoresController::class, 'delete'])->name('proveedores.delete');
+
+
+// lista de compras
+Route::get('/compras', [ComprasController::class, 'index'])->name('compras.index');
+
+// formulario compras
+Route::get('/compras/Nueva', [ComprasController::class, 'create'])->name('compras.create');
+
+// guardar compras
+Route::post('/compras', [ComprasController::class, 'store'])->name('compras.store');
+
+// validar producto de compras
+Route::post('/validar', [ComprasController::class, 'validar'])->name('compras.validar');
+
+// editar compras
+Route::get('/compras/{compra}/edit',[ ComprasController::class, 'edit'])->name('compras.edit');
+
+// actualizar cambios compras
+Route::put('/compras/{id}/edit', [ComprasController::class, 'update'])->name('compras.update');
+
+// eliminar compras
+Route::delete('/compras/{id}', [ComprasController::class, 'delete'])->name('compras.delete');
+// lista de compras
+Route::get('/compras/{id}/detalle', [ComprasController::class, 'detalles_index'])->name('compras.detalles');
 
 
 // lista de proveedores
