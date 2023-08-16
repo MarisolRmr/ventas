@@ -13,6 +13,7 @@ class Marca extends Model
         'nombre',
         'imagen',
         'descripcion',
+        'activo',
         'user_id',
     ];
 

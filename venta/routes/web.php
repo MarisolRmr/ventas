@@ -123,7 +123,7 @@ Route::get('/marcas/Nueva', [MarcasController::class, 'create'])->name('marcas.c
 Route::post('/marcas', [MarcasController::class, 'store'])->name('marcas.store');
 
 // eliminar marcas
-Route::delete('/marcas/{id}', [MarcasController::class, 'delete'])->name('marcas.delete');
+Route::put('/marcas/{id}', [MarcasController::class, 'activo'])->name('marcas.delete');
 
 // editar marcas
 Route::get('/marcas/{marca}/edit',[ MarcasController::class, 'edit'])->name('marcas.edit');

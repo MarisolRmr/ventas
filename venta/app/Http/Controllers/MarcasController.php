@@ -22,10 +22,16 @@ class MarcasController extends Controller
         return view('marcas.lista')->with(['marcas' => $marcas]);
     }
     //eliminar marca
-    public function delete($id)
+    public function activo($id)
     {
-        Marca::find($id)->delete();
-        return redirect()->back()->with('success', 'Marca eliminada correctamente');
+        $marca = Marca::find($id);
+    
+        if ($marca) {
+            $marca->update(['activo' => false]);
+            return redirect()->back()->with('success', 'Marca eliminada correctamente');
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar la marca');
+        }
     }
     // Mostrar vista de formulario
     public function create()
@@ -58,6 +64,7 @@ class MarcasController extends Controller
             'nombre' => $request->nombre,
             'imagen' => $request->imagen,
             'descripcion' => $request->descripcion,
+            'activo' => 1,
             'user_id' => $userId,
         ]);
 
