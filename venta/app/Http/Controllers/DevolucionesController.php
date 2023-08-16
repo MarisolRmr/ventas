@@ -81,7 +81,14 @@ class DevolucionesController extends Controller{
                     'cantidad_devuelta' => $cantidadDevuelta,
                     'user_id' => $userId,
                 ]);
+
+                // Actualizar la cantidad en la tabla de productos
+                $producto = Producto::find($productoId);
+                $producto->unidades += $cantidadDevuelta;
+                $producto->save();
             }
+
+
         }
 
         return redirect()->route('devoluciones.index')->with('success', 'Devolución registrada correctamente');
