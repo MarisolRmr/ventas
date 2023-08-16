@@ -7,6 +7,8 @@
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
   <title>Ventas</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('img/icono.png') }}">
+  
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -33,9 +35,20 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 </head>
+
+<style>
+  
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: #f8f9fa; /* Cambia al color deseado */
+    color: #007bff; /* Cambia al color deseado */
+}
+
+</style>
 
 @auth  
 <body>
@@ -51,8 +64,9 @@
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
-        <a class="navbar-brand" href="javascript:void(0)">
-          <img src="{{ asset ('img/ventas.png') }}" class="navbar-brand-img" alt="logo">
+        <a class="navbar-brand" href="/">
+          <img src="{{ asset ('img/icono.png') }}" class="navbar-brand-img" alt="logo">
+          <img src="{{ asset ('img/ventas.png') }}" class="navbar-brand-img" alt="logo" style="width: 60px;">
         </a>
       </div>
 
@@ -62,7 +76,7 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="{{route('posts.index',[auth()->user()])}}">
+              <a class="nav-link" href="{{route('posts.index',[auth()->user()])}}">
               <i class="ni ni-chart-bar-32 text-primary"></i>
                 <span class="nav-link-text">Dashboard</span>
               </a>
@@ -442,7 +456,32 @@
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
   <script src="{{ asset('select2/dist/js/select2.min.js') }}"></script>
+
+ 
   @yield('js')
+
+  <script>
+    // Agregar evento click a los elementos del menú
+$(document).ready(function() {
+    $('.nav-link').click(function() {
+        // Remover la clase active de todos los elementos
+        $('.nav-link').removeClass('active');
+        
+        // Agregar la clase active al elemento clickeado
+        $(this).addClass('active');
+        
+        // Guardar el estado activo en el almacenamiento local
+        localStorage.setItem('activeNavItem', $(this).attr('href'));
+    });
+    
+    // Restaurar el estado activo al cargar la página
+    var activeNavItem = localStorage.getItem('activeNavItem');
+    if (activeNavItem) {
+        $('.nav-link[href="' + activeNavItem + '"]').addClass('active');
+    }
+});
+
+</script>
   
 
 
