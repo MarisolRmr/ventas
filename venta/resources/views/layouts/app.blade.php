@@ -143,15 +143,16 @@
               </a>
             </li>
             <li class="nav-item">
-<<<<<<< HEAD
               <a class="nav-link" href="{{route('cotizaciones.index')}}">
                 <i class="ni ni-collection text-yellow"></i>
                 <span class="nav-link-text">Cotizaciones</span>
-=======
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{route('productos.import-form')}}">
-                <i class="ni ni-ui-04 text-yellow"></i>
+                <i class="ni ni-cloud-upload-96 text-default"></i>
                 <span class="nav-link-text">Importar Productos</span>
->>>>>>> e89172d1da07ad3a0f80cfdf6b78406a29e0bef5
+
               </a>
             </li>
           </ul>

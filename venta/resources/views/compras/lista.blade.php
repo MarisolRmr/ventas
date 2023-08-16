@@ -119,7 +119,7 @@ input[type="search"]::-webkit-search-cancel-button {
 @endsection
 
 @section('navegacion')
-Ventass
+Compras
 @endsection
 
 @section('contenido')
