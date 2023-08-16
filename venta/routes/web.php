@@ -39,6 +39,9 @@ Route::delete('/productos/{id}', [ProductosController::class, 'delete'])->name('
 // editar productos
 Route::get('/productos/{producto}/edit',[ ProductosController::class, 'edit'])->name('productos.edit');
 
+// editar productos
+Route::get('/productos/{producto}/detalles',[ ProductosController::class, 'detalles'])->name('productos.detalles');
+
 //ruta para enviar datos al servidor de imagen
 Route::post('/productos_imagen', [ProductosController::class,'store_imagen'])->name('productos.imagen');
 
@@ -87,6 +90,10 @@ Route::put('/subcategorias/{id}/edit', [SubcategoriaController::class, 'update']
 Route::delete('/subcategorias/{id}', [SubcategoriaController::class, 'delete'])->name('subcategorias.delete');
 
 
+
+// crear devoluciones
+Route::get('/get-products/{ventaId}', [DevolucionesController::class, 'buscarVenta'])->name('devoluciones.buscar');
+
 // lista de devoluciones
 Route::get('/devoluciones', [DevolucionesController::class, 'index'])->name('devoluciones.index');
 
@@ -96,11 +103,6 @@ Route::get('/devoluciones/Nueva', [DevolucionesController::class, 'create'])->na
 // guardar devoluciones
 Route::post('/devoluciones', [DevolucionesController::class, 'store'])->name('devoluciones.store');
 
-//ruta para enviar datos al servidor de imagen
-Route::post('/devoluciones_imagen', [DevolucionesController::class,'store_imagen'])->name('devoluciones.imagen');
-
-// editar devoluciones
-Route::get('/devoluciones/{devolucion}/edit',[ DevolucionesController::class, 'edit'])->name('devoluciones.edit');
 
 // actualizar cambios subcategorias
 Route::put('/devoluciones/{id}/edit', [DevolucionesController::class, 'update'])->name('devoluciones.update');

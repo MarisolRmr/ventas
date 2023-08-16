@@ -10,16 +10,10 @@ class Devoluciones extends Model
     use HasFactory;
     protected $table = 'devoluciones';
     protected $fillable = [
-        'nombreProducto',
-        'fecha',
-        'cliente',
-        'status',
-        'total',
-        'pagado',
-        'deuda',
-        'statusPago',
         'user_id',
-        'imagen',
+        'venta_id',
+        'producto_id',
+        'cantidad_devuelta',
     ];
 
     public function usuario()
