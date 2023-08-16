@@ -10,6 +10,11 @@ use App\Models\Cliente;
 use App\Models\Venta;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\DB;
+
+use App\Models\VentaProducto;
+
+
 class DevolucionesController extends Controller{
 
     public function __construct(){
@@ -19,8 +24,31 @@ class DevolucionesController extends Controller{
     }
 
     public function index(){
-        $devoluciones = Devoluciones::with('usuario')->get();
-        return view('devoluciones.lista')->with(['devoluciones' => $devoluciones]); 
+        $consulta = "
+        SELECT 
+            d.venta_id,
+            v.referencia,
+            p.imagen,
+            pr.nombre AS nombre_producto,
+            c.nombre AS nombre_cliente,
+            d.cantidad_devuelta,
+            d.created_at
+        FROM 
+            devoluciones d
+        JOIN 
+            venta_producto vp ON d.producto_id = vp.producto_id AND d.venta_id = vp.venta_id
+        JOIN 
+            venta v ON d.venta_id = v.id
+        JOIN 
+            producto p ON d.producto_id = p.id
+        JOIN 
+            producto pr ON vp.producto_id = pr.id
+        JOIN 
+            cliente c ON v.cliente_id = c.id";
+
+        $devoluciones = DB::select($consulta);
+
+        return view('devoluciones.lista', ['devoluciones' => $devoluciones]);
     }
 
     
@@ -33,42 +61,10 @@ class DevolucionesController extends Controller{
         return view('devoluciones.create')->with(['ventas' => $ventas,'productos' => $productos,'clientes' => $clientes]);
     }
 
-    // Validar y guardar datos del formulario
-    /*public function store(Request $request){
-        // Reglas de validación
-        $this->validate($request, [
-            'referencia' => 'required'
-        ]);
-
-        // Obtener el ID del usuario autenticado
-        $userId = Auth::id();
-        //dd($userId);
-
-        // Invocar el modelo Categoria para crear el registro con el user_id
-        Devoluciones::create([
-            'referencia' => $request->referencia,
-            'fecha' => $request->fecha,
-            'cliente' => $request->cliente,
-            'status' => $request->status,
-            'total' => $request->total,
-            'pagado' => $request->pagado,
-            'deuda' => $request->deuda,
-            'statusPago' => $request->status2,
-
-            'imagen' => $request->imagen,
-            'user_id' => $userId,
-        ]);
-
-        // Redireccionar a la vista de listado de categorías
-        return redirect()->route('devoluciones.index')->with('agregada', 'Devolución agregada correctamente');
-    }*/
 
     public function store(Request $request){
-
-        
-
         $userId = Auth::id();
-
+       
         $ventaId = $request->input('referencia');
         $productos = $request->input('productos');
         $cantidadesDevueltas = $request->input('cantidades_devueltas');
@@ -88,7 +84,7 @@ class DevolucionesController extends Controller{
             }
         }
 
-        return redirect()->route('devoluciones.index')->with('success', 'Devolución registrada correctamente.');
+        return redirect()->route('devoluciones.index')->with('success', 'Devolución registrada correctamente');
     }
 
 

@@ -164,17 +164,18 @@ Devoluciones
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Cantidad Devuelta</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Cliente</th>
                       <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Fecha</th>
-                      <th class="text-center text-uppercase  text-xxs font-weight-bolder opacity-7">Creado por</th>
+                      
                     </tr>
                   </thead>
                   <tbody>
                     @foreach($devoluciones as $devolucion)
+                    
                         <tr class="text-center">
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->id }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->venta_id }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->venta_id }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->referencia }}</p>
                             </td>
                             <td>
                                 @if($devolucion->imagen)
@@ -184,20 +185,18 @@ Devoluciones
                                 @endif
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->producto_id }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->nombre_producto }}</p>
                             </td>
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $devolucion->cantidad_devuelta }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->cliente }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->nombre_cliente }}</p>
                             </td>
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->fecha }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $devolucion->created_at }}</p>
                             </td>
-                            <td>
-                                <a href="#" ><p class="text-xs font-weight-bold mb-0">{{ $devolucion->usuario->username }}</p></a>
-                            </td>
+                            
                         </tr>
                     @endforeach
                   
