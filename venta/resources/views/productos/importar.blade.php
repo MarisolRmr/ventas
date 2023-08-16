@@ -73,11 +73,31 @@ Agregar Producto
         </div>
         <div class="card-body px-4 pt-4 pb-2 flex items-center justify-center text-center">
             @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
+            <script>
+                Swal.fire({
+                    title: 'Éxito',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    timer: 4000, 
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    
+                });
+            </script>
             @endif
 
             @if(session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
+            <script>
+                Swal.fire({
+                    title: 'Error',
+                    text: '{{ session('error') }}',
+                    icon: 'error',
+                    timer: 4000, 
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    
+                });
+            </script>
             @endif
           
             <form action="{{ route('productos.importar') }}" method="POST" enctype="multipart/form-data">
