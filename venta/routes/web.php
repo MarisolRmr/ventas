@@ -28,6 +28,9 @@ use App\Http\Controllers\CotizacionesController;
 // lista de productos
 Route::get('/productos', [ProductosController::class, 'index'])->name('productos.index');
 
+Route::get('/productos/importar', [ProductosController::class, 'importar_form'])->name('productos.import-form');
+Route::post('/productos/importar', [ProductosController::class, 'importar'])->name('productos.importar');
+
 // formulario productos
 Route::get('/productos/Nueva', [ProductosController::class, 'create'])->name('productos.create');
 
@@ -35,7 +38,7 @@ Route::get('/productos/Nueva', [ProductosController::class, 'create'])->name('pr
 Route::post('/productos', [ProductosController::class, 'store'])->name('productos.store');
 
 // eliminar productos
-Route::delete('/productos/{id}', [ProductosController::class, 'delete'])->name('productos.delete');
+Route::put('/productos/{id}', [ProductosController::class, 'activo'])->name('productos.activo');
 
 // editar productos
 Route::get('/productos/{producto}/edit',[ ProductosController::class, 'edit'])->name('productos.edit');
@@ -59,7 +62,7 @@ Route::get('/categorias/Nueva', [CategoriasController::class, 'create'])->name('
 Route::post('/categorias', [CategoriasController::class, 'store'])->name('categorias.store');
 
 // eliminar categorias
-Route::delete('/categorias/{id}', [CategoriasController::class, 'delete'])->name('categorias.delete');
+Route::put('/categorias/{id}', [CategoriasController::class, 'delete'])->name('categorias.delete');
 
 // editar categorias
 Route::get('/categorias/{categoria}/edit',[ CategoriasController::class, 'edit'])->name('categorias.edit');
@@ -88,7 +91,7 @@ Route::get('/subcategorias/{subcategoria}/edit',[ SubcategoriaController::class,
 Route::put('/subcategorias/{id}/edit', [SubcategoriaController::class, 'update'])->name('subcategorias.update');
 
 // eliminar subcategorias
-Route::delete('/subcategorias/{id}', [SubcategoriaController::class, 'delete'])->name('subcategorias.delete');
+Route::put('/subcategorias/{id}', [SubcategoriaController::class, 'delete'])->name('subcategorias.delete');
 
 
 
@@ -121,7 +124,7 @@ Route::get('/marcas/Nueva', [MarcasController::class, 'create'])->name('marcas.c
 Route::post('/marcas', [MarcasController::class, 'store'])->name('marcas.store');
 
 // eliminar marcas
-Route::delete('/marcas/{id}', [MarcasController::class, 'delete'])->name('marcas.delete');
+Route::put('/marcas/{id}', [MarcasController::class, 'activo'])->name('marcas.delete');
 
 // editar marcas
 Route::get('/marcas/{marca}/edit',[ MarcasController::class, 'edit'])->name('marcas.edit');

@@ -117,21 +117,13 @@ class SubcategoriaController extends Controller{
 
     public function delete($id)
     {
-        $subcategoria = Subcategoria::find($id);
-        // Obtener los productos asociados a la subcategoría
-        $productos = Producto::where('subcategoria_id', $subcategoria->id)->get();
-
-        // Quitar la subcategoría de los productos asociados
-        foreach ($productos as $producto) {
-            // Actualizar el ID de subcategoría a null en cada producto
-            $producto->subcategoria_id = null;
-            $producto->save();
+        $marca = Subcategoria::find($id);
+    
+        if ($marca) {
+            $marca->update(['activo' => false]);
+            return redirect()->back()->with('success', 'Subategoría eliminada correctamente');
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar la subcategoría');
         }
-
-        // Eliminar la subcategoría
-        $subcategoria->delete();
-
-
-        return redirect()->back()->with('success', 'Subcategoría eliminada correctamente');
     }
 }

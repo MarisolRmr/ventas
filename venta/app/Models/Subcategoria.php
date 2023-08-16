@@ -14,6 +14,7 @@ class Subcategoria extends Model
         'nombre',
         'categoria_id',
         'codigo',
+        'activo',
         'descripcion',
         'user_id',
     ];

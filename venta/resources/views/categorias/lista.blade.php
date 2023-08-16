@@ -201,6 +201,7 @@ Categoría
                   </thead>
                   <tbody>
                     @foreach($categorias as $categoria)
+                    @if($categoria->activo == 1)
                         <tr class="text-center">
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $categoria->id }}</p>
@@ -223,7 +224,7 @@ Categoría
                             <td class=" px-3 py-2 exclude-column">
                                 <form action="{{ route('categorias.delete', $categoria->id) }}" method="POST" onsubmit="return confirmDelete(event)">
                                 <div style="display: flex; justify-content:center">
-                                @method('delete')
+                                @method('put')
                                 @csrf
                                 <button type="submit" style="border-radius: 50px !important; border:none !important ; margin-right: 10px;" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-red-600 hover:bg-red-700 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
@@ -240,6 +241,7 @@ Categoría
                             </div>
                             </td>
                         </tr>
+                        @endif
                     @endforeach
                     
                   </tbody>
@@ -267,14 +269,6 @@ Categoría
     });
 
 
-    function confirmDelete(event) {
-        event.preventDefault();
-        const shouldDelete = window.confirm('¿Estás seguro de que deseas eliminar esta categoría? ¡Todos los productos y subcategorias asociados también serán eliminados!');
-        if (shouldDelete) {
-            event.target.submit();
-        }
-        return false;
-    }
 
 </script>
 
