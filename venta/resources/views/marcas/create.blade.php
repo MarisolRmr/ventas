@@ -83,7 +83,7 @@ Marca
                     placeholder="Descripción de la marca"
                     class="border p-3 w-full rounded-lg "
                     value="{{old('descripcion')}}"
-                ></textarea>
+                >{{old('descripcion')}}</textarea>
                 @error('descripcion')
                 <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                         {{$message}}

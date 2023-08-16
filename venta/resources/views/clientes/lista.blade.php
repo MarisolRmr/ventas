@@ -187,6 +187,19 @@ Clientes
                         });
                     </script>
                 @endif
+                @if(session('error'))
+                    <script>
+                        Swal.fire({
+                            title: 'Error',
+                            text: '{{ session('error') }}',
+                            icon: 'error',
+                            timer: 4000, 
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            
+                        });
+                    </script>
+                @endif
                 <table id="example" class="table align-items-center mb-0 hover">
                   <thead>
                     <tr>

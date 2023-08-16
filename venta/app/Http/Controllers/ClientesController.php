@@ -23,8 +23,13 @@ class ClientesController extends Controller
     //eliminar cliente
     public function delete($id)
     {
-        Cliente::find($id)->delete();
-        return redirect()->back()->with('success', 'Cliente eliminado correctamente');
+        try {
+            $cliente = Cliente::findOrFail($id);
+            $cliente->delete();
+            return redirect()->back()->with('success', 'Cliente eliminado correctamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'No se pudo eliminar el cliente debido a las relaciones existentes');
+        }
     }
     // Mostrar vista de formulario
     public function create()

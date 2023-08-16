@@ -45,8 +45,13 @@ class ProveedoresController extends Controller{
     }
 
     public function delete($id){
-        Proveedores::find($id)->delete();
-        return redirect()->back()->with('success', 'Proveedor eliminado correctamente');
+        try {
+            $cliente = Proveedores::findOrFail($id);
+            $cliente->delete();
+            return redirect()->back()->with('success', 'Proveedor eliminado correctamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'No se pudo eliminar el proveedor debido a las relaciones existentes');
+        }
     }
 
     public function edit(Proveedores $proveedor){

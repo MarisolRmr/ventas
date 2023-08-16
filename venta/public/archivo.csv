@@ -1,0 +1,4 @@
+nombre,precio_venta,precio_compra,unidades,categoria_id,subcategoria_id,marca_id,imagen
+Producto 1 txt, 100.00 , 200.00 ,50,3,5,1,imagen1
+Producto 2 txt, 200.00 , 300.00 ,60,4,6,2,imagen2
+Producto 3 txt, 300.00 , 400.00 ,70,4,5,3,imagen3

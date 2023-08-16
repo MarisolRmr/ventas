@@ -174,6 +174,19 @@ Proveedores
                         });
                     </script>
                 @endif
+                @if(session('error'))
+                    <script>
+                        Swal.fire({
+                            title: 'Error',
+                            text: '{{ session('error') }}',
+                            icon: 'error',
+                            timer: 4000, 
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            
+                        });
+                    </script>
+                @endif
                 @if(session('actualizada'))
                     <script>
                         Swal.fire({

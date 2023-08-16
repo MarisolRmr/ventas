@@ -25,6 +25,34 @@
         height: 120px !important;
         width: 120px !important;
     }
+    .select2-selection{
+        border-radius: 20px !important; 
+        height: 50px !important; 
+        width: 100% !important; 
+        border-bottom-right-radius: 20px !important;
+        border-bottom-left-radius: 20px !important;
+            
+    }
+    .select2-selection:focus{
+        outline-color: #5e72e4;
+        height: 50px !important; 
+        width: 100% !important; 
+       
+        border-bottom-right-radius: 20px !important;
+        border-bottom-left-radius: 20px !important;
+            
+    }
+    .select2-selection[aria-expanded='true'] {
+        border-bottom-right-radius: 20px !important;
+        border-bottom-left-radius: 20px  !important;
+    }
+    .select2.select2-container {
+        width: 100% !important;
+        
+    }
+    .select2-container .select2-selection--single {
+        height: 50px !important;
+    }
 </style>
 @endsection
 <!--directiva para integrar los estilos de dropzone-->
@@ -132,20 +160,26 @@ Agregar Producto
             </div>
 
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
-                <label for="categoria_id" class="mb-2 block uppercase text-gray-500 font-bold">
+                <label for="categoria_id" class="mb-2 mr-2 block uppercase text-gray-500 font-bold">
                     Categoría
                 </label>
                 <select 
-                    style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
+                    style="border-radius: 20px !important; height: 50px !important; width: 400px; margin-left: 20px; "
                     id="categoria_id"
                     name="categoria_id"
-                    class="border p-2 w-full rounded-lg @error ('categoria_id') border-red-500 @enderror"
+                    class=" border p-2 w-full rounded-lg @error ('categoria_id') border-red-500 @enderror"
                 >
                     <option value="">Seleccione una categoría</option>
                     @foreach($categorias as $categoria)
-                        <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                        <option 
+                            value="{{$categoria->id}}"
+                            @if (old('categoria_id') == $categoria->id)
+                                selected
+                            @endif 
+                        >{{$categoria->nombre}}</option>
                     @endforeach
                 </select>
+
                 @error('categoria_id')
                     <p style="background-color: #f56565; color: #fff;margin-top: 0.5rem;border-radius: 0.5rem;font-size: 0.875rem; padding: 0.5rem; text-align: center;" class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
                         {{$message}}
@@ -155,18 +189,23 @@ Agregar Producto
 
             
             <div class="mb-5" style="display: flex; align-items: top; justify-content:center">
-                <label for="subcategoria_id" class="mb-2 block uppercase text-gray-500 font-bold">
+                <label for="subcategoria_id" class="mr-2 mb-2 block uppercase text-gray-500 font-bold">
                     Subcategoría
                 </label>
                 <select 
                     style="border-radius: 20px !important; height: 50px; width: 400px; margin-left: 20px; "
                     id="subcategoria_id"
                     name="subcategoria_id"
-                    class="border p-2 w-full rounded-lg @error ('subcategoria_id') border-red-500 @enderror"
+                    class=" border p-2 w-full rounded-lg @error ('subcategoria_id') border-red-500 @enderror"
                 >
                     <option value="">Seleccione una subcategoría</option>
                     @foreach($subcategorias as $subcategoria)
-                        <option value="{{$subcategoria->id}}">{{$subcategoria->nombre}}</option>
+                        <option
+                         value="{{$subcategoria->id}}" 
+                            @if (old('subcategoria_id') == $subcategoria->id)
+                                selected
+                            @endif>
+                            {{$subcategoria->nombre}}</option>
                     @endforeach
                 </select>
                 @error('subcategoria_id')
@@ -260,6 +299,10 @@ Agregar Producto
 
     // Llamar a la función inicialmente para que muestre las subcategorías correspondientes a la categoría seleccionada
     actualizarSubcategorias();
+    $(document).ready(function () {
+        // Inicializar el selector Select2
+        $('.mi-selector').select2({width: 'resolve'});
+    });
 </script>
 
 @endsection
