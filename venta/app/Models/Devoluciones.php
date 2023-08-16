@@ -12,7 +12,6 @@ class Devoluciones extends Model
     protected $fillable = [
         'user_id',
         'venta_id',
-        'referencia',
         'producto_id',
         'cantidad_devuelta',
     ];

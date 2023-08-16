@@ -65,23 +65,25 @@ class DevolucionesController extends Controller{
 
     public function store(Request $request){
 
-        dd($request->all());
+        
+
+        $userId = Auth::id();
 
         $ventaId = $request->input('referencia');
-        $cantidadesDevueltas = $request->input('cantidades_devueltas');
-
-        
         $productos = $request->input('productos');
         $cantidadesDevueltas = $request->input('cantidades_devueltas');
 
-        foreach ($productos as $productoId => $producto) {
-            $cantidadDevuelta = $cantidadesDevueltas[$productoId];
 
+        foreach ($productos as $productoId ) {
+            
+            $cantidadDevuelta = $cantidadesDevueltas[$productoId];
+            
             if ($cantidadDevuelta > 0) {
                 Devoluciones::create([
                     'venta_id' => $ventaId,
                     'producto_id' => $productoId,
                     'cantidad_devuelta' => $cantidadDevuelta,
+                    'user_id' => $userId,
                 ]);
             }
         }

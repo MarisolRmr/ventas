@@ -100,6 +100,8 @@
         $('#referencia').on('change', function() {
             var ventaId = $(this).val();
 
+            console.log($('#referencia').val());
+
             if (ventaId) {
                 $.ajax({
                     url: '/get-products/' + ventaId,
@@ -126,7 +128,7 @@
                         <div class="col-md-8 p-0">
                             <div class="card-body p-2">
                                 <h5 class="card-title mb-1" style="font-size:16px">${producto.nombre}</h5>
-                                <input type="hidden" name="productos[${producto.id}]" value="${producto.nombre}">
+                                <input type="hidden" name="productos[${producto.id}]" value="${producto.id}">
                                 <div class="d-flex align-items-center mt-1">
                                 <p class="card-text mb-0 mr-3" style="font-size: 15px">Pre. Unit. <br>$${parseFloat(producto.precio_venta).toFixed(2)}</p>
                                 <p class="card-text mb-0 mr-3" style="font-size: 15px">Cantidad Comprada <br>${productoVenta.cantidad}</p>
