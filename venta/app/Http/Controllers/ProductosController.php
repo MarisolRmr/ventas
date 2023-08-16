@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
+use Illuminate\Support\Facades\Validator;
+
 
 class ProductosController extends Controller
 {
@@ -181,5 +183,47 @@ class ProductosController extends Controller
         }
     }
 
+    public function importar_form(){
+        return view('productos.importar');
+    }
+
+    public function importar(Request $request){
+        $userId = Auth::id();
+        $archivoCSV = $request->file('archivo_csv');
+
+        $validator = Validator::make($request->all(), [
+            'archivo_csv' => 'required|mimes:csv,txt',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'Error al cargar el archivo CSV');
+        }
+
+        if ($archivoCSV) {
+            $csv = array_map('str_getcsv', file($archivoCSV));
+            $cabeceras = array_shift($csv); // Ignora la primera fila con las cabeceras
+
+            foreach ($csv as $fila) {
+               
+                Producto::create([
+                    'nombre' => $fila[0],
+                    'precio_venta' => $fila[1],
+                    'precio_compra' => $fila[2],
+                    'unidades' => $fila[3],
+                    'categoria_id' => $fila[4],
+                    'subcategoria_id' => $fila[5],
+                    'marca_id' => $fila[6],
+                    'imagen' => $fila[7],
+                    'user_id' => $userId,
+                ]);
+            }
+
+            return redirect()->back()->with('success', 'Productos importados correctamente.');
+        }
+
+        return redirect()->back()->with('error', 'Error al cargar el archivo CSV');
+    }
+
 
 }
+

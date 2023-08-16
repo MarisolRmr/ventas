@@ -27,6 +27,9 @@ use App\Http\Controllers\ComprasController;
 // lista de productos
 Route::get('/productos', [ProductosController::class, 'index'])->name('productos.index');
 
+Route::get('/productos/importar', [ProductosController::class, 'importar_form'])->name('productos.import-form');
+Route::post('/productos/importar', [ProductosController::class, 'importar'])->name('productos.importar');
+
 // formulario productos
 Route::get('/productos/Nueva', [ProductosController::class, 'create'])->name('productos.create');
 

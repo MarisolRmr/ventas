@@ -142,6 +142,12 @@
                 <span class="nav-link-text">Compras</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('productos.import-form')}}">
+                <i class="ni ni-ui-04 text-yellow"></i>
+                <span class="nav-link-text">Importar Productos</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>

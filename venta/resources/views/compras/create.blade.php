@@ -101,7 +101,7 @@
 @endsection
 
 @section('navegacion')
-Agregar Clientes
+Agregar Compra
 @endsection
 
 @section('contenido')
