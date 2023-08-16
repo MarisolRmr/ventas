@@ -28,4 +28,5 @@ class Compra_Producto extends Model
     {
         return $this->belongsTo(Proveedores::class, 'proveedor_id');
     }
+    
 }

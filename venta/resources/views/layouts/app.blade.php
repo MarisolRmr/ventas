@@ -128,6 +128,12 @@
                 <span class="nav-link-text">Compras</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('cotizaciones.index')}}">
+                <i class="ni ni-collection text-yellow"></i>
+                <span class="nav-link-text">Cotizaciones</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>

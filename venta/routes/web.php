@@ -13,6 +13,7 @@ use App\Http\Controllers\DevolucionesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\CotizacionesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -212,6 +213,30 @@ Route::put('/compras/{id}/edit', [ComprasController::class, 'update'])->name('co
 Route::delete('/compras/{id}', [ComprasController::class, 'delete'])->name('compras.delete');
 // lista de compras
 Route::get('/compras/{id}/detalle', [ComprasController::class, 'detalles_index'])->name('compras.detalles');
+
+
+// lista de cotizaciones
+Route::get('/cotizaciones', [CotizacionesController::class, 'index'])->name('cotizaciones.index');
+
+// formulario cotizaciones
+Route::get('/cotizaciones/Nueva', [CotizacionesController::class, 'create'])->name('cotizaciones.create');
+
+// guardar cotizaciones
+Route::post('/cotizaciones', [CotizacionesController::class, 'store'])->name('cotizaciones.store');
+
+// validar producto de cotizaciones
+Route::post('/validar', [CotizacionesController::class, 'validar'])->name('cotizaciones.validar');
+
+// editar cotizaciones
+Route::get('/cotizaciones/{cotizacion}/edit',[ CotizacionesController::class, 'edit'])->name('cotizaciones.edit');
+
+// actualizar cambios cotizaciones
+Route::put('/cotizaciones/{cotizacion}/edit', [CotizacionesController::class, 'update'])->name('cotizaciones.update');
+
+// eliminar cotizaciones
+Route::delete('/cotizaciones/{id}', [CotizacionesController::class, 'delete'])->name('cotizaciones.delete');
+// lista de cotizaciones
+Route::get('/cotizaciones/{id}/detalle', [CotizacionesController::class, 'detalles_index'])->name('cotizaciones.detalles');
 
 
 // lista de proveedores
