@@ -208,7 +208,7 @@ Subcategoría
                                 </svg>
 
                                 </a>
-                            </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

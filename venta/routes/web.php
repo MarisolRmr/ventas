@@ -100,7 +100,6 @@ Route::get('/devoluciones/Nueva', [DevolucionesController::class, 'create'])->na
 Route::post('/devoluciones', [DevolucionesController::class, 'store'])->name('devoluciones.store');
 
 
-
 // actualizar cambios subcategorias
 Route::put('/devoluciones/{id}/edit', [DevolucionesController::class, 'update'])->name('devoluciones.update');
 
