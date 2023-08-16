@@ -25,30 +25,14 @@ class CategoriasController extends Controller
 
     public function delete($id)
     {
-        // Buscar la categoría por su ID
-        $categoria = Categoria::find($id);
-
-        
-        // Obtener los productos asociados a la categoría
-        $productos = Producto::where('categoria_id', $categoria->id)->get();
-
-        // Eliminar los productos asociados
-        foreach ($productos as $producto) {
-            $producto->delete();
+        $marca = Categoria::find($id);
+    
+        if ($marca) {
+            $marca->update(['activo' => false]);
+            return redirect()->back()->with('success', 'Categoría eliminada correctamente');
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar la categoría');
         }
-
-        // Obtener los subcategorias asociados a la categoría
-        $subcategorias = Subcategoria::where('categoria_id', $categoria->id)->get();
-
-        // Eliminar los subcategorias asociados
-        foreach ($subcategorias as $subcategoria) {
-            $subcategoria->delete();
-        }
-
-        // Eliminar la categoría
-        $categoria->delete();
-
-        return redirect()->back()->with('success', 'La categoría, sus productos y subcategorias asociados han sido eliminados correctamente.');
         
     }
 

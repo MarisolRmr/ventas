@@ -61,7 +61,7 @@ Route::get('/categorias/Nueva', [CategoriasController::class, 'create'])->name('
 Route::post('/categorias', [CategoriasController::class, 'store'])->name('categorias.store');
 
 // eliminar categorias
-Route::delete('/categorias/{id}', [CategoriasController::class, 'delete'])->name('categorias.delete');
+Route::put('/categorias/{id}', [CategoriasController::class, 'delete'])->name('categorias.delete');
 
 // editar categorias
 Route::get('/categorias/{categoria}/edit',[ CategoriasController::class, 'edit'])->name('categorias.edit');
@@ -90,7 +90,7 @@ Route::get('/subcategorias/{subcategoria}/edit',[ SubcategoriaController::class,
 Route::put('/subcategorias/{id}/edit', [SubcategoriaController::class, 'update'])->name('subcategorias.update');
 
 // eliminar subcategorias
-Route::delete('/subcategorias/{id}', [SubcategoriaController::class, 'delete'])->name('subcategorias.delete');
+Route::put('/subcategorias/{id}', [SubcategoriaController::class, 'delete'])->name('subcategorias.delete');
 
 
 

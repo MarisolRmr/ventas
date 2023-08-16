@@ -202,6 +202,7 @@ Subcategoría
                   </thead>
                   <tbody>
                     @foreach($subcategorias as $subcategoria)
+                    @if($subcategoria->activo == 1)
                         <tr class="text-center">
                             <td>
                                 <p class="text-xs font-weight-bold mb-0">{{ $subcategoria->id }}</p>
@@ -227,7 +228,7 @@ Subcategoría
                             <td class=" px-3 py-2 exclude-column">
                                 <form action="{{route('subcategorias.delete', $subcategoria->id)}}" method="POST" onsubmit="return confirmDelete(event)">
                                 <div style="display: flex; justify-content:center">
-                                @method('delete')
+                                @method('put')
                                 @csrf
                                 <button type="submit" style="border-radius: 50px !important; border:none !important ; margin-right: 10px;" class="inline-block px-2 py-2 rounded-lg font-bold text-white bg-red-600 hover:bg-red-700 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
@@ -244,6 +245,7 @@ Subcategoría
                                 </div>
                             </td>
                         </tr>
+                        @endif
                     @endforeach
                     
                   </tbody>
@@ -269,14 +271,6 @@ Subcategoría
             emptyTable: "Aún no hay subcategorías que mostrar."
         }
     });
-    function confirmDelete(event) {
-        event.preventDefault();
-        const shouldDelete = window.confirm('¿Estás seguro de que deseas eliminar esta subcategoría? ¡Todos los productos asociados se les quitará la subcategoria!');
-        if (shouldDelete) {
-            event.target.submit();
-        }
-        return false;
-    }
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
