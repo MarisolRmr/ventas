@@ -33,7 +33,7 @@ It was built to strengthen backend logic, database relationships, and full-stack
 
 ### 💰 Sales Module (Store Interface)
 <p align="center">
-  <img src="screenshots/shop.png" width="48%" />
+  <img src="screenshots/shop1.png" width="48%" />
   <img src="screenshots/shop2.png" width="48%" />
 </p>
 
