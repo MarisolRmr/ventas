@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`usuarios` (
   `estatus` VARCHAR(20) NOT NULL,
   `rol` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`id_usuario`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
 
 
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`categorias` (
   `descripcion` TEXT NULL,
   `id_usuario` INT NOT NULL,
   PRIMARY KEY (`id_categoria`),
-  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) VISIBLE,
-  INDEX `fk_categoria_usuario_idx` (`id_usuario` ASC) VISIBLE,
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) ,
+  INDEX `fk_categoria_usuario_idx` (`id_usuario` ASC) ,
   CONSTRAINT `fk_categoria_usuario`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `puntoventa`.`usuarios` (`id_usuario`)
@@ -75,9 +75,9 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`subcategorias` (
   `id_categoria` INT NOT NULL,
   `id_usuario` INT NOT NULL,
   PRIMARY KEY (`id_subcategoria`),
-  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) VISIBLE,
-  INDEX `fk_subcategoria_usuario_idx` (`id_usuario` ASC) VISIBLE,
-  INDEX `fk_subcategoria_categoria_idx` (`id_categoria` ASC) VISIBLE,
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) ,
+  INDEX `fk_subcategoria_usuario_idx` (`id_usuario` ASC) ,
+  INDEX `fk_subcategoria_categoria_idx` (`id_categoria` ASC) ,
   CONSTRAINT `fk_subcategoria_usuario`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `puntoventa`.`usuarios` (`id_usuario`)
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`marcas` (
   `descripcion` TEXT NULL,
   `id_usuario` INT NOT NULL,
   PRIMARY KEY (`id_marca`),
-  INDEX `fk_marca_usuario_idx` (`id_usuario` ASC) VISIBLE,
+  INDEX `fk_marca_usuario_idx` (`id_usuario` ASC) ,
   CONSTRAINT `fk_marca_usuario`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `puntoventa`.`usuarios` (`id_usuario`)
@@ -128,10 +128,10 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`productos` (
   `id_subcategoria` INT NULL,
   `id_marca` INT NOT NULL,
   PRIMARY KEY (`id_producto`),
-  INDEX `fk_producto_usuario_idx` (`id_usuario` ASC) VISIBLE,
-  INDEX `fk_producto_categoria_idx` (`id_categoria` ASC) VISIBLE,
-  INDEX `fk_producto_subcategoria_idx` (`id_subcategoria` ASC) VISIBLE,
-  INDEX `fk_producto_marca_idx` (`id_marca` ASC) VISIBLE,
+  INDEX `fk_producto_usuario_idx` (`id_usuario` ASC) ,
+  INDEX `fk_producto_categoria_idx` (`id_categoria` ASC) ,
+  INDEX `fk_producto_subcategoria_idx` (`id_subcategoria` ASC) ,
+  INDEX `fk_producto_marca_idx` (`id_marca` ASC) ,
   CONSTRAINT `fk_producto_usuario`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `puntoventa`.`usuarios` (`id_usuario`)
@@ -203,9 +203,9 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`ventas` (
   `id_recibo` INT NOT NULL,
   `id_cliente` INT NOT NULL,
   PRIMARY KEY (`id_venta`),
-  INDEX `fk_venta_usuario_idx` (`id_usuario` ASC) VISIBLE,
-  INDEX `fk_venta_recibo_idx` (`id_recibo` ASC) VISIBLE,
-  INDEX `fk_venta_cliente_idx` (`id_cliente` ASC) VISIBLE,
+  INDEX `fk_venta_usuario_idx` (`id_usuario` ASC) ,
+  INDEX `fk_venta_recibo_idx` (`id_recibo` ASC) ,
+  INDEX `fk_venta_cliente_idx` (`id_cliente` ASC) ,
   CONSTRAINT `fk_venta_usuario`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `puntoventa`.`usuarios` (`id_usuario`)
@@ -238,8 +238,8 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`detalle_ventas` (
   `id_producto` INT NOT NULL,
   `id_venta` INT NOT NULL,
   PRIMARY KEY (`id_detalle_venta`),
-  INDEX `fk_detalles_venta_idx` (`id_venta` ASC) VISIBLE,
-  INDEX `fk_detalles_producto_idx` (`id_producto` ASC) VISIBLE,
+  INDEX `fk_detalles_venta_idx` (`id_venta` ASC) ,
+  INDEX `fk_detalles_producto_idx` (`id_producto` ASC) ,
   CONSTRAINT `fk_detalles_venta`
     FOREIGN KEY (`id_venta`)
     REFERENCES `puntoventa`.`ventas` (`id_venta`)
@@ -268,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`devoluciones` (
   `estatus_pago` VARCHAR(20) NOT NULL,
   `id_producto` INT NOT NULL,
   PRIMARY KEY (`id_devolucion`),
-  INDEX `fk_devoluciones_producto_idx` (`id_producto` ASC) VISIBLE,
+  INDEX `fk_devoluciones_producto_idx` (`id_producto` ASC) ,
   CONSTRAINT `fk_devoluciones_producto`
     FOREIGN KEY (`id_producto`)
     REFERENCES `puntoventa`.`productos` (`id_producto`)
@@ -290,8 +290,8 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`cotizaciones` (
   `id_producto` INT NOT NULL,
   `id_cliente` INT NOT NULL,
   PRIMARY KEY (`id_cotizacion`),
-  INDEX `fk_cotizacion_producto_idx` (`id_producto` ASC) VISIBLE,
-  INDEX `kk_cotizacion_cliente_idx` (`id_cliente` ASC) VISIBLE,
+  INDEX `fk_cotizacion_producto_idx` (`id_producto` ASC) ,
+  INDEX `kk_cotizacion_cliente_idx` (`id_cliente` ASC) ,
   CONSTRAINT `fk_cotizacion_producto`
     FOREIGN KEY (`id_producto`)
     REFERENCES `puntoventa`.`productos` (`id_producto`)
@@ -336,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `puntoventa`.`compras` (
   `estatus_pago` VARCHAR(20) NOT NULL,
   `id_proveedor` INT NOT NULL,
   PRIMARY KEY (`id_compra`),
-  INDEX `fk_compra_proveedor_idx` (`id_proveedor` ASC) VISIBLE,
+  INDEX `fk_compra_proveedor_idx` (`id_proveedor` ASC) ,
   CONSTRAINT `fk_compra_proveedor`
     FOREIGN KEY (`id_proveedor`)
     REFERENCES `puntoventa`.`proveedores` (`id_proveedor`)
